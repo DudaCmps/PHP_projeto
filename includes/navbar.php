@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-coreui-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,23 +18,38 @@
         .sidebar-nav .nav-link.active i {
         color: #ffffff;       /* branco */
         }
+        .header-big {
+        height: 79px;              /* altura fixa */
+        display: flex;
+        align-items: center;       /* centraliza conteúdo */
+}
+
     </style>
 
 
 </head>
 <body>
-<header class="header header-sticky mb-4 border-bottom">
-    <div class="container-fluid">
-      <button class="btn btn-primary d-lg-none" type="button" data-coreui-toggle="sidebar-show">
-        <i class="cil-menu"></i>
-      </button>
-      <a class="header-brand d-lg-none" href="#">LocaFast</a>
-      <ul class="header-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#"><i class="cil-bell"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="cil-user"></i></a></li>
-      </ul>
-    </div>
-  </header>
+
+<!-- header.php -->
+<header class="header bg-dark text-light header-big border-bottom" style="margin-left:16em; border-bottom: 1px solid #3c3f41;">
+  <div class="container-fluid px-4">
+    <h5>Dashboard</h5>
+    <!-- <ul class="header-nav d-none d-lg-flex">
+      <li class="nav-item"><a class="nav-link text-white" href="#">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="#">Users</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="#">Settings</a></li>
+    </ul> -->
+    <!-- Caso decida colocar icone no final da header -->
+    <!-- <ul class="header-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="#">
+          <svg class="icon icon-lg">
+            <use xlink:href="vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+          </svg></a>
+      </li>
+    </ul> -->
+  </div>
+</header>
+
   <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
     <!-- Cabeçalho da sidebar -->
     <div class="sidebar-header border-bottom">
@@ -50,7 +65,7 @@
       </li>
       <li class="nav-title">Clientes</li>
       <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="cadastrar.php">
                 <i class="cil-user-plus fs-5 me-2"></i> Cadastrar cliente
             </a>
       </li>
