@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Db\Database;
+use PDO;
 
 class Cliente{
 
@@ -10,7 +11,7 @@ class Cliente{
      * Identificador único do cliente
      * @var int
      */
-    public $id;
+    public $id_cliente;
 
     /**
      * Nome completo do cliente
@@ -43,12 +44,40 @@ class Cliente{
     public function cadastrar(){
 
         $obDatabase = new Database('clientes');
-        $obDatabase->insert([
+        $this->id_cliente = $obDatabase->insert([
                                 'nome'=> $this->nome,
                                 'cpf'=> $this->cpf,
                                 'data_nasc'=> $this->data_nasc,
                                 'telefone'=> $this->telefone
                             ]);
+        return true;
+
+
+    }
+
+    /**
+     * Método para obter as vagas do banco para listagem
+     * @param string
+     * @param string
+     * @param string
+     * @return array
+     */
+    public static function getClientes($where = null, $order = null, $limit = null){
+        
+        return(new Database('clientes'))->select($where, $order, $limit)
+                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
+    }
+
+    /**
+     * Método para buscar a vaga pelo id
+     * @param integer
+     * @return Vaga
+     */
+    public static function getCliente($id_cliente){
+
+        return(new Database('clientes'))->select('id_cliente = '.$id_cliente)
+                                               ->fetchObject(self::class);
+        
     }
 }
 

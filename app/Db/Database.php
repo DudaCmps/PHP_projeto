@@ -64,6 +64,29 @@ class Database {
     }
 
     /**
+     * Metodo que executa as queries
+     * @param string $query
+     * @param array $params
+     * @return PDOStatement
+     */
+    public function execute($query, $params = []){
+        try {
+           $statement = $this->connection->prepare($query);
+           $statement->execute($params);
+           return $statement;
+        } catch (PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                header('location: index.php?status=error');
+                exit;
+            }else {
+                die('ERROR: '.$e->getMessage());
+            }
+        }
+
+
+    }
+
+    /**
      * Metodo que insere dados no banco
      * @param array
      * @return integer
@@ -75,7 +98,30 @@ class Database {
 
         $query = 'INSERT INTO '.$this->table.' ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
         
+        $this->execute($query,array_values($valores));
+
+        return $this->connection->lastInsertId();
         
+    }
+
+    /**
+     * Método para executar uma consulta no banco
+     * @param string
+     * @param string
+     * @param string
+     * @return PDOStatement
+     */
+    public function select($where = null, $order = null, $limit = null, $fields = '*'){
+
+    $where = !empty($where) ? ' WHERE ' . $where : '';
+    $order = !empty($order) ? ' ORDER BY ' .$order : '';
+    $limit = !empty($limit) ? ' LIMIT ' .$limit : '';
+
+
+    
+    $query = 'SELECT '.$fields.' FROM '.$this->table.''.$where.''.$order.''.$limit;
+
+    return $this->execute($query);
     }
 }
 

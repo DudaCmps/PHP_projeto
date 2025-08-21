@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en" data-coreui-theme="dark">
 <head>
@@ -6,6 +8,10 @@
     <title>LocaFast</title>
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.4.1/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-NlsxdkweGA8nr9s0TVc3Qu2zqhWMNsHrvzMpAjVR0yDqXgC2z+RWYoeCNG2uO2MC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/icons/css/all.min.css" rel="stylesheet">
+
+    <!-- link para tabelas -->
+    <link href="https://cdn.jsdelivr.net/npm/material-dashboard@1.0.0/dist/css/material-dashboard.css" rel="stylesheet">
+
 
     <style>
 
@@ -33,7 +39,7 @@
 <!-- header.php -->
 <header class="header bg-dark text-light header-big border-bottom" style="margin-left:16em; border-bottom: 1px solid #3c3f41;">
   <div class="container-fluid px-4">
-    <h5>Dashboard</h5>
+    <h5><?=TITLE?></h5>
     <!-- <ul class="header-nav d-none d-lg-flex">
       <li class="nav-item"><a class="nav-link text-white" href="#">Dashboard</a></li>
       <li class="nav-item"><a class="nav-link text-white" href="#">Users</a></li>
@@ -70,7 +76,7 @@
             </a>
       </li>
       <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="listagemClientes.php">
                 <i class="cil-task me-2 "></i> Listar usuários
             </a>
       </li>
