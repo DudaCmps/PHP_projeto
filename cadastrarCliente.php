@@ -1,15 +1,15 @@
 <?php
-// echo  "<pre>"; print_r($_POST); echo "</pre>"; exit;
+
 require __DIR__.'/vendor/autoload.php';
 
 define('TITLE', 'Cadastrar Cliente');
 
-
 use \App\Entity\Cliente;
+$obCliente = new Cliente;
 
 //VALIDANDO POST
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])){
-    $obCliente = new Cliente;
+    
     $obCliente->nome = $_POST['nome'];
     $obCliente->cpf = $_POST['cpf'];
     $obCliente->data_nasc = $_POST['data_nasc'];

@@ -21,19 +21,11 @@ if (!$obCliente instanceof Cliente) {
     exit;
 }
 
+$obCliente->excluir();
 
-//VALIDANDO POST
-if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])){
-    
-    $obCliente->nome = $_POST['nome'];
-    $obCliente->cpf = $_POST['cpf'];
-    $obCliente->data_nasc = $_POST['data_nasc'];
-    $obCliente->telefone = $_POST['telefone'];
-    $obCliente->atualizar();
+header('location: index.php?status=success');
+exit;
 
-    header('location: index.php?status=success');
-    exit;
-}
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioClientes.php';
+
+

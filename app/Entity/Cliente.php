@@ -52,7 +52,30 @@ class Cliente{
                             ]);
         return true;
 
+    }
 
+    /**
+     * Método de atualizar dados 
+     * @return boolean
+     */
+    public function atualizar(){
+        return(new Database('clientes'))->update('id_cliente ='.$this->id_cliente, [
+                                'nome'=> $this->nome,
+                                'cpf'=> $this->cpf,
+                                'data_nasc'=> $this->data_nasc,
+                                'telefone'=> $this->telefone
+                            ]);
+        
+    }
+
+    /**
+     * Método de excluir
+     * @return boolean
+     */
+    public function excluir(){
+        
+        return(new Database('clientes'))->delete('id_cliente =' .$this->id_cliente);
+        
     }
 
     /**

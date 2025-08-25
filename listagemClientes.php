@@ -1,4 +1,5 @@
 <?php 
+define('TITLE', 'Listagem Cliente');
 include __DIR__.'/index.php';
 
 
@@ -13,8 +14,8 @@ foreach ($clientes as $cliente) {
                         <td>
                             <a href="editarCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-primary">Editar</button></a>
                             <a href="infoCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-light">Info</button></a>
-                            <a href="editarCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-danger">Excluir</button></a>
                             
+                            <a href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'" onclick="return confirm(\'Tem certeza que deseja excluir este item?\')" ><button type="button" class="btn btn-danger">Excluir</button></a>
                         </td>
                     </tr>';
 }

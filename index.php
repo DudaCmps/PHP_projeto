@@ -7,5 +7,4 @@ use \App\Entity\Cliente;
 $clientes = Cliente::getClientes();
 
 
-
 include __DIR__.'/includes/navbar.php';

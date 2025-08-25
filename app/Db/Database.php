@@ -123,6 +123,38 @@ class Database {
 
     return $this->execute($query);
     }
+
+    /**
+     * Método para executar atualizaçoes no banco
+     * @param string
+     * @param array
+     * @return boolen
+     */
+    public function update($where, $valores){
+
+        $fields = array_keys($valores);
+
+        $query = 'UPDATE '.$this->table.' SET '.implode('=?,',$fields).'=? WHERE '.$where;
+    
+        $this->execute($query, array_values($valores));
+
+        return true;
+        }
+
+        /**
+         * Método para deletar no banco
+         * @param string
+         * @return boolen
+         */
+
+        public function delete($where){
+
+        $query = 'DELETE FROM '.$this->table.' WHERE '.$where;
+
+        $this->execute($query);
+
+        return true;
+        }
 }
 
 ?>
