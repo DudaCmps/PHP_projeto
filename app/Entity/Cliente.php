@@ -1,5 +1,5 @@
 <?php 
-// echo "<pre>"; print_r($obDatabase); echo "</pre>"; exit;
+
 namespace App\Entity;
 
 use App\Db\Database;

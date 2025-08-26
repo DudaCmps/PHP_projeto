@@ -128,7 +128,7 @@ class Database {
      * Método para executar atualizaçoes no banco
      * @param string
      * @param array
-     * @return boolen
+     * @return boolean
      */
     public function update($where, $valores){
 
@@ -144,7 +144,7 @@ class Database {
         /**
          * Método para deletar no banco
          * @param string
-         * @return boolen
+         * @return boolean
          */
 
         public function delete($where){

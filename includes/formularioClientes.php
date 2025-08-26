@@ -24,9 +24,46 @@
                 <label for="telefone" class="form-label">Telefone</label>
                 <input type="text" class="form-control" name="telefone" value="<?=$obCliente->telefone?>">
             </div>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
 
+            <h4 style="padding:25px 0px">Endereço</h4>
+
+             <div class="mb-3">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" name="cidade" >
+            </div>
+
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" name="estado" >
+            </div>
+
+            <div class="mb-3">
+                <label for="cep" class="form-label">CEP</label>
+                <input type="text" class="form-control" name="cep" >
+            </div>
+
+            <div class="mb-3">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" name="bairro" >
+            </div>
+
+            <div class="mb-3">
+                <label for="logradouro" class="form-label">Logradouro</label>
+                <input type="text" class="form-control" name="logradouro" >
+            </div>
+
+            <div class="mb-3">
+                <label for="numero" class="form-label">Número</label>
+                <input type="number" class="form-control" name="numero" >
+            </div>
+
+            <div class="mb-3">
+                <label for="complemento" class="form-label">Complemento</label>
+                <input type="text" class="form-control" name="complemento" >
+            </div>
+
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            
         </form>
 
     </main>

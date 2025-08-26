@@ -89,13 +89,13 @@
       </li>
       <li class="nav-title">Veículos</li>
       <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="cil-description me-2"></i> Cadastrar
+            <a class="nav-link" href="cadastrarVeiculo.php">
+                <i class="cil-description me-2"></i> Cadastrar veículos
             </a>
       </li>
       <li class="nav-item">
-            <a class="nav-link" href="cadastrarVeiculo.php">
-            <i class="cil-list me-2"></i> Listar
+            <a class="nav-link" href="ListagemVeiculos.php">
+            <i class="cil-list me-2"></i> Listar veículos
             </a>
       </li>
       <li class="nav-item">
