@@ -13,7 +13,7 @@ if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
 }
 
 //consulta
-$obCliente = Cliente::getCliente($_GET['id_cliente']);
+$obCliente = Cliente::getCliente($_GET['cliente_id']);
 
 //Valida
 if (!$obCliente instanceof Cliente) {

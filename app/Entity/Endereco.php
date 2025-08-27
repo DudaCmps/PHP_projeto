@@ -80,4 +80,17 @@ class Endereco{
                             ]);
         return true;
     }
+
+
+    /**
+     * Método para buscar o endereco pelo id do cliente
+     * @param integer
+     * @return Endereco
+     */
+    public static function getEndereco($id_cliente){
+
+        return(new Database('endereco'))->select('id_cliente = '.$id_cliente)
+                                               ->fetchObject(self::class);
+        
+    }
 }

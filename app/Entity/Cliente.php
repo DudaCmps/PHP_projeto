@@ -51,8 +51,8 @@ class Cliente{
                                 'telefone'=> $this->telefone
                             ]);
         return true;
-
     }
+    
 
     /**
      * Método de atualizar dados 
@@ -73,7 +73,7 @@ class Cliente{
      * @return boolean
      */
     public function excluir(){
-        
+
         return(new Database('clientes'))->delete('id_cliente =' .$this->id_cliente);
         
     }
@@ -85,19 +85,27 @@ class Cliente{
      * @param string
      * @return array
      */
-    public static function getClientes($where = null, $order = null, $limit = null){
+    public static function getClientes($where = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        return(new Database('clientes'))->select($where, $order, $limit)
-                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
+        $join = ' INNER JOIN endereco e ON clientes.id_cliente = e.id_cliente';
+        $fields = 'clientes.id_cliente AS cliente_id,
+                   clientes.nome,
+                   clientes.cpf,
+                   clientes.data_nasc,
+                   clientes.telefone,
+                   e.id_endereco,
+                   e.estado';
+        return(new Database('clientes'))->select($where, $order, $fields, $limit, $join)
+                                               ->fetchAll(PDO::FETCH_CLASS,self::class);
     }
 
     /**
-     * Método para buscar a vaga pelo id
+     * Método para buscar o cliente pelo id
      * @param integer
-     * @return Vaga
+     * @return Cliente
      */
     public static function getCliente($id_cliente){
-
+        
         return(new Database('clientes'))->select('id_cliente = '.$id_cliente)
                                                ->fetchObject(self::class);
         

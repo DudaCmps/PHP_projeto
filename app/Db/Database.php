@@ -72,14 +72,16 @@ class Database {
     public function execute($query, $params = []){
         try {
            $statement = $this->connection->prepare($query);
+           echo $statement; exit;
            $statement->execute($params);
+           
            return $statement;
         } catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
                 header('location: index.php?status=error');
                 exit;
             }else {
-                die('ERROR: '.$e->getMessage());
+                die('ERROR:'.$e->getMessage());
             }
         }
 
@@ -109,19 +111,20 @@ class Database {
      * @param string
      * @param string
      * @param string
+     * @param string
      * @return PDOStatement
      */
-    public function select($where = null, $order = null, $limit = null, $fields = '*'){
+    public function select($where = null, $order = null, $fields = null, $limit = null, $join = null){
 
     $where = !empty($where) ? ' WHERE ' . $where : '';
     $order = !empty($order) ? ' ORDER BY ' .$order : '';
     $limit = !empty($limit) ? ' LIMIT ' .$limit : '';
+    $join  = !empty($join)  ? ''.$join : '';
 
-
-    
-    $query = 'SELECT '.$fields.' FROM '.$this->table.''.$where.''.$order.''.$limit;
-
+    $query = 'SELECT '.$fields.' FROM '.$this->table.''.$join.$where.$order.$limit;
+        
     return $this->execute($query);
+
     }
 
     /**
@@ -150,7 +153,7 @@ class Database {
         public function delete($where){
 
         $query = 'DELETE FROM '.$this->table.' WHERE '.$where;
-
+        
         $this->execute($query);
 
         return true;

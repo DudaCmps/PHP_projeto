@@ -54,7 +54,7 @@
 
             <div class="mb-3">
                 <label for="numero" class="form-label">Número</label>
-                <input type="number" class="form-control" name="numero" >
+                <input type="text" class="form-control" name="numero" >
             </div>
 
             <div class="mb-3">

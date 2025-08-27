@@ -6,7 +6,7 @@ include __DIR__.'/index.php';
 $resultados = '';
 foreach ($clientes as $cliente) {
     $resultados .= '<tr>
-                        <td>'.$cliente->id_cliente.'</td>
+                        <td>'.$cliente->cliente_id.'</td>
                         <td>'.$cliente->nome.'</td>
                         <td>'.$cliente->cpf.'</td>
                         <td>'.date('d/m/Y', strtotime($cliente->data_nasc)).'</td>
@@ -14,7 +14,7 @@ foreach ($clientes as $cliente) {
                         <td>
                             <a href="editarCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-primary">Editar</button></a>
                             <a href="infoCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-light">Info</button></a>
-                            <a onclick=confirmar() href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button"  class="btn btn-danger">Excluir</button></a>
+                            <a href="excluirCliente.php?id_cliente='.$cliente->cliente_id.'"><button type="button" class="btn btn-danger">Excluir</button></a>
                         </td>
                     </tr>';
 }
@@ -28,7 +28,7 @@ foreach ($clientes as $cliente) {
 </head>
 <body>
     
-    <div class="wrapper" style="margin:5rem 5rem 5rem 21rem;">
+    <div class="wrapper" style="margin:3rem 3rem 3rem 18rem;">
 
         <table class="table table-striped table-hover">
 
@@ -53,9 +53,3 @@ foreach ($clientes as $cliente) {
     
 </body>
 </html>
-
-<script>
-  function confirmar() {
-    return confirmar("Tem certeza que deseja excluir este registro?");
-  }
-</script>
