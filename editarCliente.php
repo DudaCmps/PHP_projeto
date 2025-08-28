@@ -7,13 +7,14 @@ define('TITLE', 'Editar Cliente');
 use \App\Entity\Cliente;
 
 if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
-   
+   echo  "<pre>"; print_r($_GET['id_cliente']); echo "</pre>"; exit;
+
     header('location: index.php?status=error');
     exit;
 }
 
 //consulta
-$obCliente = Cliente::getCliente($_GET['cliente_id']);
+$obCliente = Cliente::getCliente($_GET['id_cliente']);
 
 //Valida
 if (!$obCliente instanceof Cliente) {

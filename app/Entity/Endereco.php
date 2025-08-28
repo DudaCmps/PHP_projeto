@@ -1,8 +1,8 @@
 <?php 
 
 namespace App\Entity;
-
 use App\Db\Database;
+
 use PDO;
 
 class Endereco{
@@ -17,7 +17,7 @@ class Endereco{
      * Identificador único do cliente ligado ao endereço
      * @var int
      */
-    public $id_cliente;
+    public $fk_cliente;
 
     /**
      * Cidade do endereço
@@ -69,7 +69,7 @@ class Endereco{
 
         $obDatabase = new Database('endereco');
         $this->id_endereco = $obDatabase->insert([
-                                'id_cliente'=> $this->id_cliente,
+                                'fk_cliente'=> $this->fk_cliente,
                                 'cidade'=> $this->cidade,
                                 'estado'=> $this->estado,
                                 'cep'=> $this->cep,
@@ -78,6 +78,7 @@ class Endereco{
                                 'numero'=> $this->numero,
                                 'complemento'=> $this->complemento
                             ]);
+                            
         return true;
     }
 

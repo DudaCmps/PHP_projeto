@@ -72,13 +72,14 @@ class Database {
     public function execute($query, $params = []){
         try {
            $statement = $this->connection->prepare($query);
-           echo $statement; exit;
            $statement->execute($params);
            
            return $statement;
+           
         } catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
-                header('location: index.php?status=error');
+                
+                header('location: index.php?status=MORTE');
                 exit;
             }else {
                 die('ERROR:'.$e->getMessage());
@@ -94,16 +95,16 @@ class Database {
      * @return integer
      */
     public function insert($valores){
-
+        
         $fields = array_keys($valores);
         $binds  = array_pad([],count($fields),'?');
+       
 
         $query = 'INSERT INTO '.$this->table.' ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
         
         $this->execute($query,array_values($valores));
 
         return $this->connection->lastInsertId();
-        
     }
 
     /**
@@ -114,7 +115,8 @@ class Database {
      * @param string
      * @return PDOStatement
      */
-    public function select($where = null, $order = null, $fields = null, $limit = null, $join = null){
+    public function select($where = null, $order = null, $fields = '*', $limit = null, $join = null){
+   
 
     $where = !empty($where) ? ' WHERE ' . $where : '';
     $order = !empty($order) ? ' ORDER BY ' .$order : '';
@@ -122,9 +124,9 @@ class Database {
     $join  = !empty($join)  ? ''.$join : '';
 
     $query = 'SELECT '.$fields.' FROM '.$this->table.''.$join.$where.$order.$limit;
-        
+    
     return $this->execute($query);
-
+ 
     }
 
     /**

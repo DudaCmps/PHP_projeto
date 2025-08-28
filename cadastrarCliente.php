@@ -20,8 +20,7 @@ $_POST['bairro'], $_POST['logradouro'], $_POST['numero'], $_POST['complemento'])
     $obCliente->telefone = $_POST['telefone'];
     $obCliente->cadastrar();
 
-
-    $obEndereco->id_cliente = $obCliente->id_cliente;
+    $obEndereco->fk_cliente = $obCliente->id_cliente;
     $obEndereco->cidade = $_POST['cidade'];
     $obEndereco->estado = $_POST['estado'];
     $obEndereco->cep = $_POST['cep'];
@@ -29,10 +28,7 @@ $_POST['bairro'], $_POST['logradouro'], $_POST['numero'], $_POST['complemento'])
     $obEndereco->logradouro = $_POST['logradouro'];
     $obEndereco->numero = $_POST['numero'];
     $obEndereco->complemento = $_POST['complemento'];
-    // echo  "<pre>"; print_r($obEndereco); echo "</pre>"; exit;
     $obEndereco->cadastrar();
-
-
 
     header('location: index.php?status=success');
     exit;

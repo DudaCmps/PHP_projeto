@@ -32,6 +32,7 @@
                 <label for="categoria" class="form-label">Categoria</label>
                 <select name="categoria" class="form-select">
                     <option value="" disabled selected>Selecione uma opção</option>
+                    
                     <option value="luxo">Luxo</option>
                     <option value="economico">Econômico</option>
                     <option value="suv">SUV</option>

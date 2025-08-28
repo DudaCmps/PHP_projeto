@@ -50,6 +50,7 @@ class Cliente{
                                 'data_nasc'=> $this->data_nasc,
                                 'telefone'=> $this->telefone
                             ]);
+                            
         return true;
     }
     
@@ -87,16 +88,18 @@ class Cliente{
      */
     public static function getClientes($where = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        $join = ' INNER JOIN endereco e ON clientes.id_cliente = e.id_cliente';
-        $fields = 'clientes.id_cliente AS cliente_id,
+        $join = ' INNER JOIN endereco e ON clientes.id_cliente = e.fk_cliente';
+        $fields = 'clientes.id_cliente,
                    clientes.nome,
                    clientes.cpf,
                    clientes.data_nasc,
                    clientes.telefone,
                    e.id_endereco,
                    e.estado';
+                   
         return(new Database('clientes'))->select($where, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
+                                               
     }
 
     /**
@@ -105,7 +108,7 @@ class Cliente{
      * @return Cliente
      */
     public static function getCliente($id_cliente){
-        
+ 
         return(new Database('clientes'))->select('id_cliente = '.$id_cliente)
                                                ->fetchObject(self::class);
         
