@@ -11,13 +11,13 @@ class Veiculo{
      * Identificador único do cliente
      * @var int
      */
-    public $id_veiculo;
+    public $id_carro;
 
     /**
      * Identificador único do modelo
      * @var int
      */
-    public $id_modelo;
+    public $fk_modelo;
 
     /**
      * Ano de fabricação
@@ -50,8 +50,8 @@ class Veiculo{
     public function cadastrar(){
 
         $obDatabase = new Database('veiculos');
-        $this->id_veiculo = $obDatabase->insert([
-                                'id_modelo'=> $this->id_modelo,
+        $this->id_carro = $obDatabase->insert([
+                                'fk_modelo'=> $this->fk_modelo,
                                 'ano_fabricacao'=> $this->ano_fabricacao,
                                 'placa'=> $this->placa,
                                 'categoria'=> $this->categoria,
@@ -59,5 +59,65 @@ class Veiculo{
                             ]);
         return true;
 
+    }
+
+    /**
+     * Método de atualizar dados 
+     * @return boolean
+     */
+    public function atualizar(){
+        return(new Database('veiculos'))->update('id_carro ='.$this->id_carro, [
+                                'fk_modelo'=> $this->fk_modelo,
+                                'ano_fabricacao'=> $this->ano_fabricacao,
+                                'placa'=> $this->placa,
+                                'categoria'=> $this->categoria,
+                                'estado'=> $this->estado
+                            ]);
+        
+    }
+
+
+    /**
+     * Método de excluir
+     * @return boolean
+    */
+    public function excluir(){
+
+        return(new Database('veiculos'))->delete('id_carro =' .$this->id_carro);
+        
+    }
+
+    /**
+     * Método para obter os carros do banco para listagem
+     * @param string
+     * @param string
+     * @param string
+     * @return array
+     */
+    public static function getVeiculos($where = null, $order = null, $limit = null, $fields = null, $join = null){
+        
+        $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
+        $fields = 'veiculos.id_carro,
+                   mo.nome,
+                   veiculos.ano_fabricacao,
+                   veiculos.placa,
+                   veiculos.categoria,
+                   veiculos.estado';
+                   
+        return(new Database('veiculos'))->select($where, $order, $fields, $limit, $join)
+                                               ->fetchAll(PDO::FETCH_CLASS,self::class);
+                                               
+    }
+
+    /**
+     * Método para buscar o cliente pelo id
+     * @param integer
+     * @return Veiculo
+     */
+    public static function getVeiculo($id_carro){
+ 
+        return(new Database('veiculos'))->select('id_carro = '.$id_carro)
+                                               ->fetchObject(self::class);
+        
     }
 }

@@ -7,7 +7,6 @@ define('TITLE', 'Editar Cliente');
 use \App\Entity\Cliente;
 
 if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
-   echo  "<pre>"; print_r($_GET['id_cliente']); echo "</pre>"; exit;
 
     header('location: index.php?status=error');
     exit;
@@ -21,7 +20,6 @@ if (!$obCliente instanceof Cliente) {
     header('location: index.php?status=error');
     exit;
 }
-
 
 //VALIDANDO POST
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])){

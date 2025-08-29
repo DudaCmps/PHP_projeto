@@ -70,6 +70,7 @@ class Database {
      * @return PDOStatement
      */
     public function execute($query, $params = []){
+        
         try {
            $statement = $this->connection->prepare($query);
            $statement->execute($params);
@@ -98,10 +99,9 @@ class Database {
         
         $fields = array_keys($valores);
         $binds  = array_pad([],count($fields),'?');
-       
-
+    
         $query = 'INSERT INTO '.$this->table.' ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
-        
+
         $this->execute($query,array_values($valores));
 
         return $this->connection->lastInsertId();

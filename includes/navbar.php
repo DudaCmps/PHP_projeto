@@ -103,6 +103,18 @@
             <i class="cil-settings me-2"></i> Manutenção
             </a>
       </li>
+      <li class="nav-title">Reservas</li>
+      <li class="nav-item">
+            <a class="nav-link" href="criaReserva.php">
+            <i class="cil-list me-2"></i> Reservar um Veículo
+            </a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link" href="listagemReservas.php">
+            <i class="cil-list me-2"></i> Reservas Ativas
+            </a>
+      </li>
+
     </ul>
   </div>
 
