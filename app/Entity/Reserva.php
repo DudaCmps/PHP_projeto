@@ -50,6 +50,27 @@ class Reserva{
     }
 
     /**
+     * Método de atualizar dados 
+     * @return boolean
+     */
+    public function atualizar(){
+        return(new Database('reserva'))->update('id_reserva ='.$this->id_reserva, [
+                                                                'estado'=> $this->estado                                                        
+        ]);
+        
+    }
+
+    /**
+     * Método de excluir
+     * @return boolean
+    */
+    public function excluir(){
+
+        return(new Database('reserva'))->delete('id_reserva =' .$this->id_reserva, 'fk_carro =' .$this->fk_carro);
+        
+    }
+
+    /**
      * Método para obter as reservas do banco para listagem
      * @param string
      * @param string
@@ -61,15 +82,26 @@ class Reserva{
         $join = ' INNER JOIN clientes c ON reserva.fk_cliente = c.id_cliente
                   INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
                 ';
-        $fields = 'reserva.id_reserva,
-                   c.nome,
-                   v.placa,
-                   v.placa,
+        $fields = 'reserva.*,
+                   c.*,
+                   v.*,
                    reserva.estado';
                    
         return(new Database('reserva'))->select($where, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
+    }
+
+    /**
+     * Método para buscar a reserva pelo id
+     * @param integer
+     * @return Reserva
+     */
+    public static function getReserva($id_reserva){
+ 
+        return(new Database('reserva'))->select('id_reserva = '.$id_reserva)
+                                               ->fetchObject(self::class);
+        
     }
     
 }

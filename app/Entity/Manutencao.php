@@ -52,6 +52,17 @@ class Manutencao{
     }
 
     /**
+     * Método de excluir
+     * @return boolean
+    */
+    public function excluir(){
+
+       return(new Database('manutencao'))->delete('id_manutencao ='.$this->id_manutencao);
+                                                   
+        
+    }
+
+    /**
      * Método para obter os carros em manutenção do banco para listagem
      * @param string
      * @param string
@@ -69,5 +80,17 @@ class Manutencao{
         return(new Database('manutencao'))->select($where, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
+    }
+
+    /**
+     * Método para buscar o cliente pelo id
+     * @param integer
+     * @return Manutencao
+     */
+    public static function getManutencao($id_manutencao){
+ 
+        return(new Database('manutencao'))->select('id_manutencao = '.$id_manutencao)
+                                               ->fetchObject(self::class);
+        
     }
 }

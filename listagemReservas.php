@@ -1,21 +1,38 @@
 <?php 
 include __DIR__.'/index.php';
 
-
 $resultados = '';
+
 foreach ($reservas as $reserva) {
+    $status = '';
+    switch ($reserva->estado) {
+        case 'confirmada':
+            $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
+            break;
+        
+            default:
+            $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
+            break;
+         
+    }
+    
     $resultados .= '<tr>
-                        <td class="text-center">'.$reserva->id_reserva.'</td>
+                        <td>'.$reserva->id_reserva.'</td>
                         <td class="text-center">'.$reserva->nome.'</td>
                         <td class="text-center">'.$reserva->placa.'</td> 
-                        <td class="text-center">'.$reserva->estado.'</td>
+                        <td class="text-center">'.$status.'</td> 
                         <td class="text-center">
-                            <a href="criaAluguel.php?id_reserva= '.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1">Aprovar</button></a>
+                            <a href="criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1">Aprovar</button></a>
                             <a href="infoReserva.php?id_carro='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-secondary me-1">Info</button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_carro='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm me-1 btn-danger">Excluir</button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm me-1 btn-danger">Cancelar</button></a>
                         </td>
                     </tr>';
 }
+$resultados = !empty($resultados) ? $resultados : '
+                                                <tr >
+                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                </tr>
+                                                ';
 ?>
 
 

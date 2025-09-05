@@ -5,6 +5,7 @@ include __DIR__.'/index.php';
 
 $resultados = '';
 foreach ($manutencoes as $manutencao) {
+  
     $resultados .= '<tr>
                         <td >'.$manutencao->id_manutencao.'</td>
                         <td class="text-center">'.$manutencao->descricao.'</td>
@@ -13,11 +14,16 @@ foreach ($manutencoes as $manutencao) {
                         <td class="text-center">
                             <a href="editarVeiculo.php?id_manutencao= '.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-primary me-1">Editar</button></a>
                             <a href="manutencaoVeiculo.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-secondary me-1">Manutenção</button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-danger">Excluir</button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirManutencao.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-danger">Excluir</button></a>
                         </td>
                     </tr>';
                     
 }
+$resultados = !empty($resultados) ? $resultados : '
+                                                <tr >
+                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                </tr>
+                                                ';
 ?>
 
 

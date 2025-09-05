@@ -41,7 +41,7 @@ class Veiculo{
      * Status do veiculo
      * @var String
      */
-    public $estado;
+    public $estado_carro;
 
 /**
      * Método de cadastro de um veiculo no banco
@@ -71,7 +71,7 @@ class Veiculo{
                                 'ano_fabricacao'=> $this->ano_fabricacao,
                                 'placa'=> $this->placa,
                                 'categoria'=> $this->categoria,
-                                'estado'=> $this->estado
+                                'estado'=> $this->estado_carro
                             ]);
         
     }
@@ -102,7 +102,7 @@ class Veiculo{
                    veiculos.ano_fabricacao,
                    veiculos.placa,
                    veiculos.categoria,
-                   veiculos.estado';
+                   veiculos.estado_carro';
                    
         return(new Database('veiculos'))->select($where, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);

@@ -21,7 +21,7 @@ if (!$obCliente instanceof Cliente) {
 
 $obCliente->excluir();
 
-header('location: ListagemClientes.php?status=success');
+header('location: listagemClientes.php?status=success');
 exit;
 
 

@@ -11,13 +11,18 @@ foreach ($clientes as $cliente) {
                         <td class="text-center">'.date('d/m/Y', strtotime($cliente->data_nasc)).'</td>
                         <td class="text-center">'.$cliente->telefone.'</td> 
                         <td class="text-center">
-                            <a href="editarCliente.php?id_cliente= '.$cliente->id_cliente.'"><button type="button" class="btn btn-sm me-1 btn-primary">Editar</button></a>
-                            <a href="infoCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1">Info</button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger">Excluir</button></a>
+                            <a href="editarCliente.php?id_cliente= '.$cliente->id_cliente.'"><button type="button" class="btn btn-sm me-1 btn-primary"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
+                            <a href="infoCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1"><i style="color:black;" class="cil-description"></i></button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
                     
 }
+$resultados = !empty($resultados) ? $resultados : '
+                                                <tr >
+                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                </tr>
+                                                ';
 ?>
 
 <div class="d-flex flex-column flex-grow-1">

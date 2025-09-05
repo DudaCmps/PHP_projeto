@@ -20,7 +20,7 @@ if (!$obCarro instanceof Veiculo) {
 }
 $obCarro->excluir();
 
-header('location: index.php?status=success');
+header('location: listagemVeiculos.php?status=success');
 exit;
 
 

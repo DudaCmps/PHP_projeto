@@ -28,7 +28,7 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])
     $obCliente->telefone = $_POST['telefone'];
     $obCliente->atualizar();
 
-    header('location: index.php?status=success');
+    header('location: listagemClientes.php?status=success');
     exit;
 }
 

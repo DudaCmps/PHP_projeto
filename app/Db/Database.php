@@ -97,6 +97,7 @@ class Database {
      */
     public function insert($valores){
         
+        
         $fields = array_keys($valores);
         $binds  = array_pad([],count($fields),'?');
     
@@ -152,10 +153,12 @@ class Database {
          * @return boolean
          */
 
-        public function delete($where){
+        public function delete($where, $and = null){
 
-        $query = 'DELETE FROM '.$this->table.' WHERE '.$where;
-        
+        $and = !empty($and) ? ' AND ' . $and : '';
+
+        $query = 'DELETE FROM '.$this->table.' WHERE '.$where.$and;
+                
         $this->execute($query);
 
         return true;

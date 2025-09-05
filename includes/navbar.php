@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" data-coreui-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,10 @@
     
     <!-- link para tabelas -->
     <link href="https://cdn.jsdelivr.net/npm/material-dashboard@1.0.0/dist/css/material-dashboard.css" rel="stylesheet">
+
+    <!-- Font Awesome Free -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
 
 
 <style>
@@ -35,13 +39,43 @@
         }
 
         .tab-pane {
-            background-color: #f3f4f7;
+            /* background-color: #f3f4f7; */
+            background-color:rgb(31, 32, 36);
         }
         .cabine {
  
           transform: translateZ(100PX);
 
         }
+
+        .status{
+        
+        --cui-badge-padding-x: 0.65em;
+        --cui-badge-padding-y: 0.35em;
+        --cui-badge-font-size: 0.85em;
+        --cui-badge-font-weight: 700;
+        --cui-badge-color: #fff;
+        --cui-badge-border-radius: var(--cui-border-radius);
+        display: inline-block;
+        padding: var(--cui-badge-padding-y) var(--cui-badge-padding-x);
+        font-size: var(--cui-badge-font-size);
+        font-weight: var(--cui-badge-font-weight);
+        line-height: 1;
+        color: var(--cui-badge-color);
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: var(--cui-badge-border-radius, 0);
+        }
+
+        .status-success {
+        background-color: var(--cui-success);
+        }
+
+        .status-warning {
+        background-color: var(--cui-warning);
+        }
+        
         
     </style>
 

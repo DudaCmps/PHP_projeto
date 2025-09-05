@@ -5,7 +5,7 @@
 
                   <div class="card">
                     <div class="card-header">
-                      <strong>Cadastro</strong>
+                      <strong><?=TITLE?></strong>
                     </div>
 
                     <div class="card-body">
@@ -47,7 +47,7 @@
                 </select>
             </div>
             
-            <button type="submit" class="btn btn-primary mb-3 mt-2">Cadastrar</button>
+            <button type="submit" class="btn btn-primary mb-3 mt-2">Enviar</button>
 
         </form>
 </div>

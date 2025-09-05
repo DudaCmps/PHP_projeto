@@ -1,18 +1,29 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-use \App\Entity\Reserva;
 
-$obReserva= new Reserva;
+use \App\Entity\Reserva;
+$reservas = Reserva::getReservas();
+
+
+$obReserva = new Reserva;
 
 //VALIDANDO POST
 if(isset($_POST['cliente'], $_POST['carro'])){
-    
+
+    foreach ($reservas as $reserva) {
+        
+        if (($reserva->fk_cliente ==  $_POST['cliente']) && ($reserva->fk_carro == $_POST['carro'])) {
+            header('location: index.php?status=error');
+            exit;
+        }
+    }
+
     $obReserva->fk_cliente = $_POST['cliente'];
     $obReserva->fk_carro = $_POST['carro'];
     $obReserva->cadastrar();
 
-    header('location: index.php?status=success');
+    header('location: listagemReservas.php?status=success');
     exit;
 }
 

@@ -13,8 +13,8 @@ foreach ($clientes as $cliente) {
 }
 
 foreach ($veiculos as $carro) {
-    if ($carro->estado == 'disponivel') {
-       $resultadosCarro .= '<option value="'.$carro->id_carro.'">'.$carro->nome.' - '.$carro->ano_fabricacao.'</option>';
+    if ($carro->estado_carro == 'disponivel') {
+       $resultadosCarro .= '<option value="'.$carro->id_carro.'">'.$carro->nome.' - '.$carro->ano_fabricacao.' - '.$carro->placa.'</option>' ;
     }
    
 }
