@@ -4,7 +4,6 @@ require __DIR__.'/vendor/autoload.php';
 use \App\Entity\Aluguel;
 use \App\Entity\Reserva;
 
-
 if(!isset($_GET['id_reserva']) or !is_numeric($_GET['id_reserva'])){
     header('location: index.php?status=error');
     exit;
@@ -44,11 +43,9 @@ if (isset($_POST['data_inicio'], $_POST['data_final'])) {
     $obReserva->estado = 'confirmada';
     $obReserva->atualizar();
 
-
     header('location: index.php?status=success');
     exit;
 }
-
 
 include __DIR__.'/includes/navbar.php';
 include __DIR__.'/includes/formularioAluguel.php';

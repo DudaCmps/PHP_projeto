@@ -35,7 +35,7 @@
 
               <div class="input-group mb-3">
                 <label for="cep" class="input-group-text">CEP</label>
-                <input type="text" class="form-control" id="cep" name="cep">
+                <input type="text" class="form-control" id="cep" name="cep" placeholder="00000-000">
               </div>
 
               <div class="input-group mb-3">

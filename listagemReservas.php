@@ -1,5 +1,5 @@
 <?php 
-include __DIR__.'/index.php';
+include __DIR__.'/config.php';
 
 $resultados = '';
 
