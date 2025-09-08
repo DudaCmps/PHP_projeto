@@ -70,6 +70,37 @@ class Reserva{
         
     }
 
+        /**
+     * Método para obter o veiculo mais alugado
+     * @param string
+     * @param string
+     * @param string
+     * @return Reserva
+     */
+    public static function getReservaRank($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+        
+        $where = ' v.id_carro = reserva.fk_carro
+                 ';
+
+        $join = ' INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
+                ';
+        $fields = ' v.*
+                  ';
+
+        $group = ' v.id_carro
+        ';
+
+        $order = ' count(*) DESC
+                 ';
+
+        $limit = ' 1
+                 ';
+                   
+        return(new Database('reserva'))->select($where, $group, $order, $fields, $limit, $join)
+                                                ->fetchObject(self::class);
+                                               
+    }
+
     /**
      * Método para obter as reservas do banco para listagem
      * @param string
@@ -77,7 +108,7 @@ class Reserva{
      * @param string
      * @return array
      */
-    public static function getReservas($where = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getReservas($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN clientes c ON reserva.fk_cliente = c.id_cliente
                   INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
@@ -87,7 +118,7 @@ class Reserva{
                    v.*,
                    reserva.estado';
                    
-        return(new Database('reserva'))->select($where, $order, $fields, $limit, $join)
+        return(new Database('reserva'))->select($where, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

@@ -1,3 +1,22 @@
+<?php 
+use App\Entity\Reserva;
+
+
+$totalClientes = 0;
+foreach ($clientes as $cliente) {
+  $totalClientes++;
+}
+
+$totalReservas = 0;
+foreach ($reservas as $reserva) {
+  $totalReservas++;
+}
+
+$reservaRank = Reserva::getReservaRank();
+
+
+?>
+
 <div class="d-flex flex-column flex-grow-1">
 <div class="m-4">
 <div class="col-12">
@@ -7,8 +26,8 @@
             <div class="col-12 col-sm-6 col-xl-4 col-xxl-3">
                 <div class="card text-white bg-primary">
                     <div class="card-body">
-                    <div class="fs-4 fw-semibold">89.9%</div>
-                    <div>Widget title</div>
+                    <div class="fs-4 fw-semibold"><?=$totalClientes?></div>
+                    <div>Clientes Ativos</div>
                     <div class="progress progress-white progress-thin my-2">
                         <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div><small class="text-white text-opacity-75">Widget helper text</small>
@@ -20,8 +39,8 @@
             <div class="col-12 col-sm-6 col-xl-4 col-xxl-3">
                         <div class="card text-white bg-warning">
                           <div class="card-body">
-                            <div class="fs-4 fw-semibold">12.124</div>
-                            <div>Widget title</div>
+                            <div class="fs-4 fw-semibold"></div>
+                            <div>Veículo mais alugado</div>
                             <div class="progress progress-white progress-thin my-2">
                               <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div><small class="text-white text-opacity-75">Widget helper text</small>
@@ -44,8 +63,8 @@
             <div class="col-12 col-sm-6 col-xl-4 col-xxl-3">
                         <div class="card text-white bg-info">
                           <div class="card-body">
-                            <div class="fs-4 fw-semibold">2 TB</div>
-                            <div>Widget title</div>
+                            <div class="fs-4 fw-semibold"><?=$totalReservas?></div>
+                            <div>Reservas Ativas</div>
                             <div class="progress progress-white progress-thin my-2">
                               <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div><small class="text-white text-opacity-75">Widget helper text</small>

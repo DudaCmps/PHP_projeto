@@ -99,7 +99,7 @@ class Aluguel{
      * @param string
      * @return array
      */
-    public static function getAlugueis($where = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getAlugueis($where = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN reserva r ON aluguel.fk_reserva = r.id_reserva
                 ';
@@ -107,7 +107,7 @@ class Aluguel{
                    r.*
                    ';
                    
-        return(new Database('aluguel'))->select($where, $order, $fields, $limit, $join)
+        return(new Database('aluguel'))->select($where, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
     }
 }

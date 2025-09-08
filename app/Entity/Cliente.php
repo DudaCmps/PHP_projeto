@@ -86,7 +86,7 @@ class Cliente{
      * @param string
      * @return array
      */
-    public static function getClientes($where = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getClientes($where = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN endereco e ON clientes.id_cliente = e.fk_cliente';
         $fields = 'clientes.id_cliente,
@@ -97,7 +97,7 @@ class Cliente{
                    e.id_endereco,
                    e.estado';
                    
-        return(new Database('clientes'))->select($where, $order, $fields, $limit, $join)
+        return(new Database('clientes'))->select($where,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

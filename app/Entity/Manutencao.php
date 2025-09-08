@@ -69,7 +69,7 @@ class Manutencao{
      * @param string
      * @return array
      */
-    public static function getManutencoes($where = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getManutencoes($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN veiculos ON manutencao.fk_carro = veiculos.id_carro';
         $fields = 'manutencao.id_manutencao,
@@ -77,7 +77,7 @@ class Manutencao{
                    manutencao.data_manutencao,
                    veiculos.placa
                    ';
-        return(new Database('manutencao'))->select($where, $order, $fields, $limit, $join)
+        return(new Database('manutencao'))->select($where,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

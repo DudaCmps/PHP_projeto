@@ -8,6 +8,7 @@ use App\Entity\Reserva;
 use App\Entity\Aluguel;
 use App\Entity\Manutencao;
 
+
 $clientes = Cliente::getClientes();
 $veiculos = Veiculo::getVeiculos();
 $reservas = Reserva::getReservas();

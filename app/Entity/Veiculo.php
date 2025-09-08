@@ -92,10 +92,10 @@ class Veiculo{
      * @param string
      * @param string
      * @param string
-     * @return array
+     * @return Reserva
      */
-    public static function getVeiculos($where = null, $order = null, $limit = null, $fields = null, $join = null){
-        
+    public static function getVeiculos($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+       
         $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
         $fields = 'veiculos.id_carro,
                    mo.nome,
@@ -104,7 +104,7 @@ class Veiculo{
                    veiculos.categoria,
                    veiculos.estado_carro';
                    
-        return(new Database('veiculos'))->select($where, $order, $fields, $limit, $join)
+        return(new Database('veiculos'))->select($where,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

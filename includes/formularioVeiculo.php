@@ -25,7 +25,7 @@
                     <option value="6" <?= $obCarro->fk_modelo == '6' ? 'selected' : '' ?> >Focus</option>
                 </select>
             </div>
-            
+    
 
             <div class="input-group mb-3">
 
