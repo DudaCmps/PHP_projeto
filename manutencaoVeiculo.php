@@ -7,10 +7,14 @@ use \App\Entity\Veiculo;
 $obManutencao = new Manutencao;
 
 $obCarro = Veiculo::getVeiculo($_GET['id_carro']);
-
+if ($obCarro->estado_carro == 'alugado') {
+        header('location: listagemVeiculos.php?status=error');
+    }
 //VALIDANDO POST
 if(isset($_POST['id_carro'], $_POST['descricao'], $_POST['data_manutencao'])){
 
+    
+    
     $obManutencao->fk_carro = $_POST['id_carro'];
     $obManutencao->descricao = $_POST['descricao'];
     $obManutencao->data_manutencao = $_POST['data_manutencao'];
@@ -18,7 +22,7 @@ if(isset($_POST['id_carro'], $_POST['descricao'], $_POST['data_manutencao'])){
 
     $obCarro->estado_carro = 'manutencao';
     $obCarro->atualizar();
-    header('location: formularioManutencao.php?status=success');
+    header('location: listagemVeiculos.php?status=success');
     exit;
 }
 

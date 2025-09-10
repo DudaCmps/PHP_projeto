@@ -1,4 +1,7 @@
 <!-- Conteúdo formulario-->
+<?php 
+$hoje = new DateTime('today')
+?>
 
 <div class="d-flex flex-column flex-grow-1">
             <div class="m-4">
@@ -16,7 +19,6 @@
         
               <div class="input-group mb-3">
                 <label for="data_inicio" class="input-group-text">Data de Início</label>
-                
                 <input type="datetime-local" class="form-control me-3" name="data_inicio" id="data_inicio" style="border-radius: 0px 5px 5px 0px">
                 <!-- <div id="emailHelp" class="form-text">Quando você quer retirar o carro?</div> -->
 

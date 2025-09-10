@@ -26,12 +26,12 @@ if ($obReserva->estado == 'confirmada') {
     exit;
 }
 
-
 //VALIDANDO POST
 if(isset($_POST['cliente'], $_POST['carro'])){
 
     $obReserva->fk_cliente = $_POST['cliente'];
     $obReserva->fk_carro = $_POST['carro'];
+    
     $obReserva->atualizar();
 
     header('location: listagemReservas.php?status=success');

@@ -83,7 +83,7 @@ class Veiculo{
                                 'ano_fabricacao'=> $this->ano_fabricacao,
                                 'placa'=> $this->placa,
                                 'categoria'=> $this->categoria,
-                                'estado'=> $this->estado_carro
+                                'estado_carro'=> $this->estado_carro
                             ]);
         
     }
@@ -143,13 +143,9 @@ class Veiculo{
         $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo
                   INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca';
                   
-        $fields = ' veiculos.id_carro,
+        $fields = ' veiculos.*,
                     mo.nome AS nomeModelo,
-                    ma.nome AS nomeMarca,
-                    veiculos.ano_fabricacao,
-                    veiculos.placa,
-                    veiculos.categoria,
-                    veiculos.estado_carro';
+                    ma.nome AS nomeMarca';
 
         return(new Database('veiculos'))->select('veiculos.id_carro = '.$id_carro, $group=null, $order=null, $fields, $limit = null, $join)
                                                ->fetchObject(self::class);

@@ -7,13 +7,16 @@ foreach ($reservas as $reserva) {
     $status = '';
     switch ($reserva->estado) {
         case 'confirmada':
+            $botaoAprovar = '<a><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
+            $botaoEditar = '<a><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>';
             $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
             break;
         
             default:
+            $botaoEditar = '<a href="editarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>';
+            $botaoAprovar='<a href="criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
             $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
             break;
-         
     }
     
     $resultados .= '<tr>
@@ -22,9 +25,9 @@ foreach ($reservas as $reserva) {
                         <td class="text-center">'.$reserva->placa.'</td> 
                         <td class="text-center">'.$status.'</td> 
                         <td class="text-center">
-                            <a href="criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>
+                            '.$botaoAprovar .'
 
-                            <a href="editarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
+                            '.$botaoEditar .'
 
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
@@ -32,20 +35,21 @@ foreach ($reservas as $reserva) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" class="registros"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="5" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
 
 
 <div class="d-flex flex-column flex-grow-1">
+<?=$mensagem?>
 <div class="m-4">
 <div class="row">
 <div class="col-12">
           
             <div class="card">
             <div class="card-header">
-            <strong>Reservas</strong>
+            <strong>Reservas ativas</strong>
             </div>
 
 <div class="card-body">

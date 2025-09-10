@@ -55,8 +55,10 @@ class Reserva{
      */
     public function atualizar(){
         return(new Database('reserva'))->update('id_reserva ='.$this->id_reserva, [
-                                                                'estado'=> $this->estado                                                        
-        ]);
+                                                                'estado'=> $this->estado,
+                                                                'fk_cliente'=> $this->fk_cliente,
+                                                                'fk_carro'=> $this->fk_carro                                                 
+                                                                    ]);
         
     }
 

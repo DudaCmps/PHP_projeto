@@ -3,38 +3,40 @@
 $resultados = '';
 
 foreach ($alugueis as $aluguel) {
-    // $status = '';
-    // switch ($reserva->estado) {
-    //     case 'confirmada':
-    //         $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
-    //         break;
-        
-    //         default:
-    //         $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
-    //         break;
-         
-    // }
+
+
+    $dataIni = date('d/m/Y H:i', strtotime($aluguel->data_inicio));
+    $dataFim = date('d/m/Y H:i', strtotime($aluguel->data_final));
 
     $resultados .= '<tr>
                         <td>'.$aluguel->id_aluguel.'</td>
-                        <td class="text-center">'.$aluguel->data_inicio.'</td>
-                        <td class="text-center">'.$aluguel->data_final.'</td> 
+                        <td class="text-center">'.$aluguel->nome.'</td>
+                        <td class="text-center">'.$aluguel->placa.'</td>
+                        <td class="text-center">'.$dataIni.'</td>
+                        <td class="text-center">'.$dataFim.'</td> 
                         <td class="text-center">R$'. number_format($aluguel->valor, 2, ",", ".").'</td> 
                         <td class="text-center">
-                            <a href="criaAluguel.php?id_reserva='.$aluguel->id_reserva.'"><button type="button" class="btn btn-sm btn-primary me-1">Editar</button></a>
-                            <a href="infoReserva.php?id_carro='.$aluguel->id_reserva.'"><button type="button" class="btn btn-sm btn-secondary me-1">Info</button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$aluguel->id_reserva.'"><button type="button" class="btn btn-sm me-1 btn-danger">Cancelar</button></a>
+                
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirAluguel.php?id_aluguel='.$aluguel->id_aluguel.'" ><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="7"  class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (el) {
+        new coreui.Tooltip(el);
+    });
+});
+</script>
 <div class="m-4">
 <div class="row">
 <div class="col-12">
@@ -53,6 +55,8 @@ $resultados = !empty($resultados) ? $resultados : '
 
             <thead>
                 <th scope="col">#</th>
+                <th scope="col" class="text-center">Nome</th>
+                <th scope="col" class="text-center">Placa</th>
                 <th scope="col" class="text-center">Data de inicio</th>
                 <th scope="col" class="text-center">Data de devolução</th>
                 <th scope="col" class="text-center">Valor</th>

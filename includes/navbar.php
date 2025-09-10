@@ -1,3 +1,27 @@
+<?php 
+$mensagem = '';
+if (isset($_GET['status'])) {
+  switch ($_GET['status']) {
+      case 'success':
+          $mensagem = '
+          <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
+              ✅ Ação realizada com sucesso!
+              <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
+          </div>';
+          break;
+      
+      case 'error':
+          $mensagem = '
+          <div class="alert alert-danger alert-dismissible fade show m-4" role="alert">
+              ❌ Ação não realizada!
+              <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
+          </div>';
+          break;
+  }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" data-coreui-theme="dark">
 <head>
@@ -72,6 +96,9 @@
 
         .status-warning {
         background-color: var(--cui-warning);
+        }
+        .status-info{
+            background-color: var(--cui-info);
         }
         
         .registros{

@@ -6,7 +6,7 @@ use \App\Entity\Reserva;
 
 if (!isset($_GET['id_reserva']) or !is_numeric($_GET['id_reserva'])) {
 
-    header('location: index.php?status=error');
+    header('location: listagemReservas.php?status=error');
     exit;
 }
 
@@ -15,18 +15,18 @@ $obReserva = Reserva::getReserva($_GET['id_reserva']);
 
 //Valida
 if (!$obReserva instanceof Reserva) {
-    header('location: index.php?status=error');
+    header('location: listagemReservas.php?status=error');
     exit;
 }
 
 if ($obReserva->estado == 'confirmada') {
-    header('location: index.php?status=error');
+    header('location: listagemReservas.php?status=error');
     exit;
 }
 
 $obReserva->excluir();
 
-header('location: listagemReservas.php?status=success');
+header('location: listagemReservas.php?status=excluido');
 exit;
 
 

@@ -1,5 +1,6 @@
 <?php 
 $id_carro = isset($_GET['id_carro']) ? (int) $_GET['id_carro'] : 0;
+
 ?>
 
 <div class="d-flex flex-column flex-grow-1">
@@ -30,7 +31,7 @@ $id_carro = isset($_GET['id_carro']) ? (int) $_GET['id_carro'] : 0;
               </div>
 
               
-              <button type="submit" class="btn btn-primary mb-3 mt-2">Agendar</button>
+              <button type="submit" class="btn btn-outline-primary mb-3 mt-2">Agendar</button>
             </form>
           </div>
 

@@ -20,8 +20,6 @@ if (!$cli instanceof Cliente) {
 
 $obHistorico = Reserva::getReservaCliente($_GET['id_cliente']);
 
-
-
 $resultados = '';
 foreach ($obHistorico as $historico) {
 
@@ -32,13 +30,13 @@ foreach ($obHistorico as $historico) {
                         <td class="text-center">'.$historico->status.'</td> 
                         <td class="text-center">'.$historico->nomeMarca.' '.$historico->nome.' '.$historico->ano_fabricacao.'</td>
                         <td class="text-center">'.$historico->categoria.'</td>
-                        
+            
                     </tr>';
                     
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="6" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
@@ -52,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <div class="d-flex flex-column flex-grow-1">
+<?=$mensagem?>
 <div class="m-4">
 <div class="row">
 <div class="col-12">

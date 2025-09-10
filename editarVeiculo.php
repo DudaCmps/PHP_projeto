@@ -8,16 +8,17 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_carro']) or !is_numeric($_GET['id_carro'])) {
 
-    header('location: index.php?status=error');
+    header('location: listagemVeiculos.php?status=error');
     exit;
 }
 
 //consulta
 $obCarro = Veiculo::getVeiculo($_GET['id_carro']);
 
+
 //Valida
 if (!$obCarro instanceof Veiculo) {
-    header('location: index.php?status=error');
+    header('location: listagemVeiculos.php?status=error');
     exit;
 }
 
@@ -28,7 +29,6 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     $obCarro->ano_fabricacao = $_POST['ano_fabricacao'];
     $obCarro->placa = $_POST['placa'];
     $obCarro->categoria = $_POST['categoria'];
-    $obCarro->estado_carro = $_POST['status'];
     
     $obCarro->atualizar();
 

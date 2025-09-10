@@ -6,17 +6,18 @@ include __DIR__.'/config.php';
 $resultados = '';
 foreach ($veiculos as $carro) {
 
+
     switch ($carro->estado_carro) {
         case 'alugado':
-            $status = 'Alugado';
+            $status = '<span class="status status-info">Alugado</span>';
             break;
 
         case 'manutencao':
-            $status = 'Manutenção';
+            $status = '<span class="status status-warning">Manutenção</span>';
             break;
         
         default:
-        $status = 'Disponível';
+        $status = '<span class="status status-success">Disponível</span>';
             break;
     }
 
@@ -33,6 +34,8 @@ foreach ($veiculos as $carro) {
         $categoria = 'SUV';
             break;
     }
+
+   
 
     $resultados .= '<tr>
                         <td >'.$carro->id_carro.'</td>
@@ -53,20 +56,13 @@ foreach ($veiculos as $carro) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" class="registros"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="7" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (el) {
-        new coreui.Tooltip(el);
-    });
-});
-</script>
 
 <div class="d-flex flex-column flex-grow-1">
+<?=$mensagem?>
 <div class="m-4">
 <div class="row">
 <div class="col-12">

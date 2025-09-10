@@ -12,8 +12,7 @@ foreach ($manutencoes as $manutencao) {
                         <td class="text-center">'.$manutencao->data_manutencao.'</td> 
                         <td class="text-center">'.$manutencao->placa.'</td>
                         <td class="text-center">
-                            <a href="editarVeiculo.php?id_manutencao= '.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-primary me-1">Editar</button></a>
-                            <a href="manutencaoVeiculo.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-secondary me-1">Manutenção</button></a>
+                            
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirManutencao.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-danger">Excluir</button></a>
                         </td>
                     </tr>';
@@ -21,13 +20,14 @@ foreach ($manutencoes as $manutencao) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" class="registros"><a class="registrosLink">Sem registros</a></td>
+                                                <td colspan="5" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
 
 
 <div class="d-flex flex-column flex-grow-1">
+<?=$mensagem?>
 <div class="m-4">
 <div class="row">
 <div class="col-12">

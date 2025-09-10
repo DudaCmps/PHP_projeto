@@ -13,7 +13,7 @@ foreach ($clientes as $cliente) {
 }
 
 foreach ($veiculos as $carro) {
-    if ($carro->estado_carro == 'disponivel') {
+    if ($carro->estado_carro != 'manutencao') {
        $resultadosCarro .= '<option value="'.$carro->id_carro.'">'.$carro->nome.' - '.$carro->ano_fabricacao.' - '.$carro->placa.'</option>' ;
     }
    
@@ -29,7 +29,7 @@ foreach ($veiculos as $carro) {
 
                   <div class="card">
                     <div class="card-header">
-                      <strong>Cadastro</strong>
+                      <strong>Reserva</strong>
                     </div>
 
                     <div class="card-body">
@@ -55,7 +55,7 @@ foreach ($veiculos as $carro) {
                 <div id="emailHelp" class="form-text">Escolha o carro para a reserva.</div>
             </div>
 
-            <button type="submit" class="btn btn-primary mb-3 mt-2">Reservar</button>
+            <button type="submit" class="btn btn-outline-primary mb-3 mt-2">Reservar</button>
 
         </form>
         </div>

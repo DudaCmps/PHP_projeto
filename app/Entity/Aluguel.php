@@ -70,7 +70,6 @@ class Aluguel{
 
         return $valor;
 
-
     }
 
     /**
@@ -93,6 +92,15 @@ class Aluguel{
     }
 
     /**
+     * Método de excluir
+     * @return boolean
+    */
+    public function excluir(){
+
+        return(new Database('aluguel'))->delete('id_aluguel =' .$this->id_aluguel);
+    }
+
+    /**
      * Método para obter os alugueis do banco para listagem
      * @param string
      * @param string
@@ -101,14 +109,30 @@ class Aluguel{
      */
     public static function getAlugueis($where = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        $join = ' INNER JOIN reserva r ON aluguel.fk_reserva = r.id_reserva
+        $join = ' INNER JOIN reserva re ON re.id_reserva = aluguel.fk_reserva
+                  INNER JOIN veiculos ve ON re.fk_carro = ve.id_carro
+                  INNER JOIN clientes cl ON re.fk_cliente = cl.id_cliente
                 ';
         $fields = 'aluguel.*,
-                   r.*
+                    cl.*,
+                    re.*,
+                    ve.*
                    ';
                    
         return(new Database('aluguel'))->select($where, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
+    }
+
+    /**
+     * Método para buscar a reserva pelo id
+     * @param integer
+     * @return Aluguel
+     */
+    public static function getAluguel($id_aluguel){
+ 
+        return(new Database('aluguel'))->select('id_aluguel = '.$id_aluguel)
+                                               ->fetchObject(self::class);
+        
     }
 
 
