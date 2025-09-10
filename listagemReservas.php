@@ -22,9 +22,11 @@ foreach ($reservas as $reserva) {
                         <td class="text-center">'.$reserva->placa.'</td> 
                         <td class="text-center">'.$status.'</td> 
                         <td class="text-center">
-                            <a href="criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1">Aprovar</button></a>
-                            <a href="infoReserva.php?id_carro='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-secondary me-1">Info</button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm me-1 btn-danger">Cancelar</button></a>
+                            <a href="criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>
+
+                            <a href="editarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
+
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
 }
@@ -81,3 +83,12 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
 </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (el) {
+        new coreui.Tooltip(el);
+    });
+});
+</script>

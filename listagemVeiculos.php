@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
             <div class="card">
             <div class="card-header">
-            <strong>Lista de Clientes</strong>
+            <strong>Veículos</strong>
             </div>
 
 <div class="card-body">

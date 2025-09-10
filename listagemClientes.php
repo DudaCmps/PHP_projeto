@@ -10,16 +10,11 @@ foreach ($clientes as $cliente) {
                         <td class="text-center">'.date('d/m/Y', strtotime($cliente->data_nasc)).'</td>
                         <td class="text-center">'.$cliente->telefone.'</td> 
                         <td class="text-center">
-                            <a href="editarCliente.php?id_cliente= '.$cliente->id_cliente.'"><button type="button"class="btn btn-sm me-1 btn-primary"
-                            data-coreui-toggle="tooltip" 
-        data-coreui-placement="top" 
-        title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
-                            <a href="listagemHistorico.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" 
-        data-coreui-placement="top" 
-        title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" 
-        data-coreui-placement="top" 
-        title="Excluir"><i class="cil-trash"></i></button></a>
+                            <a href="editarCliente.php?id_cliente= '.$cliente->id_cliente.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
+                            
+                            <a href="listagemHistorico.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
+                           
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
                     
@@ -79,3 +74,12 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
 </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (el) {
+        new coreui.Tooltip(el);
+    });
+});
+</script>
