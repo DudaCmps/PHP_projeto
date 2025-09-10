@@ -43,6 +43,18 @@ class Veiculo{
      */
     public $estado_carro;
 
+    /**
+     * Status do veiculo
+     * @var String
+     */
+    public $nomeMarca;
+
+    /**
+     * Status do veiculo
+     * @var String
+     */
+    public $nomeModelo;
+
 /**
      * Método de cadastro de um veiculo no banco
      * @return boolean
@@ -97,7 +109,7 @@ class Veiculo{
     public static function getVeiculos($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
        
         $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
-        $fields = 'veiculos.id_carro,
+        $fields = ' veiculos.id_carro,
                    mo.nome,
                    veiculos.ano_fabricacao,
                    veiculos.placa,
@@ -109,14 +121,37 @@ class Veiculo{
                                                
     }
 
+    // /**
+    //  * Método para buscar o cliente pelo id
+    //  * @param integer
+    //  * @return Veiculo
+    //  */
+    // public static function getVeiculo($id_carro){
+ 
+    //     return(new Database('veiculos'))->select('id_carro = '.$id_carro)
+    //                                            ->fetchObject(self::class);
+        
+    // }
+
     /**
      * Método para buscar o cliente pelo id
      * @param integer
-     * @return Veiculo
+     * @returnc
      */
-    public static function getVeiculo($id_carro){
- 
-        return(new Database('veiculos'))->select('id_carro = '.$id_carro)
+    public static function getVeiculo($id_carro, $fields = null, $join = null){
+
+        $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo
+                  INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca';
+                  
+        $fields = ' veiculos.id_carro,
+                    mo.nome AS nomeModelo,
+                    ma.nome AS nomeMarca,
+                    veiculos.ano_fabricacao,
+                    veiculos.placa,
+                    veiculos.categoria,
+                    veiculos.estado_carro';
+
+        return(new Database('veiculos'))->select('veiculos.id_carro = '.$id_carro, $group=null, $order=null, $fields, $limit = null, $join)
                                                ->fetchObject(self::class);
         
     }

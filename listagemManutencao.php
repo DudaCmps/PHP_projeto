@@ -21,7 +21,7 @@ foreach ($manutencoes as $manutencao) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="5" class="registros"><a class="registrosLink">Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>

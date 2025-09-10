@@ -79,22 +79,17 @@ class Reserva{
      */
     public static function getReservaRank($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        $where = ' v.id_carro = reserva.fk_carro
-                 ';
+        
+        $join = ' INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro ';
+    
+        $fields = ' reserva.fk_carro, COUNT(*) as total_alugueis ';
+        
+        $group = ' reserva.fk_carro ';
+        
+        $order = ' total_alugueis DESC ';
+        
+        $limit = ' 1 ';
 
-        $join = ' INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
-                ';
-        $fields = ' v.*
-                  ';
-
-        $group = ' v.id_carro
-        ';
-
-        $order = ' count(*) DESC
-                 ';
-
-        $limit = ' 1
-                 ';
                    
         return(new Database('reserva'))->select($where, $group, $order, $fields, $limit, $join)
                                                 ->fetchObject(self::class);
@@ -134,7 +129,28 @@ class Reserva{
                                                ->fetchObject(self::class);
         
     }
-    
+
+    /**
+     * Método para obter as reservas do banco para listagem
+     * @param string
+     * @param string
+     * @param string
+     * @return array
+     */
+    public static function getReservaCliente($fk_cliente,$where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+        
+        $join = ' INNER JOIN aluguel a ON reserva.id_reserva = a.fk_reserva
+                  INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
+                  INNER JOIN modelos mo ON v.fk_modelo = mo.id_modelo
+                  INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca
+                ';
+        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_cliente, reserva.estado AS status, a.*, v.*,ma.nome AS nomeMarca, mo.*';
+                   
+        return(new Database('reserva'))->select(' reserva.fk_cliente = '.$fk_cliente, $group, $order, $fields, $limit, $join)
+                                               ->fetchAll(PDO::FETCH_CLASS,self::class);
+                                               
+    }
+
 }
 
 ?>

@@ -19,6 +19,10 @@ if (!$obReserva instanceof Reserva) {
     exit;
 }
 
+if ($obReserva->estado == 'confirmada') {
+    header('location: index.php?status=error');
+    exit;
+}
 
 $obReserva->excluir();
 

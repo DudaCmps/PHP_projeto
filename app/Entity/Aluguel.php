@@ -110,4 +110,6 @@ class Aluguel{
         return(new Database('aluguel'))->select($where, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
     }
+
+
 }

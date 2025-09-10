@@ -120,13 +120,14 @@ class Database {
    
 
     $where = !empty($where) ? ' WHERE ' . $where : '';
+    $fields = !empty($fields) ? ''. $fields : '*';
     $group = !empty($group) ? ' GROUP BY ' .$group : '';
     $order = !empty($order) ? ' ORDER BY ' .$order : '';
     $limit = !empty($limit) ? ' LIMIT ' .$limit : '';
     $join  = !empty($join)  ? ''.$join : '';
 
     $query = 'SELECT '.$fields.' FROM '.$this->table.''.$join.$where.$group.$order.$limit;
-    
+
     return $this->execute($query);
  
     }

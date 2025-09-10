@@ -14,12 +14,12 @@ foreach ($alugueis as $aluguel) {
     //         break;
          
     // }
-    
+
     $resultados .= '<tr>
                         <td>'.$aluguel->id_aluguel.'</td>
                         <td class="text-center">'.$aluguel->data_inicio.'</td>
                         <td class="text-center">'.$aluguel->data_final.'</td> 
-                        <td class="text-center">'.$aluguel->valor.'</td> 
+                        <td class="text-center">R$'. number_format($aluguel->valor, 2, ",", ".").'</td> 
                         <td class="text-center">
                             <a href="criaAluguel.php?id_reserva='.$aluguel->id_reserva.'"><button type="button" class="btn btn-sm btn-primary me-1">Editar</button></a>
                             <a href="infoReserva.php?id_carro='.$aluguel->id_reserva.'"><button type="button" class="btn btn-sm btn-secondary me-1">Info</button></a>

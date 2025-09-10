@@ -15,4 +15,5 @@ $reservas = Reserva::getReservas();
 $alugueis = Aluguel::getAlugueis();
 $manutencoes = Manutencao::getManutencoes();
 
+
 include __DIR__.'/includes/navbar.php';

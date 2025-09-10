@@ -42,20 +42,29 @@ foreach ($veiculos as $carro) {
                         <td class="text-center">'.$categoria.'</td>
                         <td class="text-center">'.$status.'</td>
                         <td class="text-center">
-                            <a href="editarVeiculo.php?id_carro= '.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-primary me-1"><i class="fa-regular fa-pen-to-square"></i></button></a>
-                            <a href="manutencaoVeiculo.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-secondary me-1"><i class="cil-settings "></i></button></a>
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-danger"><i class="cil-trash"></i></button></a>
+                            <a href="editarVeiculo.php?id_carro= '.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-primary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i class="fa-regular fa-pen-to-square" style="color: black;"></i></button></a>
+
+                            <a href="manutencaoVeiculo.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção"><i class="cil-settings" style="color: black;font-size:16px;"></i></button></a>
+
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_carro='.$carro->id_carro.'" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><button type="button" class="btn btn-sm btn-danger"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
                     
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" style="background-color:#f3f4f7"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="5" class="registros"><a style="color:#949398;">Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (el) {
+        new coreui.Tooltip(el);
+    });
+});
+</script>
 
 <div class="d-flex flex-column flex-grow-1">
 <div class="m-4">

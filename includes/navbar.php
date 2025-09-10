@@ -74,6 +74,14 @@
         background-color: var(--cui-warning);
         }
         
+        .registros{
+            background-color:#3a3a3a;
+        }
+
+        .registrosLink {
+            color:rgb(177, 177, 177);
+            text-decoration: none;
+        }
         
     </style>
 
@@ -83,7 +91,7 @@
 
 <div class="sidebar sidebar-fixed border-end" id="sidebar">
     <div class="sidebar-header border-bottom">
-      <h2>LocaFast</h2>
+      <h2><i class="cib-vlc"></i>LocaFast</h2>
     </div>
 
     <!-- Nav -->
@@ -152,7 +160,7 @@
   <div class="wrapper min-vh-100 ">
 
         <header class="header header-sticky border-bottom" 
-        style="position: fixed; top: 0; left: 250px; right: 0; height: 65px; ">
+        style="position: fixed; top: 0; left: 250px; right: 0; height: 66px; ">
             <div class="container-fluid h-100 d-flex align-items-center px-4" >
                 <ul class="header-nav d-none d-md-flex">
 
