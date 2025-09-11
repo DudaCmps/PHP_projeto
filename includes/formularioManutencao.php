@@ -1,6 +1,9 @@
 <?php 
 $id_carro = isset($_GET['id_carro']) ? (int) $_GET['id_carro'] : 0;
 
+$dataAtual = new DateTime();
+$dataFormatada = $dataAtual->format('Y-m-d'); 
+
 ?>
 
 <div class="d-flex flex-column flex-grow-1">
@@ -27,7 +30,8 @@ $id_carro = isset($_GET['id_carro']) ? (int) $_GET['id_carro'] : 0;
               
               <div class="input-group mb-3">
                 <label for="data_manutencao" class="input-group-text">Data da Manutenção</label>
-                <input type="date" class="form-control" id="data_manutencao" name="data_manutencao" >
+                <input type="date" class="form-control" id="data_manutencao" name="data_manutencao" 
+                 min="<?=$dataFormatada ?>" required>
               </div>
 
               

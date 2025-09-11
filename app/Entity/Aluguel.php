@@ -46,7 +46,7 @@ class Aluguel{
         
         switch ($categoria) {
             case 'economico':
-                $valorTemp = 59.99;
+                $valorTemp = 79.99;
                 break;
             
             case 'suv':
@@ -65,7 +65,15 @@ class Aluguel{
         $intervalo = $this->data_inicio->diff($this->data_final);
 
         $dias = $intervalo->days;
-        
+
+        if ($dias < 1) {
+            $dias = 1;
+        }
+
+        if ($dias < 1 || $this->data_final <= $this->data_inicio) {
+            header('location: listagemReservas.php?status=error');
+        }
+
         $valor = $valorTemp * $dias;
 
         return $valor;

@@ -19,8 +19,8 @@ if (isset($_GET['status'])) {
           break;
   }
 }
+date_default_timezone_set('America/Sao_Paulo');
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en" data-coreui-theme="dark">

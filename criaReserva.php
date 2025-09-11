@@ -1,10 +1,8 @@
 <?php
 require __DIR__.'/vendor/autoload.php';
 
-
 use \App\Entity\Reserva;
 $reservas = Reserva::getReservas();
-
 
 $obReserva = new Reserva;
 
@@ -14,7 +12,7 @@ if(isset($_POST['cliente'], $_POST['carro'])){
     foreach ($reservas as $reserva) {
         
         if (($reserva->fk_cliente ==  $_POST['cliente']) && ($reserva->fk_carro == $_POST['carro'])) {
-            header('location: index.php?status=error');
+            header('location: criaReserva.php?id_reserva= '.$reserva->id_reserva);
             exit;
         }
     }

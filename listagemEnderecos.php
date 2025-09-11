@@ -2,23 +2,10 @@
 include __DIR__.'/config.php';
 
 use \App\Entity\Endereco;
-
-if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
-
-    header('location: index.php?status=error');
-    exit;
-}
 use \App\Entity\Cliente;
-
 
 //consulta
 $cli = Cliente::getCliente($_GET['id_cliente']);
-
-//Valida
-if (!$cli instanceof Cliente) {
-    header('location: index.php?status=error');
-    exit;
-}
 
 $enderecos = Endereco::getEnderecos($cli->id_cliente);
 
@@ -47,7 +34,7 @@ foreach ($enderecos as $endereco) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" class="registros"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="8" class="registros"><a style="color:#949398;">Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>

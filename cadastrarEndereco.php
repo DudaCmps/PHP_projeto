@@ -10,7 +10,8 @@ use \App\Entity\Endereco;
 $obEndereco = new Endereco;
 
 if (!isset($_GET['id_cliente']) || empty($_GET['id_cliente'])) {
-    die("Cliente não informado!");
+    header('location:index.php?status=error');
+    exit;
 }
 
 $cli = Cliente::getCliente($_GET['id_cliente']);
@@ -28,7 +29,7 @@ if(isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $_
     $obEndereco->complemento = $_POST['complemento'];
     $obEndereco->cadastrar();
    
-    header('location: listagemEnderecos.php?status=success');
+    header('location: index.php?status=success');
     exit;
 }
 

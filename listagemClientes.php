@@ -15,7 +15,7 @@ foreach ($clientes as $cliente) {
                             
                             <a href="listagemHistorico.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
 
-                            <a href="listagemEnderecos.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Endereços"><i style="color:pink;" class="cil-description"></i></button></a>
+                            <a href="listagemEnderecos.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-warning me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Endereços"><i style="color:black;" class="cil-house"></i></button></a>
                            
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
@@ -24,7 +24,7 @@ foreach ($clientes as $cliente) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="5" class="registros"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="6" class="registros"><a style="color:#949398;">Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>

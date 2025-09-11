@@ -15,7 +15,6 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     $obCarro->ano_fabricacao = $_POST['ano_fabricacao'];
     $obCarro->placa = $_POST['placa'];
     $obCarro->categoria = $_POST['categoria'];
-    
 
     $obCarro->cadastrar();
 

@@ -28,7 +28,7 @@ $obReserva->excluir();
 $veiculo = Veiculo::getVeiculo($obReserva->fk_carro);
 
 $veiculo->estado_carro = 'disponivel';
-    $veiculo->atualizar();
+$veiculo->atualizar();
 
 $obAluguel->excluir();
 
