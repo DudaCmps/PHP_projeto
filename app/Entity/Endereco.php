@@ -82,15 +82,58 @@ class Endereco{
         return true;
     }
 
+    /**
+     * Método de atualizar dados 
+     * @return boolean
+     */
+    public function atualizar(){
+        return(new Database('endereco'))->update('id_endereco ='.$this->id_endereco, [
+                                                                'cidade'=> $this->cidade,
+                                                                'estado'=> $this->estado,
+                                                                'cep'=> $this->cep,
+                                                                'bairro'=> $this->bairro,
+                                                                'logradouro'=> $this->logradouro,
+                                                                'numero'=> $this->numero,
+                                                                'complemento'=>$this->complemento                                                 
+                                                                    ]);
+        
+    }
 
     /**
-     * Método para buscar o endereco pelo id do cliente
+     * Método de excluir
+     * @return boolean
+    */
+    public function excluir(){
+
+        return(new Database('endereco'))->delete('id_endereco =' .$this->id_endereco, 'id_endereco =' .$this->id_endereco);
+        
+    }
+
+    /**
+     * Método para obter os enderecos do banco para listagem
+     * @param string
+     * @param string
+     * @param string
+     * @return array
+     */
+    public static function getEnderecos($id_cliente, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+        
+        $join = ' INNER JOIN clientes cli ON endereco.fk_cliente = cli.id_cliente';
+        $fields = 'cli.id_cliente,
+                   endereco.*';  
+                   
+        return(new Database('endereco'))->select(' endereco.fk_cliente = '.$id_cliente,$group, $order, $fields, $limit, $join)
+                                               ->fetchAll(PDO::FETCH_CLASS,                                    self::class);                                        
+    }
+
+    /**
+     * Método para buscar o endereco 
      * @param integer
      * @return Endereco
      */
-    public static function getEndereco($id_cliente){
+    public static function getEndereco($id_endereco){
 
-        return(new Database('endereco'))->select('id_cliente = '.$id_cliente)
+        return(new Database('endereco'))->select('id_endereco = '.$id_endereco)
                                                ->fetchObject(self::class);
         
     }

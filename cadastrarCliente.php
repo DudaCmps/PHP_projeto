@@ -12,8 +12,7 @@ $obEndereco = new Endereco;
 
 
 //VALIDANDO POST
-if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'], $_POST['cidade'], $_POST['estado'], $_POST['cep'], 
-$_POST['bairro'], $_POST['logradouro'], $_POST['numero'], $_POST['complemento'])){
+if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'], $_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $_POST['logradouro'], $_POST['numero'], $_POST['complemento'])){
     $obCliente->nome = $_POST['nome'];
     $obCliente->cpf = $_POST['cpf'];
     $obCliente->data_nasc = $_POST['data_nasc'];

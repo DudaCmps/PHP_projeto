@@ -33,4 +33,4 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])
 }
 
 include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioClientes.php';
+include __DIR__.'/includes/formularioEditaCliente.php';

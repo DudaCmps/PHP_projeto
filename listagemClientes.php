@@ -14,6 +14,8 @@ foreach ($clientes as $cliente) {
                             <a href="editarCliente.php?id_cliente= '.$cliente->id_cliente.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
                             
                             <a href="listagemHistorico.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
+
+                            <a href="listagemEnderecos.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Endereços"><i style="color:pink;" class="cil-description"></i></button></a>
                            
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>

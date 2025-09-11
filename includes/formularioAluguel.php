@@ -19,11 +19,14 @@ $hoje = new DateTime('today')
         
               <div class="input-group mb-3">
                 <label for="data_inicio" class="input-group-text">Data de Início</label>
-                <input type="datetime-local" class="form-control me-3" name="data_inicio" id="data_inicio" style="border-radius: 0px 5px 5px 0px">
-                <!-- <div id="emailHelp" class="form-text">Quando você quer retirar o carro?</div> -->
+                <input type="datetime-local" class="form-control me-3" name="data_inicio" id="data_inicio" 
+                      style="border-radius: 0px 5px 5px 0px"
+                      min="<?= $minData ?>" required>
 
-                <label for="cpf" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Data de Devolução</label>
-                <input type="datetime-local" class="form-control" id="data_final" name="data_final">
+                <label for="data_final" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Data de Devolução</label>
+                <input type="datetime-local" class="form-control" id="data_final" name="data_final" 
+                      style="border-radius: 0px 5px 5px 0px"
+                      min="<?= $minData ?>" required>
               </div>
               <!-- <div class="d-grid gap-2"> -->
                 <button type="submit" class="btn btn-outline-primary mb-3 mt-2">Reservar</button>
