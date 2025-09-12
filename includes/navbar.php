@@ -28,6 +28,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LocaFast</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.4.1/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-NlsxdkweGA8nr9s0TVc3Qu2zqhWMNsHrvzMpAjVR0yDqXgC2z+RWYoeCNG2uO2MC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/icons/css/all.min.css" rel="stylesheet">
 
@@ -37,7 +38,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <link href="https://cdn.jsdelivr.net/npm/material-dashboard@1.0.0/dist/css/material-dashboard.css" rel="stylesheet">
 
     <!-- Font Awesome Free -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 
 
@@ -64,7 +65,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
         .tab-pane {
             /* background-color: #f3f4f7; */
-            background-color:rgb(36, 37, 41);
+            background-color:rgba(71, 106, 247, 0)
         }
         .cabine {
           transform: translateZ(100PX);

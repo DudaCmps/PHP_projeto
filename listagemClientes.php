@@ -24,7 +24,7 @@ foreach ($clientes as $cliente) {
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
-                                                <td colspan="6" class="registros"><a style="color:#949398;">Sem registros</a></td>
+                                                <td colspan="6" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
