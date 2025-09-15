@@ -1,6 +1,5 @@
 <?php
-// echo  "<pre>"; print_r($_POST); echo "</pre>"; exit;
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Cliente;
 
@@ -32,5 +31,5 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioEditaCliente.php';
+include __DIR__.'/../includes/navbar.php';
+include __DIR__.'/../includes/formularioEditaCliente.php';

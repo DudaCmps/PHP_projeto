@@ -1,5 +1,5 @@
 <?php 
-include __DIR__.'/config.php';
+include __DIR__ . '/../config.php';
 
 use \App\Entity\Endereco;
 use \App\Entity\Cliente;

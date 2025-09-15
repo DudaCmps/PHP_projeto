@@ -1,5 +1,7 @@
 <?php 
 $mensagem = '';
+define('BASE_URL', '/locaFast/');
+
 if (isset($_GET['status'])) {
   switch ($_GET['status']) {
       case 'success':
@@ -126,7 +128,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <ul class="sidebar-nav">
 
       <li class="nav-item">
-          <a class="nav-link active" href="index.php">
+          <a class="nav-link active" href="<?= BASE_URL ?>index.php">
               <i class="cil-speedometer me-2"></i>Dashboard
           </a>
       </li>
@@ -134,13 +136,13 @@ date_default_timezone_set('America/Sao_Paulo');
       <li class="nav-title">Clientes</li>
 
       <li class="nav-item">
-          <a class="nav-link" href="cadastrarCliente.php">
+          <a class="nav-link" href="<?= BASE_URL ?>clientes/cadastrarCliente.php">
               <i class="cil-user-plus fs-5 me-2"></i> Cadastrar usuário
           </a>
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="listagemClientes.php">
+          <a class="nav-link" href="<?= BASE_URL ?>clientes/listagemClientes.php">
               <i class="cil-list-filter me-2"></i></i> Listar usuários
           </a>
       </li>
@@ -148,21 +150,22 @@ date_default_timezone_set('America/Sao_Paulo');
       <li class="nav-title">Veículos</li>
 
       <li class="nav-item">
-          <a class="nav-link" href="cadastrarVeiculo.php">
+        <a class="nav-link" href="<?= BASE_URL ?>veiculos/cadastrarVeiculo.php">
           <i class="me-2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-car-front-fill" viewBox="0 0 16 16">
-  <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17s3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z"/>
-</svg></i> Cadastrar veículos
-          </a>
+            <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17s3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z"/>
+            </svg>
+            </i> Cadastrar veículos
+        </a>
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="ListagemVeiculos.php">
+          <a class="nav-link" href="<?= BASE_URL ?>veiculos/ListagemVeiculos.php">
             <i class="cil-list me-2"></i> Listar veículos
           </a>
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="listagemManutencao.php">
+          <a class="nav-link" href="<?= BASE_URL ?>manutenções/listagemManutencao.php">
             <i class="cil-settings me-2"></i> Manutenção
           </a>
       </li>
@@ -170,13 +173,13 @@ date_default_timezone_set('America/Sao_Paulo');
       <li class="nav-title">Reservas</li>
 
       <li class="nav-item">
-          <a class="nav-link" href="criaReserva.php">
+          <a class="nav-link" href="<?= BASE_URL ?>reservas/criaReserva.php">
           <i class="cil-paperclip me-2"></i> Reservar um Veículo
           </a>
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="listagemReservas.php">
+          <a class="nav-link" href="<?= BASE_URL ?>reservas/listagemReservas.php">
             <i class="cil-check-circle me-2"></i> Reservas Ativas
           </a>
       </li>

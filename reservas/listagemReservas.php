@@ -1,5 +1,5 @@
 <?php 
-include __DIR__.'/config.php';
+include __DIR__ . '/../config.php';
 
 $resultados = '';
 
@@ -14,7 +14,7 @@ foreach ($reservas as $reserva) {
         
             default:
             $botaoEditar = '<a href="editarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>';
-            $botaoAprovar='<a href="criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
+            $botaoAprovar='<a href="../alugueis/criaAluguel.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
             $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
             break;
     }

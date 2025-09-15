@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Reserva;
 $reservas = Reserva::getReservas();
@@ -25,5 +25,5 @@ if(isset($_POST['cliente'], $_POST['carro'])){
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioReserva.php';
+include __DIR__ . '/../includes/navbar.php';
+include __DIR__ . '/../includes/formularioReserva.php';

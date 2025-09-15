@@ -1,6 +1,5 @@
 <?php
-// echo  "<pre>"; print_r($_POST); echo "</pre>"; exit;
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Reserva;
 
@@ -26,7 +25,7 @@ if ($obReserva->estado == 'confirmada') {
 
 $obReserva->excluir();
 
-header('location: listagemReservas.php?status=excluido');
+header('location: listagemReservas.php?status=success');
 exit;
 
 

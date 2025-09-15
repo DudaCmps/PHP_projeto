@@ -1,6 +1,5 @@
 <?php
-// echo  "<pre>"; print_r($_POST); echo "</pre>"; exit;
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Aluguel;
 use \App\Entity\Reserva;
@@ -9,7 +8,7 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_aluguel']) or !is_numeric($_GET['id_aluguel'])) {
 
-    header('location: index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 
@@ -18,7 +17,7 @@ $obAluguel = Aluguel::getAluguel($_GET['id_aluguel']);
 
 //Valida
 if (!$obAluguel instanceof Aluguel) {
-    header('location: index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 
@@ -32,8 +31,9 @@ $veiculo->atualizar();
 
 $obAluguel->excluir();
 
-header('location: index.php?status=success');
+header('location: ../index.php?status=success');
 exit;
+
 
 
 

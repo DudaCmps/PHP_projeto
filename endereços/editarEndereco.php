@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 use App\Entity\Endereco;
 
 if (!isset($_GET['id_endereco']) || !is_numeric($_GET['id_endereco'])) {
@@ -35,5 +35,5 @@ if (isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $
 }
 
 // Inclui navbar e formulário
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioEndereco.php';
+include __DIR__ . '/../includes/navbar.php';
+include __DIR__.'/../includes/formularioEndereco.php';

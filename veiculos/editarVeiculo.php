@@ -1,6 +1,5 @@
 <?php
-// echo  "<pre>"; print_r($_POST); echo "</pre>"; exit;
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 define('TITLE', 'Editar Veículo');
 
@@ -8,7 +7,7 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_carro']) or !is_numeric($_GET['id_carro'])) {
 
-    header('location: listagemVeiculos.php?status=error');
+    header('location: listagemClientes.php?status=error');
     exit;
 }
 
@@ -36,5 +35,5 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioVeiculo.php';
+include __DIR__ . '/../includes/navbar.php';
+include __DIR__.'/../includes/formularioVeiculo.php';

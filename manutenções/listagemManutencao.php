@@ -1,7 +1,5 @@
 <?php 
-
-include __DIR__.'/config.php';
-
+include __DIR__ . '/../config.php';
 
 $resultados = '';
 foreach ($manutencoes as $manutencao) {

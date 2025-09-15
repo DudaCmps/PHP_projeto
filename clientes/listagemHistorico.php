@@ -1,9 +1,9 @@
 <?php 
-include __DIR__.'/config.php';
+include __DIR__ . '/../config.php';
 
 if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
 
-    header('location: index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 use \App\Entity\Cliente;
@@ -14,7 +14,7 @@ $cli = Cliente::getCliente($_GET['id_cliente']);
 
 //Valida
 if (!$cli instanceof Cliente) {
-    header('location: index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 

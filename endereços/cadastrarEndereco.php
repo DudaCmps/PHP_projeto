@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 define('TITLE', 'Cadastrar Endereco');
 
 
@@ -10,7 +10,7 @@ use \App\Entity\Endereco;
 $obEndereco = new Endereco;
 
 if (!isset($_GET['id_cliente']) || empty($_GET['id_cliente'])) {
-    header('location:index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 
@@ -29,9 +29,9 @@ if(isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $_
     $obEndereco->complemento = $_POST['complemento'];
     $obEndereco->cadastrar();
    
-    header('location: index.php?status=success');
+    header('location: ../index.php?status=success');
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioEndereco.php';
+include __DIR__.'/../includes/navbar.php';
+include __DIR__.'/../includes/formularioEndereco.php';

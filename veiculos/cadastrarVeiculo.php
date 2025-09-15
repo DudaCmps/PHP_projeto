@@ -1,7 +1,5 @@
 <?php
-
-require __DIR__.'/vendor/autoload.php';
-
+require __DIR__ . '/../vendor/autoload.php';
 define('TITLE', 'Cadastrar Veículo');
 
 use \App\Entity\Veiculo;
@@ -18,9 +16,9 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
 
     $obCarro->cadastrar();
 
-    header('location: index.php?status=success');
+    header('location: ../index.php?status=success');
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioVeiculo.php';
+include __DIR__ . '/../includes/navbar.php';
+include __DIR__.'/../includes/formularioVeiculo.php';

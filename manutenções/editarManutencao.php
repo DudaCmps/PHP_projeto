@@ -1,12 +1,11 @@
 <?php
-// echo  "<pre>"; print_r($_POST); echo "</pre>"; exit;
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_carro']) or !is_numeric($_GET['id_carro'])) {
 
-    header('location: index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 
@@ -15,7 +14,7 @@ $obCarro = Veiculo::getVeiculo($_GET['id_carro']);
 
 //Valida
 if (!$obCarro instanceof Veiculo) {
-    header('location: index.php?status=error');
+    header('location: ../index.php?status=error');
     exit;
 }
 
@@ -30,9 +29,9 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     
     $obCarro->atualizar();
 
-    header('location: listagemManutencao.php?status=success');
+    header('location: ../index.php?status=success');
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioVeiculo.php';
+include __DIR__ . '/../includes/navbar.php';
+include __DIR__ . '/../includes/formularioVeiculo.php';

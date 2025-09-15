@@ -33,7 +33,7 @@ $estados = [
                   style="border-radius: 0px 5px 5px 0px" name="telefone" value="<?=$obCliente->telefone?>" required>
 
                 <label for="cpf" class="input-group-text" style="border-radius: 5px 0px 0px 5px">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" value="<?=$obCliente->cpf?>" required maxlength="11">
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" value="<?=$obCliente->cpf?>" required maxlength="14">
               </div>
 
               <div class="input-group mb-3">

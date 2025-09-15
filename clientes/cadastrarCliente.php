@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 define('TITLE', 'Cadastrar Cliente');
 
 
@@ -29,9 +29,9 @@ if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'],
     $obEndereco->complemento = $_POST['complemento'];
     $obEndereco->cadastrar();
    
-    header('location: index.php?status=success');
+    header('location: ../index.php?status=success');
     exit;
 }
 
-include __DIR__.'/includes/navbar.php';
-include __DIR__.'/includes/formularioClientes.php';
+include __DIR__ . '/../includes/navbar.php';
+include __DIR__.'/../includes/formularioClientes.php';
