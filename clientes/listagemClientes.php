@@ -2,21 +2,21 @@
 include __DIR__ . '/../config.php';
 
 $resultados = '';
-foreach ($clientes as $cliente) {
+foreach ($usuarios as $usuario) {
     $resultados .= '<tr>
-                        <td>'.$cliente->id_cliente.'</td>
-                        <td class="text-center">'.$cliente->nome.'</td>
-                        <td class="text-center">'.$cliente->cpf.'</td>
-                        <td class="text-center">'.date('d/m/Y', strtotime($cliente->data_nasc)).'</td>
-                        <td class="text-center">'.$cliente->telefone.'</td> 
+                        <td>'.$usuario->id_user.'</td>
+                        <td class="text-center">'.$usuario->nome.'</td>
+                        <td class="text-center">'.$usuario->cpf.'</td>
+                        <td class="text-center">'.date('d/m/Y', strtotime($usuario->data_nasc)).'</td>
+                        <td class="text-center">'.$usuario->telefone.'</td> 
                         <td class="text-center">
-                            <a href="editarCliente.php?id_cliente= '.$cliente->id_cliente.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
+                            <a href="editarUsuario.php?id_user= '.$usuario->id_user.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
                             
-                            <a href="listagemHistorico.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
+                            <a href="listagemHistorico.php?id_user='.$usuario->id_user.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
 
-                            <a href="../endereços/listagemEnderecos.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-warning me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Endereços"><i style="color:black;" class="cil-house"></i></button></a>
+                            <a href="../endereços/listagemEnderecos.php?id_user='.$usuario->id_user.'"><button type="button" class="btn btn-sm btn-warning me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Endereços"><i style="color:black;" class="cil-house"></i></button></a>
                            
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_cliente='.$cliente->id_cliente.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
+                            <a onclientck="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirUsuario.php?id_user='.$usuario->id_user.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
                     
@@ -36,7 +36,7 @@ $resultados = !empty($resultados) ? $resultados : '
           
             <div class="card">
             <div class="card-header">
-            <strong>Lista de Clientes</strong>
+            <strong>Lista de Usuarios</strong>
             </div>
 
 <div class="card-body">

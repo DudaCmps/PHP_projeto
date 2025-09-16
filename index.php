@@ -1,4 +1,5 @@
 <?php 
-include __DIR__.'/config.php';
-include __DIR__.'/includes/cards.php';
-include __DIR__.'/includes/listagemAluguel.php';
+require __DIR__ . '/vendor/autoload.php';
+
+
+include __DIR__.'/includes/loginPage.php';

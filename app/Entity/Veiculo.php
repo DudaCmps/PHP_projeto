@@ -8,7 +8,7 @@ use PDO;
 class Veiculo{
 
     /**
-     * Identificador único do cliente
+     * Identificador único do usuario
      * @var int
      */
     public $id_carro;
@@ -122,7 +122,7 @@ class Veiculo{
     }
 
     // /**
-    //  * Método para buscar o cliente pelo id
+    //  * Método para buscar o usuario pelo id
     //  * @param integer
     //  * @return Veiculo
     //  */
@@ -134,7 +134,7 @@ class Veiculo{
     // }
 
     /**
-     * Método para buscar o cliente pelo id
+     * Método para buscar o usuario pelo id
      * @param integer
      * @returnc
      */

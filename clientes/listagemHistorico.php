@@ -1,24 +1,24 @@
 <?php 
 include __DIR__ . '/../config.php';
 
-if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
+if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
 
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
-use \App\Entity\Cliente;
+use \App\Entity\Usuario;
 use \App\Entity\Reserva;
 
 //consulta
-$cli = Cliente::getCliente($_GET['id_cliente']);
+$client = Usuario::getUsuario($_GET['id_user']);
 
 //Valida
-if (!$cli instanceof Cliente) {
-    header('location: ../index.php?status=error');
+if (!$client instanceof Usuario) {
+    header('location: ../index2.php?status=error');
     exit;
 }
 
-$obHistorico = Reserva::getReservaCliente($_GET['id_cliente']);
+$obHistorico = Reserva::getReservaUsuario($_GET['id_user']);
 
 $resultados = '';
 foreach ($obHistorico as $historico) {
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="row">
 <div class="col-12">
         
-<div><h3>Histórico de <?=$cli->nome?></h3></div>  
+<div><h3>Histórico de <?=$client->nome?></h3></div>  
 
 <div class="card">
             

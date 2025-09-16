@@ -32,6 +32,8 @@ $estados = [
                 <h1>Cadastre-se</h1>
                 <p class="text-body-secondary">Crie sua conta</p>
 
+                <form action="../auth/registerProcess.php" method="post">
+
                 <div class="input-group mb-3">
                 <label for="nome" class="input-group-text" id="basic-addon1">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome"  required placeholder="Nome Completo">
@@ -54,6 +56,8 @@ $estados = [
               <div class="input-group mb-3">
                 <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
                 <input type="date" class="form-control" id="data_nasc" name="data_nasc" max="2005" required>
+
+              
               </div>
 
               <div class="input-group mb-3">
@@ -62,52 +66,65 @@ $estados = [
               </div>
 
               
-              <div class="input-group mb-3">
+              <!-- <div class="input-group mb-3">
                 <label for="senha" class="input-group-text" id="basic-addon1">Confirmar senha</label>
                 <input type="password" class="form-control" id="senha" name="senha" placeholder="Repita a senha"  required>
-              </div>
-
-              <h4 class="p-2">Endereço</h4>
-
-                <div class="input-group mb-3">
-                <label for="cep" class="input-group-text">CEP</label>
-                <input type="text" class="form-control me-3" id="cep" name="cep" placeholder="00000-000" style="border-radius: 0px 5px 5px 0px">
-
-              <label for="numero" class="input-group-text" style="border-radius: 5px 0px 0px 5px">N°</label>
-              <input type="text" class="form-control flex-grow-0" id="numero" name="numero" style="width: 150px;">
-              </div>
+              </div> -->
 
               <div class="input-group mb-3">
-              <label for="cidade" class="input-group-text">Cidade</label>
-              <input type="text" class="form-control me-3" id="cidade" name="cidade" style="border-radius: 0px 5px 5px 0px" >
 
-              <label for="estado" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Estado</label>
-              <select class="form-select" id="estado" name="estado" >
-                  <option value="">Selecione</option>
-                  <?php foreach ($estados as $sigla => $nome): ?>
-                      <option >
-                          <?= $nome ?>
-                      </option>
-                  <?php endforeach; ?>
-              </select>
-
+                <label for="perfil" class="input-group-text">Perfil</label>
+                  <select class="form-select" name="perfil" id="perfilSelect" required>
+                      <option disabled selected>Selecione</option>
+                      <option value="cliente">Cliente</option>
+                      <option value="admin">Administrador</option>
+                  </select>
               </div>
 
-              <div class="input-group mb-3">
-                <label for="bairro" class="input-group-text">Bairro</label>
-                <input type="text" class="form-control me-3" id="bairro" name="bairro" >
+                <div id="addressHidden" style="display: none;">
 
-                <label for="logradouro" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Logradouro</label>
-                <input type="text" class="form-control" id="logradouro" name="logradouro" >
-              </div>
+                <h4 class="p-2">Endereço</h4>
 
-              <div class="input-group mb-3">
-                <label for="complemento" class="input-group-text">Complemento</label>
-                <input type="text" class="form-control" id="complemento" name="complemento" >
+                  <div class="input-group mb-3">
+                  <label for="cep" class="input-group-text">CEP</label>
+                  <input type="text" class="form-control me-3" id="cep" name="cep" placeholder="00000-000" style="border-radius: 0px 5px 5px 0px">
+
+                  <label for="numero" class="input-group-text" style="border-radius: 5px 0px 0px 5px">N°</label>
+                  <input type="text" class="form-control flex-grow-0" id="numero" name="numero" style="width: 150px;">
+                  </div>
+
+                  <div class="input-group mb-3">
+                  <label for="cidade" class="input-group-text">Cidade</label>
+                  <input type="text" class="form-control me-3" id="cidade" name="cidade" style="border-radius: 0px 5px 5px 0px" >
+
+                  <label for="estado" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Estado</label>
+                  <select class="form-select" id="estado" name="estado" >
+                    <option value="" disabled selected>Selecione</option>
+                    <?php foreach ($estados as $sigla => $nome): ?>
+                        <option value="<?= $sigla ?>">
+                            <?= $nome ?>
+                        </option>
+                    <?php endforeach; ?>
+                  </select>
+                  </div>
+
+                  <div class="input-group mb-3">
+                  <label for="bairro" class="input-group-text">Bairro</label>
+                  <input type="text" class="form-control me-3" id="bairro" name="bairro" >
+
+                  <label for="logradouro" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Logradouro</label>
+                  <input type="text" class="form-control" id="logradouro" name="logradouro" >
+                  </div>
+
+                  <div class="input-group mb-3">
+                  <label for="complemento" class="input-group-text">Complemento</label>
+                  <input type="text" class="form-control" id="complemento" name="complemento" >
+                </div>
+                </div>
+
+                <button class="btn btn-block btn-success" type="submit">Criar conta</button>
+                </form>
                 
-              </div>
-
-                <button class="btn btn-block btn-success" type="button">Criar conta</button>
               </div>
             </div>
           </div>
@@ -117,3 +134,16 @@ $estados = [
     
 </body>
 </html>
+
+<script>
+const perfilSelect = document.getElementById('perfilSelect');
+const addressHidden = document.getElementById('addressHidden');
+
+perfilSelect.addEventListener('change', function() {
+    if (this.value === 'cliente') {
+        addressHidden.style.display = 'block'; // mostra endereço
+    } else {
+        addressHidden.style.display = 'none';  // esconde endereço
+    }
+});
+</script>

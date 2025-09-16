@@ -116,13 +116,13 @@ class Endereco{
      * @param string
      * @return array
      */
-    public static function getEnderecos($id_cliente, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getEnderecos($id_user, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        $join = ' INNER JOIN clientes cli ON endereco.fk_cliente = cli.id_cliente';
-        $fields = 'cli.id_cliente,
+        $join = ' INNER JOIN usuarios client ON endereco.fk_cliente = client.id_user';
+        $fields = 'client.id_user,
                    endereco.*';  
                    
-        return(new Database('endereco'))->select(' endereco.fk_cliente = '.$id_cliente,$group, $order, $fields, $limit, $join)
+        return(new Database('endereco'))->select(' endereco.fk_cliente = '.$id_user,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,                                    self::class);                                        
     }
 

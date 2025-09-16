@@ -1,15 +1,15 @@
 <?php 
-use \App\Entity\Cliente;
+use \App\Entity\Usuario;
 use App\Entity\Veiculo;
 
-$clientes = Cliente::getClientes();
+$usuarios = Usuario::getUsuarios();
 $veiculos = Veiculo::getVeiculos();
 
-$resultadosCliente = '';
+$resultadosUsuario = '';
 $resultadosCarro = '';
 
-foreach ($clientes as $cliente) {
-    $resultadosCliente .= '<option value="'.$cliente->id_cliente.'">'.$cliente->nome.'</option>';
+foreach ($usuarios as $usuario) {
+    $resultadosUsuario .= '<option value="'.$usuario->id_user.'">'.$usuario->nome.'</option>';
 }
 
 foreach ($veiculos as $carro) {
@@ -36,13 +36,13 @@ foreach ($veiculos as $carro) {
 
     <form method="post">
             <div class="mb-3">
-                <label for="cliente" class="form-label">Clientes</label>
+                <label for="usuario" class="form-label">Usuarios</label>
                 
-                <select name="cliente" class="form-select">
-                <option value="" disabled selected>Selecione um cliente</option>
-                <?=$resultadosCliente?>
+                <select name="usuario" class="form-select">
+                <option value="" disabled selected>Selecione um usuario</option>
+                <?=$resultadosUsuario?>
                 </select>
-                <div id="emailHelp" class="form-text">Escolha o cliente que fará a reserva.</div>
+                <div id="emailHelp" class="form-text">Escolha o usuario que fará a reserva.</div>
             </div>
 
             <div class="mb-3">

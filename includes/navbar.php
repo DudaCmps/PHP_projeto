@@ -128,21 +128,21 @@ date_default_timezone_set('America/Sao_Paulo');
     <ul class="sidebar-nav">
 
       <li class="nav-item">
-          <a class="nav-link active" href="<?= BASE_URL ?>index.php">
+          <a class="nav-link active" href="<?= BASE_URL ?>index2.php">
               <i class="cil-speedometer me-2"></i>Dashboard
           </a>
       </li>
 
-      <li class="nav-title">Clientes</li>
+      <li class="nav-title">Users</li>
 
       <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>clientes/cadastrarCliente.php">
+          <a class="nav-link" href="<?= BASE_URL ?>usuarios/cadastrarUsuario.php">
               <i class="cil-user-plus fs-5 me-2"></i> Cadastrar usuário
           </a>
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>clientes/listagemClientes.php">
+          <a class="nav-link" href="<?= BASE_URL ?>usuarios/listagemUsuarios.php">
               <i class="cil-list-filter me-2"></i></i> Listar usuários
           </a>
       </li>
@@ -196,7 +196,7 @@ date_default_timezone_set('America/Sao_Paulo');
                 <ul class="header-nav d-none d-md-flex">
 
                     <li class="nav-item"><a class="nav-link" href="#" data-coreui-i18n="dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-coreui-i18n="users">Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-coreui-i18n="usuarios">Usuarios</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-coreui-i18n="settings">Settings</a></li>
                   </ul>
             </div>

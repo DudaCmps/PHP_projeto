@@ -1,35 +1,35 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use \App\Entity\Cliente;
+use \App\Entity\Usuario;
 
-if (!isset($_GET['id_cliente']) or !is_numeric($_GET['id_cliente'])) {
+if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
 
-    header('location: listagemClientes.php?status=error');
+    header('location: listagemUsuarios.php?status=error');
     exit;
 }
 
 //consulta
-$obCliente = Cliente::getCliente($_GET['id_cliente']);
+$obUsuario = Usuario::getUsuario($_GET['id_user']);
 
 //Valida
-if (!$obCliente instanceof Cliente) {
-    header('location: listagemClientes.php?status=error');
+if (!$obUsuario instanceof Usuario) {
+    header('location: listagemUsuarios.php?status=error');
     exit;
 }
 
 //VALIDANDO POST
 if(isset($_POST['nome'], $_POST['cpf'], $_POST['data_nasc'], $_POST['telefone'])){
     
-    $obCliente->nome = $_POST['nome'];
-    $obCliente->cpf = $_POST['cpf'];
-    $obCliente->data_nasc = $_POST['data_nasc'];
-    $obCliente->telefone = $_POST['telefone'];
-    $obCliente->atualizar();
+    $obUsuario->nome = $_POST['nome'];
+    $obUsuario->cpf = $_POST['cpf'];
+    $obUsuario->data_nasc = $_POST['data_nasc'];
+    $obUsuario->telefone = $_POST['telefone'];
+    $obUsuario->atualizar();
 
-    header('location: listagemClientes.php?status=success');
+    header('location: listagemUsuarios.php?status=success');
     exit;
 }
 
 include __DIR__.'/../includes/navbar.php';
-include __DIR__.'/../includes/formularioEditaCliente.php';
+include __DIR__.'/../includes/formularioEditaUsuario.php';

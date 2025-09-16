@@ -7,7 +7,7 @@ use \App\Entity\Veiculo;
 
 
 if (!isset($_GET['id_reserva']) || !is_numeric($_GET['id_reserva'])) {
-    header('Location: ../index.php?status=error');
+    header('Location: ../index2.php?status=error');
     exit;
 }
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data_inicio'], $_POST
     $veiculo->estado_carro  = 'alugado';
     $veiculo->atualizar();
 
-    header('location: ../index.php?status=success');
+    header('location: ../index2.php?status=success');
     exit;
 }
 

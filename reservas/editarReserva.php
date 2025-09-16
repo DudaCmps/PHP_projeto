@@ -7,7 +7,7 @@ use \App\Entity\Reserva;
 
 if (!isset($_GET['id_reserva']) or !is_numeric($_GET['id_reserva'])) {
 
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
@@ -16,19 +16,19 @@ $obReserva= Reserva::getReserva($_GET['id_reserva']);
 
 //Valida
 if (!$obReserva instanceof Reserva) {
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
 if ($obReserva->estado == 'confirmada') {
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
 //VALIDANDO POST
-if(isset($_POST['cliente'], $_POST['carro'])){
+if(isset($_POST['usuario'], $_POST['carro'])){
 
-    $obReserva->fk_cliente = $_POST['cliente'];
+    $obReserva->fk_usuario = $_POST['usuario'];
     $obReserva->fk_carro = $_POST['carro'];
     
     $obReserva->atualizar();

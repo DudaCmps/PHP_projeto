@@ -8,7 +8,7 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_aluguel']) or !is_numeric($_GET['id_aluguel'])) {
 
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
@@ -17,7 +17,7 @@ $obAluguel = Aluguel::getAluguel($_GET['id_aluguel']);
 
 //Valida
 if (!$obAluguel instanceof Aluguel) {
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
@@ -31,7 +31,7 @@ $veiculo->atualizar();
 
 $obAluguel->excluir();
 
-header('location: ../index.php?status=success');
+header('location: ../index2.php?status=success');
 exit;
 
 

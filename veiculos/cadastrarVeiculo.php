@@ -16,7 +16,7 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
 
     $obCarro->cadastrar();
 
-    header('location: ../index.php?status=success');
+    header('location: ../index2.php?status=success');
     exit;
 }
 

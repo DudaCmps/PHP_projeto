@@ -7,7 +7,7 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_carro']) or !is_numeric($_GET['id_carro'])) {
 
-    header('location: listagemClientes.php?status=error');
+    header('location: listagemUsuarios.php?status=error');
     exit;
 }
 

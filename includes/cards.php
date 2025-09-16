@@ -3,10 +3,10 @@ use App\Entity\Reserva;
 use App\Entity\Veiculo;
 use App\Entity\Aluguel;
 
-//CARD CLIENTE
-$totalClientes = 0;
-foreach ($clientes as $cliente) {
-  $totalClientes++;
+//CARD USER
+$totalUsuarios = 0;
+foreach ($usuarios as $usuario) {
+  $totalUsuarios++;
 }
 
 $totalReservas = 0;
@@ -46,8 +46,8 @@ foreach ($alugueis as $aluguel) {
             <div class="col-12 col-sm-6 col-xl-4 col-xxl-3">
                 <div class="card text-white bg-primary">
                     <div class="card-body">
-                    <div class="fs-4 fw-semibold"><?=$totalClientes?></div>
-                    <div>Clientes Ativos</div>
+                    <div class="fs-4 fw-semibold"><?=$totalUsuarios?></div>
+                    <div>Usuarios Ativos</div>
                     <div class="progress progress-white progress-thin my-2">
                         <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div><small class="text-white text-opacity-75">Widget helper text</small>

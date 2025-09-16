@@ -2,14 +2,14 @@
 include __DIR__ . '/../config.php';
 
 use \App\Entity\Endereco;
-use \App\Entity\Cliente;
+use \App\Entity\Usuario;
 
 //consulta
-$cli = Cliente::getCliente($_GET['id_cliente']);
+$client = Usuario::getUsuario($_GET['id_user']);
 
-$enderecos = Endereco::getEnderecos($cli->id_cliente);
+$enderecos = Endereco::getEnderecos($client->id_user);
 
-$botao = '<a href="cadastrarEndereco.php?id_cliente='.$cli->id_cliente.'"><button type="button"class=" btn mt-3 btn-primary" >Adicionar Endereço</i></button></a>';
+$botao = '<a href="cadastrarEndereco.php?id_user='.$client->id_user.'"><button type="button"class=" btn mt-3 btn-primary" >Adicionar Endereço</i></button></a>';
 
 $resultados = '';
 foreach ($enderecos as $endereco) {
@@ -27,7 +27,7 @@ foreach ($enderecos as $endereco) {
                             <a href="editarEndereco.php?id_endereco= '.$endereco->id_endereco.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
                             
                            
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirEndereco.php?id_endereco='.$endereco->id_endereco.'&id_cliente='.$cli->id_cliente.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirEndereco.php?id_endereco='.$endereco->id_endereco.'&id_user='.$client->id_user.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
                     

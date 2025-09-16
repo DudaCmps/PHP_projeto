@@ -16,21 +16,30 @@
           <div class="col-lg-8">
             <div class="card-group d-block d-md-flex row">
               <div class="card col-md-7 p-4 mb-0">
+
                 <div class="card-body">
                   <h1>Bem vindo(a)!</h1>
                   <p class="text-body-secondary">Entre na sua conta</p>
+
+                  <form action="./auth/loginProcess.php" method="POST">
+
                   <div class="input-group mb-3"><span class="input-group-text">
                   <i class="cil-user"></i></span>
-                    <input class="form-control" type="text" placeholder="exemplo@gmail.com">
+                    <input class="form-control" type="text" placeholder="exemplo@gmail.com" name="email">
                   </div>
+
                   <div class="input-group mb-4"><span class="input-group-text">
                   <i class="cil-lock-locked"></i></span>
-                    <input class="form-control" type="password" placeholder="********">
+                    <input class="form-control" type="password" placeholder="********" name="senha">
                   </div>
+
                   <div class="row">
                     <div class="col-6">
-                      <button class="btn btn-primary px-4" type="button">Entrar</button>
-                    </div>
+                      <button class="btn btn-primary px-4" type="submit">Entrar</button>
+                  </div>
+
+                  </form>
+      
                     <div class="col-6 text-end">
                       <button class="btn btn-link px-0" type="button">Esqueceu a senha?</button>
                     </div>
@@ -42,7 +51,7 @@
                   <div>
                     <h2>Cadastre-se</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <button class="btn btn-lg btn-outline-light mt-3" type="button">Cadastre Agora!</button>
+                    <a href="includes/registerPage.php"><button class="btn btn-lg btn-outline-light mt-3" type="button">Cadastre Agora!</button></a>
                   </div>
                 </div>
               </div>

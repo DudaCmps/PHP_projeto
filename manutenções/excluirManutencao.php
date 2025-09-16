@@ -6,7 +6,7 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_manutencao']) or !is_numeric($_GET['id_manutencao'])) {
 
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
@@ -16,7 +16,7 @@ $obCarro = Veiculo::getVeiculo($obManutencao->fk_carro);
 
 //Valida
 if (!$obManutencao instanceof Manutencao) {
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 

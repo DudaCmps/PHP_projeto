@@ -3,23 +3,23 @@ require __DIR__ . '/../vendor/autoload.php';
 define('TITLE', 'Cadastrar Endereco');
 
 
-use \App\Entity\Cliente;
+use \App\Entity\Usuario;
 use \App\Entity\Endereco;
 
 
 $obEndereco = new Endereco;
 
-if (!isset($_GET['id_cliente']) || empty($_GET['id_cliente'])) {
-    header('location: ../index.php?status=error');
+if (!isset($_GET['id_user']) || empty($_GET['id_user'])) {
+    header('location: ../index2.php?status=error');
     exit;
 }
 
-$cli = Cliente::getCliente($_GET['id_cliente']);
+$client = Usuario::getUsuario($_GET['id_user']);
 
 //VALIDANDO POST
 if(isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $_POST['logradouro'], $_POST['numero'], $_POST['complemento'])){
 
-    $obEndereco->fk_cliente = $cli->id_cliente;
+    $obEndereco->fk_usuario = $client->id_user;
     $obEndereco->cidade = $_POST['cidade'];
     $obEndereco->estado = $_POST['estado'];
     $obEndereco->cep = $_POST['cep'];
@@ -29,7 +29,7 @@ if(isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $_
     $obEndereco->complemento = $_POST['complemento'];
     $obEndereco->cadastrar();
    
-    header('location: ../index.php?status=success');
+    header('location: ../index2.php?status=success');
     exit;
 }
 

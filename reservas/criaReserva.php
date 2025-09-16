@@ -7,17 +7,17 @@ $reservas = Reserva::getReservas();
 $obReserva = new Reserva;
 
 //VALIDANDO POST
-if(isset($_POST['cliente'], $_POST['carro'])){
+if(isset($_POST['usuario'], $_POST['carro'])){
 
     foreach ($reservas as $reserva) {
         
-        if (($reserva->fk_cliente ==  $_POST['cliente']) && ($reserva->fk_carro == $_POST['carro'])) {
+        if (($reserva->fk_usuario ==  $_POST['usuario']) && ($reserva->fk_carro == $_POST['carro'])) {
             header('location: criaReserva.php?id_reserva= '.$reserva->id_reserva);
             exit;
         }
     }
 
-    $obReserva->fk_cliente = $_POST['cliente'];
+    $obReserva->fk_usuario = $_POST['usuario'];
     $obReserva->fk_carro = $_POST['carro'];
     $obReserva->cadastrar();
 

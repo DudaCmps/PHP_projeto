@@ -61,7 +61,7 @@ $resultados = !empty($resultados) ? $resultados : '
 
             <thead>
                 <th scope="col">#</th>
-                <th scope="col" class="text-center">Nome do cliente</th>
+                <th scope="col" class="text-center">Nome do usuario</th>
                 <th scope="col" class="text-center">Placa do Veículo</th>
                 <th scope="col" class="text-center">Status</th>
                 <th scope="col" class="text-center">Ações</th>

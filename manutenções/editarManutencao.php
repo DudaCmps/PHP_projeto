@@ -5,7 +5,7 @@ use \App\Entity\Veiculo;
 
 if (!isset($_GET['id_carro']) or !is_numeric($_GET['id_carro'])) {
 
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
@@ -14,7 +14,7 @@ $obCarro = Veiculo::getVeiculo($_GET['id_carro']);
 
 //Valida
 if (!$obCarro instanceof Veiculo) {
-    header('location: ../index.php?status=error');
+    header('location: ../index2.php?status=error');
     exit;
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     
     $obCarro->atualizar();
 
-    header('location: ../index.php?status=success');
+    header('location: ../index2.php?status=success');
     exit;
 }
 

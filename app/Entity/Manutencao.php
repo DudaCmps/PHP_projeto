@@ -83,7 +83,7 @@ class Manutencao{
     }
 
     /**
-     * Método para buscar o cliente pelo id
+     * Método para buscar o usuario pelo id
      * @param integer
      * @return Manutencao
      */
