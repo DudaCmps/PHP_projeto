@@ -13,10 +13,13 @@ $obUsuario = Usuario::getUsuarioEmail($_POST['email']);
 if ($obUsuario && password_verify($_POST['senha'], $obUsuario->senha)) {
     if ($obUsuario->perfil === 'admin') {
         //Inicia sessão de admin
-        # code...
+        header('Location: ../clientes/index.php');
     }else{
         //Inicia sessão de cliente
         $_SESSION['id_user'] = $obUsuario->id_user;
+        
     }
     
+}else {
+    header('Location: ../index.php?status=error');
 }

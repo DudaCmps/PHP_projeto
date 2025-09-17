@@ -3,36 +3,7 @@ use App\Entity\Reserva;
 use App\Entity\Veiculo;
 use App\Entity\Aluguel;
 
-//CARD USER
-$totalUsuarios = 0;
-foreach ($usuarios as $usuario) {
-  $totalUsuarios++;
-}
 
-$totalReservas = 0;
-foreach ($reservas as $reserva) {
-  $totalReservas++;
-}
-
-//CARD VEICULO
-$reservaRank = Reserva::getReservaRank();
-if ($reservaRank != NULL) {
-  $obCarroRank = Veiculo::getVeiculo($reservaRank->fk_carro);
-  $carro = $obCarroRank->nomeMarca.' '.$obCarroRank->nomeModelo.' '.$obCarroRank->ano_fabricacao;
-}else{
-  $carro = 'Nenhum veículo alugado';
-}
-
-//CARD VALOR ALUGUEL
-$alugueis = Aluguel::getAlugueis();
-
-$totalAluguel = 0;
-
-foreach ($alugueis as $aluguel) {
-  $totalAluguel += $aluguel->valor; 
-}
-
-//LISTAGEM ALUGUEL
 ?>
 
 

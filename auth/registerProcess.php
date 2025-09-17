@@ -10,7 +10,7 @@ $obEndereco = new Endereco;
 //Validanção do post basico
 if (!isset($_POST['nome'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['data_nasc'], $_POST['senha'], $_POST['perfil'])) {
 
-    header('location: ../index2.php?status=error');
+    header('location: ../includes/registerPage.php?status=error');
     exit;
 }
 
@@ -21,6 +21,8 @@ $obUsuario->telefone = $_POST['telefone'];
 $obUsuario->cpf = $_POST['cpf'];
 $obUsuario->data_nasc = $_POST['data_nasc'];
 $obUsuario->senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
+$obUsuario->perfil = $_POST['perfil'];
+
 $obUsuario->cadastrar();
 
 //Verifica se é cliente, caso seja preenche endereço 
