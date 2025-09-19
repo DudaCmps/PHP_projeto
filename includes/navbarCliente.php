@@ -34,7 +34,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.4.1/dist/css/coreui.min.css" rel="stylesheet" integrity="sha384-NlsxdkweGA8nr9s0TVc3Qu2zqhWMNsHrvzMpAjVR0yDqXgC2z+RWYoeCNG2uO2MC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/@coreui/icons/css/all.min.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.4.1/dist/js/coreui.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- link para tabelas -->
     <link href="https://cdn.jsdelivr.net/npm/material-dashboard@1.0.0/dist/css/material-dashboard.css" rel="stylesheet">
@@ -42,10 +42,14 @@ date_default_timezone_set('America/Sao_Paulo');
     <!-- Font Awesome Free -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+body{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
         .sidebar-header {
           padding: 8.9px 1rem; 
         }
@@ -112,11 +116,18 @@ date_default_timezone_set('America/Sao_Paulo');
             color:rgb(177, 177, 177);
             text-decoration: none;
         }
-        .caixaUser{
-            justify-content: center;
-            
+        .caixaUser{ 
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
         }
-        
+
+        .dropdown-menu {
+            box-shadow: 0px 1px 11px 1px #2323237a;
+        }
+    
         
     </style>
 
@@ -132,13 +143,7 @@ date_default_timezone_set('America/Sao_Paulo');
     <!-- Nav -->
     <ul class="sidebar-nav">
 
-    <li class="d-flex flex-row">
-          <img style="height:55px; margin: 20px 10px 20px 0px;" src="../imgUser.png" alt="">
-          <div class="caixaUser d-flex flex-column">
-            <span>Maria Campos</span>
-            <span style="font-size: .8em;">mariacampos@gmail.com</span>
-          </div>
-    </li>
+
 
       <li class="nav-item">
           <a class="nav-link active" href="<?= BASE_URL ?>index2.php">
@@ -190,10 +195,27 @@ date_default_timezone_set('America/Sao_Paulo');
         </ul>
 
         <!-- Ícone logout alinhado à direita -->
-        <div class="ms-auto">
-            <a href="logout.php" class="nav-link">
-                <i class="cil-account-logout icon icon-lg"></i> 
-            </a>
+        <div class="ms-auto d-flex flex-row align-items-center">
+        <div class="dropdown">
+            <button class="caixaUser d-flex align-items-center border-0 bg-transparent" 
+                    type="button" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false">
+            
+            <!-- Avatar -->
+            <img src="../imgUser.png" alt="Avatar" class="rounded-circle me-2" width="40" height="40">
+            
+            <!-- Nome -->
+            <span>Olá, Maria Campos</span>
+            
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><svg width="15" height="15" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16 text-danger me-2" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"></path></svg>Logout</a></li>
+            </ul>
+        </div>
         </div>
 
     </div>
