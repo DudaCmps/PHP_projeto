@@ -47,6 +47,12 @@ class Veiculo{
      * Status do veiculo
      * @var String
      */
+    public $ativo_carro;
+
+    /**
+     * Status do veiculo
+     * @var String
+     */
     public $nomeMarca;
 
     /**

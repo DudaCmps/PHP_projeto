@@ -1,25 +1,35 @@
-<?php 
+<?php
+session_start(); // iniciar sessão
+
 require __DIR__ . '/../vendor/autoload.php';
 use \App\Entity\Usuario;
 
-
-if (!isset($_POST['email'], $_POST['senha']) && !empty($_POST['email']) && !empty($_POST['senha'])) {
-
+// Verifica se email e senha foram enviados
+if (!isset($_POST['email'], $_POST['senha']) || empty($_POST['email']) || empty($_POST['senha'])) {
     header('Location: /index.php?status=error');
-} 
+    exit;
+}
 
+// Busca usuário pelo email
 $obUsuario = Usuario::getUsuarioEmail($_POST['email']);
-    
+
+// Verifica senha
 if ($obUsuario && password_verify($_POST['senha'], $obUsuario->senha)) {
-    if ($obUsuario->perfil === 'admin') {
-        //Inicia sessão de admin
-        header('Location: ../clientes/index.php');
-    }else{
-        //Inicia sessão de cliente
-        $_SESSION['id_user'] = $obUsuario->id_user;
-        
-    }
+
+    // 🔹 Define dados da sessão
+    $_SESSION['id_user'] = $obUsuario->id_user;
+    $_SESSION['nome']    = $obUsuario->nome;
+    $_SESSION['perfil']  = $obUsuario->perfil;
     
-}else {
+    // Redireciona conforme perfil
+    if ($obUsuario->perfil === 'admin') {
+        header('Location: ../admin/index.php');
+    } else {
+        header('Location: ../cliente/index.php');
+    }
+    exit;
+
+} else {
     header('Location: ../index.php?status=error');
+    exit;
 }

@@ -1,3 +1,9 @@
+<?php 
+include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/navbarAdmin.php';
+
+?>
+
 <div class="d-flex flex-column flex-grow-1">
             <div class="m-4">
               <div class="row">
@@ -5,24 +11,24 @@
 
                   <div class="card">
                     <div class="card-header">
-                      <strong><?=TITLE?></strong>
+                      <strong>Cadastrar novo veículo</strong>
                     </div>
 
                     <div class="card-body">
 
-        <form method="post">
+        <form method="post" action="cadastrarVeiculo.php">
 
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelos</label>
                 <select name="modelo" class="form-select">
                     
                 <option value="" disabled selected>Selecione uma opção</option>
-                    <option value="1" <?= $obCarro->fk_modelo == '1' ? 'selected' : '' ?> >Corolla</option>
-                    <option value="2" <?= $obCarro->fk_modelo == '2' ? 'selected' : '' ?> >Yaris</option>
-                    <option value="3" <?= $obCarro->fk_modelo == '3' ? 'selected' : '' ?> >Civic</option>
-                    <option value="4" <?= $obCarro->fk_modelo == '4' ? 'selected' : '' ?> >Fit</option>
-                    <option value="5" <?= $obCarro->fk_modelo == '5' ? 'selected' : '' ?> >Fiesta</option>
-                    <option value="6" <?= $obCarro->fk_modelo == '6' ? 'selected' : '' ?> >Focus</option>
+                    <option value="1">Corolla</option>
+                    <option value="2">Yaris</option>
+                    <option value="3">Civic</option>
+                    <option value="4">Fit</option>
+                    <option value="5">Fiesta</option>
+                    <option value="6">Focus</option>
                 </select>
             </div>
     
@@ -30,10 +36,10 @@
             <div class="input-group mb-3">
 
                 <label for="placa" class="input-group-text" id="basic-addon1">Placa</label>
-                <input type="text"  name="placa" class="form-control me-3"style="border-radius: 0px 5px 5px 0px" value="<?=$obCarro->placa?>" maxlength="10">
+                <input type="text"  name="placa" class="form-control me-3"style="border-radius: 0px 5px 5px 0px" maxlength="10">
                 
                 <label for="ano_fabricacao"class="input-group-text" id="basic-addon1" style="border-radius: 5px 0px 0px 5px">Ano de Fabricação</label>
-                <input type="text" class="form-control" placeholder="YYYY" name="ano_fabricacao" value="<?=$obCarro->ano_fabricacao?>">
+                <input type="text" class="form-control" placeholder="YYYY" name="ano_fabricacao">
             </div>
 
             <div class="mb-3">
@@ -41,9 +47,9 @@
                 <select name="categoria" class="form-select">
                     <option value="" disabled selected>Selecione uma opção</option>
                     
-                    <option value="luxo" <?= $obCarro->categoria == 'luxo' ? 'selected' : '' ?> >Luxo</option>
-                    <option value="economico" <?= $obCarro->categoria == 'economico' ? 'selected' : '' ?> >Econômico</option>
-                    <option value="suv" <?= $obCarro->categoria == 'suv' ? 'selected' : '' ?> >SUV</option>
+                    <option value="luxo">Luxo</option>
+                    <option value="economico" >Econômico</option>
+                    <option value="suv">SUV</option>
                 </select>
             </div>
             
@@ -58,6 +64,6 @@
 </div>
 
 <!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>
+<?php 
+include __DIR__.'/../includes/footer.php';
+?>

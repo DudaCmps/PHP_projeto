@@ -1,4 +1,6 @@
 <?php 
+include __DIR__ . '/../includes/navbarAdmin.php';
+
 $id_carro = isset($_GET['id_carro']) ? (int) $_GET['id_carro'] : 0;
 
 $dataAtual = new DateTime();
@@ -18,7 +20,7 @@ $dataFormatada = $dataAtual->format('Y-m-d');
           </div>
 
           <div class="card-body">
-            <form method="post">
+            <form method="post" action="processaManutencao.php">
 
             <input type="hidden" name="id_carro" value="<?= $id_carro ?>">
 
