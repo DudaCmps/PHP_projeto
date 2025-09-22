@@ -16,12 +16,10 @@ foreach ($veiculos as $carro) {
     if ($carro->estado_carro != 'manutencao' && $carro->estado_carro != 'alugado') {
        $resultadosCarro .= '<option value="'.$carro->id_carro.'">'.$carro->nome.' - '.$carro->ano_fabricacao.' - '.$carro->placa.'</option>' ;
     }
-   
 }
 
 ?>
 <!-- Conteúdo formulario-->
-
 <div class="d-flex flex-column flex-grow-1">
             <div class="m-4">
               <div class="row">
@@ -67,6 +65,6 @@ foreach ($veiculos as $carro) {
 </div>
 
 <!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>
+<?php 
+include __DIR__.'/../includes/footer.php';
+?>

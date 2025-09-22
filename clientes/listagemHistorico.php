@@ -1,5 +1,8 @@
 <?php 
+include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
+
 
 if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
 
@@ -30,9 +33,7 @@ foreach ($obHistorico as $historico) {
                         <td class="text-center">'.$historico->status.'</td> 
                         <td class="text-center">'.$historico->nomeMarca.' '.$historico->nome.' '.$historico->ano_fabricacao.'</td>
                         <td class="text-center">'.$historico->categoria.'</td>
-            
                     </tr>';
-                    
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
@@ -40,6 +41,7 @@ $resultados = !empty($resultados) ? $resultados : '
                                                 </tr>
                                                 ';
 ?>
+ 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
@@ -55,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="row">
 <div class="col-12">
         
-<div><h3>Histórico de <?=$client->nome?></h3></div>  
+<div><h5>Histórico de alugueis</h5></div>  
 
 <div class="card">
             

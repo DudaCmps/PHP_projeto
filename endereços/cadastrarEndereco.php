@@ -19,7 +19,7 @@ $client = Usuario::getUsuario($_GET['id_user']);
 //VALIDANDO POST
 if(isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $_POST['logradouro'], $_POST['numero'], $_POST['complemento'])){
 
-    $obEndereco->fk_usuario = $client->id_user;
+    $obEndereco->fk_cliente = $client->id_user;
     $obEndereco->cidade = $_POST['cidade'];
     $obEndereco->estado = $_POST['estado'];
     $obEndereco->cep = $_POST['cep'];

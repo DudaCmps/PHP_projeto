@@ -35,19 +35,19 @@ foreach ($veiculos as $carro) {
             break;
     }
 
-   
-
     $resultados .= '<tr>
-                        <td >'.$carro->id_carro.'</td>
+                        <td>'.$carro->id_carro.'</td>
                         <td class="text-center">'.$carro->nome.'</td>
                         <td class="text-center">'.$carro->ano_fabricacao.'</td> 
                         <td class="text-center">'.$carro->placa.'</td>
                         <td class="text-center">'.$categoria.'</td>
                         <td class="text-center">'.$status.'</td>
                         <td class="text-center">
-                            <a href="editarVeiculo.php?id_carro= '.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-primary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i class="fa-regular fa-pen-to-square" style="color: black;"></i></button></a>
+                            <a href="formularioEditarVeiculo.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-primary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i class="fa-regular fa-pen-to-square" style="color: black;"></i></button></a>
 
                             <a href="../manutenções/formularioManutencao.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção"><i class="cil-settings" style="color: black;font-size:16px;"></i></button></a>
+
+                            <a href="inativarVeiculo.php?id_carro='.$carro->id_carro.'" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Inativar"><button type="button" class="btn btn-sm btn-warning"><i class="fa-solid fa-ban"></i></button></a>
 
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_carro='.$carro->id_carro.'" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><button type="button" class="btn btn-sm btn-danger"><i class="cil-trash"></i></button></a>
                         </td>

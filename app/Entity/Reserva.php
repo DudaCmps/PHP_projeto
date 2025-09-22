@@ -17,7 +17,7 @@ class Reserva{
      * id do usuario
      * @var int
      */
-    public $fk_usuario;
+    public $fk_cliente;
 
     /**
      * id do veiculo
@@ -41,7 +41,7 @@ class Reserva{
 
         
         $this->id_reserva = $obDatabase->insert([
-                                'fk_usuario'=> $this->fk_usuario,
+                                'fk_cliente'=> $this->fk_cliente,
                                 'fk_carro'=> $this->fk_carro
                                 
                             ]);
@@ -56,7 +56,7 @@ class Reserva{
     public function atualizar(){
         return(new Database('reserva'))->update('id_reserva ='.$this->id_reserva, [
                                                                 'estado'=> $this->estado,
-                                                                'fk_usuario'=> $this->fk_usuario,
+                                                                'fk_cliente'=> $this->fk_cliente,
                                                                 'fk_carro'=> $this->fk_carro                                                 
                                                                     ]);
         
@@ -107,7 +107,7 @@ class Reserva{
      */
     public static function getReservas($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        $join = ' INNER JOIN usuarios c ON reserva.fk_usuario = c.id_user
+        $join = ' INNER JOIN usuarios c ON reserva.fk_cliente = c.id_user
                   INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
                 ';
         $fields = 'reserva.*,
@@ -139,16 +139,16 @@ class Reserva{
      * @param string
      * @return array
      */
-    public static function getReservaUsuario($fk_usuario,$where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getReservaUsuario($fk_cliente,$where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN aluguel a ON reserva.id_reserva = a.fk_reserva
                   INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
                   INNER JOIN modelos mo ON v.fk_modelo = mo.id_modelo
                   INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca
                 ';
-        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_usuario, reserva.estado AS status, a.*, v.*,ma.nome AS nomeMarca, mo.*';
+        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_cliente, reserva.estado AS status, a.*, v.*,ma.nome AS nomeMarca, mo.*';
                    
-        return(new Database('reserva'))->select(' reserva.fk_usuario = '.$fk_usuario, $group, $order, $fields, $limit, $join)
+        return(new Database('reserva'))->select(' reserva.fk_cliente = '.$fk_cliente, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

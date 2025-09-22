@@ -50,6 +50,12 @@ class Usuario{
     public $telefone;
 
     /**
+     * usuario ativo
+     * @var integer
+     */
+    public $ativo_usuario;
+
+    /**
      * Tipo de perfil
      * @var string
      */

@@ -30,7 +30,7 @@ if (isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $
     $obEndereco->atualizar();
 
     // Redireciona para a lista de endereços do usuario
-    header('location: listagemEnderecos.php?id_user=' . $obEndereco->fk_usuario . '&status=success');
+    header('location: listagemEnderecos.php?id_user=' . $obEndereco->fk_cliente . '&status=success');
     exit;
 }
 

@@ -1,4 +1,6 @@
 <?php 
+include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
 $resultados = '';
@@ -84,9 +86,9 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
                 
 <!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>
+<?php 
+include __DIR__.'/../includes/footer.php';
+?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

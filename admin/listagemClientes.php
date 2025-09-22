@@ -4,30 +4,60 @@ include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
 $resultados = '';
-foreach ($usuarios as $usuario) {
-    $resultados .= '<tr>
-                        <td>'.$usuario->id_user.'</td>
-                        <td class="text-center">'.$usuario->nome.'</td>
-                        <td class="text-center">'.$usuario->cpf.'</td>
-                        <td class="text-center">'.date('d/m/Y', strtotime($usuario->data_nasc)).'</td>
-                        <td class="text-center">'.$usuario->telefone.'</td> 
-                        <td class="text-center">
-                            <a href="editarUsuario.php?id_user= '.$usuario->id_user.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
-                            
-                            <a href="listagemHistorico.php?id_user='.$usuario->id_user.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Histórico"><i style="color:black;" class="cil-description"></i></button></a>
 
-                            <a href="../endereços/listagemEnderecos.php?id_user='.$usuario->id_user.'"><button type="button" class="btn btn-sm btn-warning me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Endereços"><i style="color:black;" class="cil-house"></i></button></a>
-                           
-                            <a onclientck="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirUsuario.php?id_user='.$usuario->id_user.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
-                        </td>
-                    </tr>';
-                    
+foreach ($usuarios as $usuario) {
+
+if ($usuario->ativo_usuario == 1) {
+    $ativo = 'Sim';
+}else {
+    $ativo = 'Não';
 }
+   $resultados .= '
+            <tr>
+                <td>'.$usuario->id_user.'</td>
+                <td class="text-center">'.$usuario->nome.'</td>
+                <td class="text-center">'.$usuario->cpf.'</td>
+                <td class="text-center">'.date('d/m/Y', strtotime($usuario->data_nasc)).'</td>
+                <td class="text-center">'.$ativo.'</td>
+                <td class="text-center">'.$usuario->telefone.'</td> 
+                <td class="text-center">
+                    <a href="editarCliente.php?id_user='.$usuario->id_user.'">
+                        <button type="button" class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" title="Editar">
+                            <i style="color:black;" class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </a>
+
+                    <a href="../clientes/listagemHistorico.php?id_user='.$usuario->id_user.'">
+                        <button type="button" class="btn btn-sm btn-light me-1" data-coreui-toggle="tooltip" title="Histórico">
+                            <i style="color:black;" class="cil-description"></i>
+                        </button>
+                    </a>
+
+                    <a href="../enderecos/listagemEnderecos.php?id_user='.$usuario->id_user.'">
+                        <button type="button" class="btn btn-sm btn-info me-1" data-coreui-toggle="tooltip" title="Endereços">
+                            <i style="color:black;" class="cil-house"></i>
+                        </button>
+                    </a>
+                    
+                    <a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
+                        <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
+                            <i class="fa-solid fa-ban"></i>
+                        </button>
+                    </a>
+
+                    <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_user='.$usuario->id_user.'">
+                        <button type="button" class="btn btn-sm me-1 btn-danger" data-coreui-toggle="tooltip" title="Excluir">
+                            <i class="cil-trash"></i>
+                        </button>
+                    </a>
+                </td>
+            </tr>';
+    }                 
+
 $resultados = !empty($resultados) ? $resultados : '
-                                                <tr >
-                                                <td colspan="6" class="registros"><a>Sem registros</a></td>
-                                                </tr>
-                                                ';
+    <tr>
+        <td colspan="6" class="registros text-center">Sem registros</td>
+    </tr>';
 ?>
 
 <div class="d-flex flex-column flex-grow-1">
@@ -53,7 +83,8 @@ $resultados = !empty($resultados) ? $resultados : '
                 <th scope="col">#</th>
                 <th scope="col" class="text-center">Nome</th>
                 <th scope="col" class="text-center">CPF</th>
-                <th scope="col" class="text-center">Data de Nascimento</th>
+                <th scope="col" class="text-center">Data de Nascimento</th>  
+                <th scope="col" class="text-center">Ativo</th>
                 <th scope="col" class="text-center">Telefone</th>
                 <th scope="col" class="text-center">Ações</th>
                 </tr>
@@ -75,9 +106,9 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
 
 <!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>
+<?php 
+include __DIR__.'/../includes/footer.php';
+?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

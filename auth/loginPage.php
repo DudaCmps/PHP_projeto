@@ -51,7 +51,7 @@
                   <div>
                     <h2>Cadastre-se</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a href="includes/registerPage.php"><button class="btn btn-lg btn-outline-light mt-3" type="button">Cadastre Agora!</button></a>
+                    <a href="auth/registerPage.php"><button class="btn btn-lg btn-outline-light mt-3" type="button">Cadastre Agora!</button></a>
                   </div>
                 </div>
               </div>

@@ -5,7 +5,7 @@ use \App\Entity\Usuario;
 
 if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
 
-    header('location: listagemUsuarios.php?status=error');
+    header('location: listagemClientes.php?status=error');
     exit;
 }
 
@@ -15,13 +15,13 @@ $obUsuario = Usuario::getUsuario($_GET['id_user']);
 //Valida
 if (!$obUsuario instanceof Usuario) {
 
-    header('location: listagemUsuarios.php?status=error');
+    header('location: listagemClientes.php?status=error');
     exit;
 }
 
 $obUsuario->excluir();
 
-header('location: listagemUsuarios.php?status=success');
+header('location: listagemClientes.php?status=success');
 exit;
 
 

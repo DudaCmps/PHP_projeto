@@ -28,7 +28,7 @@ if ($obReserva->estado == 'confirmada') {
 //VALIDANDO POST
 if(isset($_POST['usuario'], $_POST['carro'])){
 
-    $obReserva->fk_usuario = $_POST['usuario'];
+    $obReserva->fk_cliente = $_POST['usuario'];
     $obReserva->fk_carro = $_POST['carro'];
     
     $obReserva->atualizar();

@@ -1,5 +1,8 @@
 <?php 
+include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
+
 
 use \App\Entity\Endereco;
 use \App\Entity\Usuario;
@@ -9,7 +12,7 @@ $client = Usuario::getUsuario($_GET['id_user']);
 
 $enderecos = Endereco::getEnderecos($client->id_user);
 
-$botao = '<a href="cadastrarEndereco.php?id_user='.$client->id_user.'"><button type="button"class=" btn mt-3 btn-primary" >Adicionar Endereço</i></button></a>';
+$botao = '<a href="cadastrarEndereco.php?id_user='.$client->id_user.'"><button type="button"class=" btn mt-3 btn-primary">Adicionar novo endereço</i></button></a>';
 
 $resultados = '';
 foreach ($enderecos as $endereco) {

@@ -193,7 +193,7 @@ body{
       <li class="nav-title">Reservas e Alugueis</li>
 
       <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>reservas/criaReserva.php">
+          <a class="nav-link" href="<?= BASE_URL ?>alugueis/listagemAluguel.php">
           <i class="cil-paperclip me-2"></i> Alugueis
           </a>
       </li>

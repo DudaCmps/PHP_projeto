@@ -5,15 +5,13 @@ define('TITLE', 'Editar Veículo');
 
 use \App\Entity\Veiculo;
 
-if (!isset($_GET['id_carro']) or !is_numeric($_GET['id_carro'])) {
+if (!isset($_POST['id_carro']) or !is_numeric($_POST['id_carro'])) {
 
-    header('location: listagemUsuarios.php?status=error');
+    header('location: listagemVeiculos.php?status=error');
     exit;
 }
-
 //consulta
-$obCarro = Veiculo::getVeiculo($_GET['id_carro']);
-
+$obCarro = Veiculo::getVeiculo($_POST['id_carro']);
 
 //Valida
 if (!$obCarro instanceof Veiculo) {
@@ -28,12 +26,9 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     $obCarro->ano_fabricacao = $_POST['ano_fabricacao'];
     $obCarro->placa = $_POST['placa'];
     $obCarro->categoria = $_POST['categoria'];
-    
+
     $obCarro->atualizar();
 
     header('location: listagemVeiculos.php?status=success');
     exit;
 }
-
-include __DIR__ . '/../includes/navbar.php';
-include __DIR__.'/../includes/formularioVeiculo.php';

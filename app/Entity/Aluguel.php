@@ -119,7 +119,7 @@ class Aluguel{
         
         $join = ' INNER JOIN reserva re ON re.id_reserva = aluguel.fk_reserva
                   INNER JOIN veiculos ve ON re.fk_carro = ve.id_carro
-                  INNER JOIN usuarios cl ON re.fk_usuario = cl.id_user
+                  INNER JOIN usuarios cl ON re.fk_cliente = cl.id_user
                 ';
         $fields = 'aluguel.*,
                     cl.*,

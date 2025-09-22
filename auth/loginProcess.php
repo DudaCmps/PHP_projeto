@@ -25,7 +25,7 @@ if ($obUsuario && password_verify($_POST['senha'], $obUsuario->senha)) {
     if ($obUsuario->perfil === 'admin') {
         header('Location: ../admin/index.php');
     } else {
-        header('Location: ../cliente/index.php');
+        header('Location: ../clientes/index.php');
     }
     exit;
 
