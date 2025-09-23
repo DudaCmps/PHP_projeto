@@ -1,7 +1,21 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
-include __DIR__.'/../includes/navbarAdmin.php';
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
 include __DIR__ . '/../config.php';
+use \App\Entity\Usuario;
+
+// Navbar dinâmica
+if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin') {
+  include __DIR__.'/../includes/navbarAdmin.php';
+} else {
+  include __DIR__.'/../includes/navbarCliente.php';
+}
+
+
+//consulta
+$obUsuario = Usuario::getUsuario($_SESSION['id_user']);
 
 $estados = [
     'AC'=>'Acre','AL'=>'Alagoas','AP'=>'Amapá','AM'=>'Amazonas','BA'=>'Bahia',
@@ -19,40 +33,43 @@ $estados = [
     <div class="row">
       <div class="col-12">
         
-        <div><h4>Ficha de Felipe Dontal</h4></div>  
+        <div><h4>Editar meus dados</h4></div>  
         <div class="card">
 
           <div class="card-body">
             
-            <form method="post" action="processaCliente.php">
+            <form method="post" action="dadosCliente.php">
+
+              <input type="hidden" name="id_user" value="<?=$obUsuario->id_user?>">
+              <input type="hidden" name="perfil" value="<?=$obUsuario->perfil?>">
 
               <div class="input-group mb-3">
                 <label for="nome" class="input-group-text">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" required placeholder="Nome Completo">
+                <input type="text" class="form-control" id="nome" name="nome" required value="<?=$obUsuario->nome?>">
               </div>
 
               <div class="input-group mb-3">
                 <label for="email" class="input-group-text">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required placeholder="exemplo@gmail.com">
+                <input type="email" class="form-control" id="email" name="email" required value="<?=$obUsuario->email?>">
               </div>
 
               <div class="input-group mb-3">
                 <label for="telefone" class="input-group-text">Telefone</label>
                 <input type="text" class="form-control me-3" id="telefone" name="telefone"
-                       placeholder="(00) 00000-0000" required>
+                value="<?=$obUsuario->telefone?>" required>
 
                 <label for="cpf" class="input-group-text">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required maxlength="14">
+                <input type="text" class="form-control" id="cpf" name="cpf" value="<?=$obUsuario->cpf?>" required maxlength="14">
               </div>
 
               <div class="input-group mb-3">
                 <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required>
+                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required value="<?=$obUsuario->data_nasc?>">
               </div>
 
               <div class="input-group mb-3">
                 <label for="senha" class="input-group-text">Senha</label>
-                <input type="password" class="form-control" id="senha" name="senha" required placeholder="********">
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="********">
               </div>
               <div class="form-text pb-3">Qualquer informação alterada deverá ser salva antes de sair da página.</div>
               <button class="btn btn-outline-success" type="submit">Salvar</button>

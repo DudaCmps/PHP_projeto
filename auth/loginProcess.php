@@ -14,9 +14,9 @@ if (!isset($_POST['email'], $_POST['senha']) || empty($_POST['email']) || empty(
 $obUsuario = Usuario::getUsuarioEmail($_POST['email']);
 
 // Verifica senha
-if ($obUsuario && password_verify($_POST['senha'], $obUsuario->senha)) {
+if ($obUsuario && $obUsuario->ativo_usuario == 1 && password_verify($_POST['senha'], $obUsuario->senha)) {
 
-    // 🔹 Define dados da sessão
+    // Define dados da sessão
     $_SESSION['id_user'] = $obUsuario->id_user;
     $_SESSION['nome']    = $obUsuario->nome;
     $_SESSION['perfil']  = $obUsuario->perfil;

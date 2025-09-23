@@ -84,15 +84,19 @@ class Usuario{
      * Método de atualizar dados 
      * @return boolean
      */
-    public function atualizar(){
-        return(new Database('usuarios'))->update('id_user ='.$this->id_user, [
-                                'nome'=> $this->nome,
-                                'cpf'=> $this->cpf,
-                                'data_nasc'=> $this->data_nasc,
-                                'telefone'=> $this->telefone
-                            ]);
-        
+    public function atualizar() {
+        return (new Database('usuarios'))->update('id_user = '.$this->id_user, [
+            'nome'          => $this->nome,
+            'email'         => $this->email,
+            'telefone'      => $this->telefone,
+            'cpf'           => $this->cpf,
+            'data_nasc'     => $this->data_nasc,
+            'perfil'        => $this->perfil,
+            'senha'         => $this->senha,
+            'ativo_usuario' => $this->ativo_usuario
+        ]);
     }
+    
 
     /**
      * Método de excluir
@@ -115,11 +119,13 @@ class Usuario{
         
        
         $fields = 'usuarios.id_user,
-                   usuarios.nome,
-                   usuarios.cpf,
-                   usuarios.data_nasc,
-                   usuarios.telefone
-                   ';
+           usuarios.nome,
+           usuarios.cpf,
+           usuarios.data_nasc,
+           usuarios.telefone,
+           usuarios.ativo_usuario,
+           usuarios.perfil';
+
                    
         return(new Database('usuarios'))->select($where,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);

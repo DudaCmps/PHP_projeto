@@ -1,18 +1,32 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
 $resultados = '';
 
 foreach ($usuarios as $usuario) {
+    
+    if ($usuario->ativo_usuario == 1) {
+        $botao = '<a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
+                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
+                                <i class="cil-check-circle"></i>
+                            </button>
+                        </a>';
+        $ativo = '<span class="status status-success">Sim</span>';
+    }else {
+        $botao = '<a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
+                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
+                                <i class="fa-solid fa-ban"></i>
+                            </button>
+                        </a>';
+        $ativo = '<span class="status status-warning">Não</span>';
+    }
 
-if ($usuario->ativo_usuario == 1) {
-    $ativo = 'Sim';
-}else {
-    $ativo = 'Não';
-}
-   $resultados .= '
+    if ($usuario->perfil == 'cliente') {
+        $resultados .= '
             <tr>
                 <td>'.$usuario->id_user.'</td>
                 <td class="text-center">'.$usuario->nome.'</td>
@@ -39,11 +53,7 @@ if ($usuario->ativo_usuario == 1) {
                         </button>
                     </a>
                     
-                    <a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
-                        <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
-                            <i class="fa-solid fa-ban"></i>
-                        </button>
-                    </a>
+                    '.$botao.'
 
                     <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_user='.$usuario->id_user.'">
                         <button type="button" class="btn btn-sm me-1 btn-danger" data-coreui-toggle="tooltip" title="Excluir">
@@ -52,7 +62,9 @@ if ($usuario->ativo_usuario == 1) {
                     </a>
                 </td>
             </tr>';
-    }                 
+    }
+   
+}                 
 
 $resultados = !empty($resultados) ? $resultados : '
     <tr>
@@ -68,7 +80,7 @@ $resultados = !empty($resultados) ? $resultados : '
           
             <div class="card">
             <div class="card-header">
-            <strong>Lista de Usuarios</strong>
+            <strong>Lista de Clientes</strong>
             </div>
 
 <div class="card-body">

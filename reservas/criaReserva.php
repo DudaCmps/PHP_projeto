@@ -1,4 +1,5 @@
 <?php
+session_start();
 require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Reserva;
@@ -6,21 +7,23 @@ $reservas = Reserva::getReservas();
 
 $obReserva = new Reserva;
 
+$id_carro = $_GET['id_carro'];
+
 //VALIDANDO POST
-if(isset($_POST['usuario'], $_POST['carro'])){
+if(isset($id_carro)){
 
     foreach ($reservas as $reserva) {
         
-        if (($reserva->fk_cliente ==  $_POST['usuario']) && ($reserva->fk_carro == $_POST['carro'])) {
-            header('location: criaReserva.php?id_reserva= '.$reserva->id_reserva);
+        if (($reserva->fk_cliente ==  $_SESSION['id_user']) && ($reserva->fk_carro == $id_carro)) {
+            header('location: ../clientes/index.php?status=error ');
             exit;
         }
     }
 
-    $obReserva->fk_cliente = $_POST['usuario'];
-    $obReserva->fk_carro = $_POST['carro'];
+    $obReserva->fk_cliente = $_SESSION['id_user'];
+    $obReserva->fk_carro = $id_carro;
     $obReserva->cadastrar();
 
-    header('location: listagemReservas.php?status=success');
+    header('location: ../clientes/reservasCliente.php?status=success');
     exit;
 }
