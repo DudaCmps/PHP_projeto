@@ -15,7 +15,7 @@ foreach ($reservas as $reserva) {
                                 <i class="fa-solid fa-ban"></i>
                             </button>
                     </a>';
-
+            
             $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
             break;
         

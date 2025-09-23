@@ -11,17 +11,18 @@ foreach ($usuarios as $usuario) {
     
     if ($usuario->ativo_usuario == 1) {
         $botao = '<a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
-                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
-                                <i class="cil-check-circle"></i>
+                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
+                                <i class="fa-solid fa-ban"></i>
                             </button>
                         </a>';
         $ativo = '<span class="status status-success">Sim</span>';
     }else {
         $botao = '<a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
-                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
-                                <i class="fa-solid fa-ban"></i>
+                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
+                                <i class="cil-check-circle"></i>
                             </button>
                         </a>';
+        
         $ativo = '<span class="status status-warning">Não</span>';
     }
 

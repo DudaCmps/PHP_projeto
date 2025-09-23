@@ -7,34 +7,53 @@ include __DIR__ . '/../config.php';
 $obReserva = Reserva::getReservaUsuario($_SESSION['id_user']);
 
 $resultados = '';
-
+$botaoAluguel = '';
 foreach ($reservas as $reserva) {
     $status = '';
     switch ($reserva->estado) {
         case 'confirmada':
             
-            $botaoEditar = '<a><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>';
+            $botaoAluguel = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                            <button type="button" class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" title="">
+                               Iniciar Aluguel
+                            </button>
+                    </a>';        
+
             $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
             break;
-        
-            default:
-            $botaoEditar = '<a href="editarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>';
-        
+            
+            case 'pendente':
+                $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Cancelar">
+                                <i class="fa-solid fa-ban"></i>
+                            </button>
+                    </a>';
             $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
+            break;
+        
+            case 'cancelada':
+                $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
+                                <i class="cil-check-circle"></i>
+                            </button>
+                        </a>';
+            $status .= '<span class="status status-danger">'.$reserva->estado.'</span>';
             break;
     }
     
-    $resultados .= '<tr>
+    if ($reserva->estado) {
+        $resultados .= '<tr>
                         <td>'.$reserva->id_reserva.'</td>
                         <td class="text-center">'.$reserva->nome.'</td>
                         <td class="text-center">'.$reserva->placa.'</td> 
                         <td class="text-center">'.$status.'</td> 
                         <td class="text-center">
 
-
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="../reservas/excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
+                            '.$botaoAluguel.'
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
+    }
 }
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
