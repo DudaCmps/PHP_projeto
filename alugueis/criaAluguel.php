@@ -6,12 +6,12 @@ use \App\Entity\Reserva;
 use \App\Entity\Veiculo;
 
 
-if (!isset($_GET['id_reserva']) || !is_numeric($_GET['id_reserva'])) {
-    header('Location: ../index2.php?status=error');
+if (!isset($_POST['id_reserva']) || !is_numeric($_POST['id_reserva'])) {
+    header('Location: formularioAluguel.php?status=error');
     exit;
 }
 
-$obReserva = Reserva::getReserva($_GET['id_reserva']);
+$obReserva = Reserva::getReserva($_POST['id_reserva']);
 $veiculo   = Veiculo::getVeiculo($obReserva->fk_carro);
 
 if ($veiculo->estado_carro == 'alugado') {
@@ -21,7 +21,6 @@ if ($veiculo->estado_carro == 'alugado') {
 }
 
 $obAluguel = new Aluguel;
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data_inicio'], $_POST['data_final'])) {
 
@@ -40,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data_inicio'], $_POST
     $obAluguel->data_final  = $dataFinal;
     $obAluguel->fk_reserva  = $obReserva->id_reserva;
     $obAluguel->valor       = $obAluguel->calcularValor($categoria);
+    $obAluguel->ativo_aluguel  = 1;
 
     if ($veiculo->estado_carro == 'manutencao') {
         header('location: ../reservas/listagemReservas.php?status=error');       
@@ -50,12 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['data_inicio'], $_POST
 
     $obReserva->estado      = 'confirmada';
     $obReserva->atualizar();
+
     $veiculo->estado_carro  = 'alugado';
     $veiculo->atualizar();
 
-    header('location: ../index2.php?status=success');
+    header('location: ../clientes/alugueisCliente.php?status=success');
     exit;
 }
-
-include __DIR__ . '/../includes/navbar.php';
-include __DIR__ . '/../includes/formularioAluguel.php';

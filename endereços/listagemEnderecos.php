@@ -1,18 +1,27 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
-include __DIR__.'/../includes/navbarAdmin.php';
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__ . '/../config.php';
-
-
-use \App\Entity\Endereco;
 use \App\Entity\Usuario;
+use \App\Entity\Endereco;
 
-//consulta
-$client = Usuario::getUsuario($_GET['id_user']);
+// verificando o usuario
+if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin') {
+    include __DIR__.'/../includes/navbarAdmin.php';
+    
+    //consulta
+    $client = Usuario::getUsuario($_GET['id_user']);
+
+} else {
+    include __DIR__.'/../includes/navbarCliente.php';
+
+    //consulta
+    $client = Usuario::getUsuario($_SESSION['id_user']);
+}
 
 $enderecos = Endereco::getEnderecos($client->id_user);
 
-$botao = '<a href="cadastrarEndereco.php?id_user='.$client->id_user.'"><button type="button"class=" btn mt-3 btn-primary">Adicionar novo endereço</i></button></a>';
+$botao = '<a href="formularioCadastrarEndereco.php?id_user='.$client->id_user.'"><button type="button"class=" btn mt-3 btn-primary">Adicionar novo endereço</i></button></a>';
 
 $resultados = '';
 foreach ($enderecos as $endereco) {
@@ -27,10 +36,10 @@ foreach ($enderecos as $endereco) {
                         <td class="text-center">'.$endereco->numero.'</td> 
                         <td class="text-center">'.$endereco->complemento.'</td> 
                         <td class="text-center">
-                            <a href="editarEndereco.php?id_endereco= '.$endereco->id_endereco.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
+                            <a href="formularioEndereco.php?id_endereco= '.$endereco->id_endereco.'"><button type="button"class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i style="color:black;" class="fa-regular fa-pen-to-square"></i></button></a>
                             
                            
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirEndereco.php?id_endereco='.$endereco->id_endereco.'&id_user='.$client->id_user.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirEndereco.php?id_endereco='.$endereco->id_endereco.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
                     

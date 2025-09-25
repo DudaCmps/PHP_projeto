@@ -1,18 +1,16 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-  session_start();
-}
+include __DIR__.'/../includes/iniciaSessao.php';
+
 
 include __DIR__ . '/../config.php';
 use \App\Entity\Usuario;
 
-// Navbar dinâmica
+// verificando o usuario
 if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin') {
   include __DIR__.'/../includes/navbarAdmin.php';
 } else {
   include __DIR__.'/../includes/navbarCliente.php';
 }
-
 
 //consulta
 $obUsuario = Usuario::getUsuario($_SESSION['id_user']);

@@ -1,5 +1,6 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
@@ -37,7 +38,7 @@ foreach ($veiculos as $carro) {
 
     $resultados .= '<tr>
                         <td>'.$carro->id_carro.'</td>
-                        <td class="text-center">'.$carro->nome.'</td>
+                        <td class="text-center">'.$carro->nome_modelos.'</td>
                         <td class="text-center">'.$carro->ano_fabricacao.'</td> 
                         <td class="text-center">'.$carro->placa.'</td>
                         <td class="text-center">'.$categoria.'</td>

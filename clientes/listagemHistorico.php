@@ -1,5 +1,6 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
@@ -31,12 +32,12 @@ foreach ($obHistorico as $historico) {
                         <td class="text-center">'.date('d/m/Y', strtotime($historico->data_inicio)).' - '.date('d/m/Y', strtotime($historico->data_final)).'</td>
                         <td class="text-center">'.$historico->valor.'</td> 
                         <td class="text-center">'.$historico->status.'</td> 
-                        <td class="text-center">'.$historico->nomeMarca.' '.$historico->nome.' '.$historico->ano_fabricacao.'</td>
+                        <td class="text-center">'.$historico->nome_marca.' '.$historico->nome_modelo.' '.$historico->ano_fabricacao.'</td>
                         <td class="text-center">'.$historico->categoria.'</td>
                     </tr>';
 }
 $resultados = !empty($resultados) ? $resultados : '
-                                                <tr >
+                                                <tr>
                                                 <td colspan="6" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';

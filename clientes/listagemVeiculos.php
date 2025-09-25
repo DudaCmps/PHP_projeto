@@ -1,4 +1,5 @@
 <?php 
+include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__.'/../includes/navbarCliente.php';
 include __DIR__ . '/../config.php';
 
@@ -28,7 +29,7 @@ foreach ($veiculos as $carro) {
     if ($carro->estado_carro == 'disponivel') {
         $resultados .= '<tr>
         <td>'.$carro->id_carro.'</td>
-        <td class="text-center">'.$carro->nome.'</td>
+        <td class="text-center">'.$carro->nome_modelos.'</td>
         <td class="text-center">'.$carro->ano_fabricacao.'</td> 
         <td class="text-center">'.$carro->placa.'</td>
         <td class="text-center">'.$categoria.'</td>

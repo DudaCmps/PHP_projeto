@@ -38,6 +38,13 @@ class Aluguel{
     public $valor;
 
     /**
+     * estado do aluguel
+     * @var boolean
+     */
+    public $ativo_aluguel;
+    
+
+    /**
      * Método de calculo para o valor do aluguel
      * @return float
      */
@@ -93,7 +100,8 @@ class Aluguel{
                                 'fk_reserva'=> $this->fk_reserva,
                                 'data_inicio'=> $this->data_inicio->format('Y-m-d H:i:s'),
                                 'data_final'=> $this->data_final->format('Y-m-d H:i:s'),
-                                'valor'=> $this->valor
+                                'valor'=> $this->valor,
+                                'ativo_aluguel'=> $this->ativo_aluguel
                             ]);
                             
         return true;
@@ -116,6 +124,29 @@ class Aluguel{
      * @return array
      */
     public static function getAlugueis($where = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
+        
+        $join = ' INNER JOIN reserva re ON re.id_reserva = aluguel.fk_reserva
+                  INNER JOIN veiculos ve ON re.fk_carro = ve.id_carro
+                  INNER JOIN usuarios cl ON re.fk_cliente = cl.id_user
+                ';
+        $fields = 'aluguel.*,
+                    cl.*,
+                    re.*,
+                    ve.*
+                   ';
+                   
+        return(new Database('aluguel'))->select($where, $group, $order, $fields, $limit, $join)
+                                               ->fetchAll(PDO::FETCH_CLASS,self::class);
+    }
+
+        /**
+     * Método para obter os alugueis do banco para listagem de um cliente especifico
+     * @param string
+     * @param string
+     * @param string
+     * @return array
+     */
+    public static function getAlugueisCliente($where = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN reserva re ON re.id_reserva = aluguel.fk_reserva
                   INNER JOIN veiculos ve ON re.fk_carro = ve.id_carro

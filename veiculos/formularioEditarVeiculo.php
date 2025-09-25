@@ -1,5 +1,6 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__.'/../includes/navbarAdmin.php';
 require __DIR__ . '/../vendor/autoload.php';
 use App\Entity\Veiculo;

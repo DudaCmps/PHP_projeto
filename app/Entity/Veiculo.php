@@ -59,7 +59,7 @@ class Veiculo{
      * Status do veiculo
      * @var String
      */
-    public $nomeModelo;
+    public $nome_modelos;
 
 /**
      * Método de cadastro de um veiculo no banco
@@ -116,7 +116,7 @@ class Veiculo{
        
         $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
         $fields = ' veiculos.id_carro,
-                   mo.nome,
+                   mo.nome_modelos,
                    veiculos.ano_fabricacao,
                    veiculos.placa,
                    veiculos.categoria,
@@ -150,8 +150,8 @@ class Veiculo{
                   INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca';
                   
         $fields = ' veiculos.*,
-                    mo.nome AS nomeModelo,
-                    ma.nome AS nomeMarca';
+                    mo.nome_modelos AS nomeModelo,
+                    ma.nome_marca AS nomeMarca';
 
         return(new Database('veiculos'))->select('veiculos.id_carro = '.$id_carro, $group=null, $order=null, $fields, $limit = null, $join)
                                                ->fetchObject(self::class);

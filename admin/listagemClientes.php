@@ -1,7 +1,6 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
@@ -48,7 +47,7 @@ foreach ($usuarios as $usuario) {
                         </button>
                     </a>
 
-                    <a href="../enderecos/listagemEnderecos.php?id_user='.$usuario->id_user.'">
+                    <a href="../endereços/listagemEnderecos.php?id_user='.$usuario->id_user.'">
                         <button type="button" class="btn btn-sm btn-info me-1" data-coreui-toggle="tooltip" title="Endereços">
                             <i style="color:black;" class="cil-house"></i>
                         </button>
@@ -69,7 +68,7 @@ foreach ($usuarios as $usuario) {
 
 $resultados = !empty($resultados) ? $resultados : '
     <tr>
-        <td colspan="6" class="registros text-center">Sem registros</td>
+        <td colspan="7" class="registros text-center">Sem registros</td>
     </tr>';
 ?>
 

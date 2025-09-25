@@ -1,5 +1,6 @@
 <?php 
-include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
@@ -10,30 +11,33 @@ foreach ($reservas as $reserva) {
 
     switch ($reserva->estado) {
         case 'confirmada':
-            $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
-                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Ativar">
+            $botaoInativar = '<a href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
                                 <i class="fa-solid fa-ban"></i>
                             </button>
                     </a>';
+            $botaoAprovar = '<button type="button" class="disabled btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button>';
             
             $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
             break;
         
             case 'pendente':
-                $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                $botaoInativar = '<a href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
                             <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Cancelar">
                                 <i class="fa-solid fa-ban"></i>
                             </button>
                     </a>';
+                $botaoAprovar = '<a href="aprovaReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
             $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
             break;
 
             case 'cancelada':
-                $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                $botaoInativar = '<a href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
                             <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
                                 <i class="cil-check-circle"></i>
                             </button>
                         </a>';
+                $botaoAprovar = '<button type="button" class="disabled btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button>';
             $status .= '<span class="status status-danger">'.$reserva->estado.'</span>';
             break;
     }
@@ -45,9 +49,9 @@ foreach ($reservas as $reserva) {
                         <td class="text-center">'.$status.'</td> 
                         <td class="text-center">
 
-                        <a href="aprovaReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>
+                        '.$botaoAprovar.'
 
-                        '.$botao.'
+                        '.$botaoInativar.'
 
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>

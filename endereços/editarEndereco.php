@@ -2,13 +2,15 @@
 require __DIR__ . '/../vendor/autoload.php';
 use App\Entity\Endereco;
 
-if (!isset($_GET['id_endereco']) || !is_numeric($_GET['id_endereco'])) {
+$id_endereco = $_POST['id_endereco'];
+
+if (!isset($id_endereco) || !is_numeric($id_endereco)) {
     header('location: listagemEnderecos.php?status=error');
     exit;
 }
 
 // Consulta
-$obEndereco = Endereco::getEndereco($_GET['id_endereco']);
+$obEndereco = Endereco::getEndereco($id_endereco);
 
 // Valida
 if (!$obEndereco instanceof Endereco) {
@@ -33,7 +35,3 @@ if (isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $
     header('location: listagemEnderecos.php?id_user=' . $obEndereco->fk_cliente . '&status=success');
     exit;
 }
-
-// Inclui navbar e formulário
-include __DIR__ . '/../includes/navbar.php';
-include __DIR__.'/../includes/formularioEndereco.php';

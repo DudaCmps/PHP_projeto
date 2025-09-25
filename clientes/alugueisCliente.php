@@ -1,12 +1,15 @@
-<?php 
+<?php
 include __DIR__.'/../includes/iniciaSessao.php';
+include __DIR__.'/../includes/navbarCliente.php';
+use App\Entity\Aluguel;
 
-include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
+
+$meusalugueis = Aluguel::getAlugueis('fk_cliente ='. $_SESSION['id_user']);
 
 $resultados = '';
 
-foreach ($alugueis as $aluguel) {
+foreach ($meusalugueis as $aluguel) {
 
 
     $dataIni = date('d/m/Y H:i', strtotime($aluguel->data_inicio));
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </thead>
             </thead>
 
-            <tbody class="table-group-divider">
+            <tbody>
                 <?=$resultados?>
             </tbody>
 

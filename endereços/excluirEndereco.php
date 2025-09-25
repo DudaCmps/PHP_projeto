@@ -5,17 +5,24 @@ use App\Entity\Endereco;
 $idEndereco = isset($_GET['id_endereco']) ? (int) $_GET['id_endereco'] : 0;
 
 if ($idEndereco <= 0 ) {
-    header('location: ../index2.php?status=error');
+
+    $voltar = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
+    header('Location: ' . $voltar.'?status=error');
     exit;
+
 }
 
 $obEndereco = Endereco::getEndereco($idEndereco);
 if (!$obEndereco instanceof Endereco) {
-    header('location: ../index2.php?status=error');
+
+    $voltar = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
+    header('Location: ' . $voltar.'?status=error');
     exit;
+    
 }
 
 $obEndereco->excluir();
 
-header('location: ../index2.php?status=success');
+$voltar = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php';
+header('Location: ' . $voltar);
 exit;

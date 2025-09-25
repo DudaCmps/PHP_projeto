@@ -14,7 +14,7 @@ if(isset($id_carro)){
 
     foreach ($reservas as $reserva) {
         
-        if (($reserva->fk_cliente ==  $_SESSION['id_user']) && ($reserva->fk_carro == $id_carro)) {
+        if (($reserva->fk_cliente ==  $_SESSION['id_user']) && ($reserva->fk_carro == $id_carro) && ($reserva->estado !=  'cancelada')) {
             header('location: ../clientes/index.php?status=error ');
             exit;
         }

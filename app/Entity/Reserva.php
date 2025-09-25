@@ -146,7 +146,8 @@ class Reserva{
                   INNER JOIN modelos mo ON v.fk_modelo = mo.id_modelo
                   INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca
                 ';
-        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_cliente, reserva.estado AS status, a.*, v.*,ma.nome AS nomeMarca, mo.*';
+        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_cliente, reserva.estado AS status, a.*, v.*,ma.nome_marca AS nome_marca,
+            mo.nome_modelos AS nome_modelo';
                    
         return(new Database('reserva'))->select(' reserva.fk_cliente = '.$fk_cliente, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);

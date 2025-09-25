@@ -1,67 +1,79 @@
 <?php
 use App\Entity\Reserva;
+use App\Entity\Aluguel;
+
+include __DIR__.'/../includes/iniciaSessao.php';
 
 include __DIR__.'/../includes/navbarCliente.php';
 include __DIR__ . '/../config.php';
 
-$obReserva = Reserva::getReservaUsuario($_SESSION['id_user']);
+$obReserva = Reserva::getReservas('fk_cliente='.$_SESSION['id_user']);
 
-$resultados = '';
-$botaoAluguel = '';
-foreach ($reservas as $reserva) {
+
+foreach ($obReserva as $reserva) {
+    
+
+    // Pula reservas já com aluguel
+    $obAluguel = Aluguel::getAlugueis('fk_reserva='.$reserva->id_reserva);
+    if ($obAluguel != null) {
+        continue; // vai para a próxima iteração do foreach
+    }
+
+    // redefine variáveis
     $status = '';
+    $botaoAluguel = '';
+    $botaoCancelar = '';
+    $botaoStatus = '';
+
     switch ($reserva->estado) {
         case 'confirmada':
-            
-            $botaoAluguel = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
-                            <button type="button" class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" title="">
-                               Iniciar Aluguel
-                            </button>
-                    </a>';        
 
+            $aluguelConfirmado = Aluguel::getAlugueis('id_user='.$_SESSION['id_user']);
+            $botaoAluguel = '<a href="../alugueis/formularioAluguel.php?id_reserva='.$reserva->id_reserva.'">
+                <button type="button" class="btn btn-sm me-1 btn-primary" title="Iniciar aluguel">
+                    <i class="cil-calendar-check"></i>
+                </button>
+            </a>';
+            $botaoCancelar = '<a onclick="return confirm(\'Tem certeza que deseja cancelar?\');" href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                <button type="button" class="btn btn-sm btn-danger" title="Cancelar">
+                    <i class="cil-trash"></i>
+                </button>
+            </a>';
             $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
             break;
-            
-            case 'pendente':
-                $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
-                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Cancelar">
-                                <i class="fa-solid fa-ban"></i>
-                            </button>
-                    </a>';
+
+        case 'pendente':
+            $botaoCancelar = '<a onclick="return confirm(\'Tem certeza que deseja cancelar?\');" href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                <button type="button" class="btn btn-sm btn-danger" title="Cancelar">
+                    <i class="cil-trash"></i>
+                </button>
+            </a>';
+            $botaoStatus = '<span class="status status-warning">Esta reserva está em análise.</span>';
             $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
             break;
-        
-            case 'cancelada':
-                $botao = '<a href="inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
-                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
-                                <i class="cil-check-circle"></i>
-                            </button>
-                        </a>';
+
+        default:
             $status .= '<span class="status status-danger">'.$reserva->estado.'</span>';
             break;
     }
-    
-    if ($reserva->estado) {
-        $resultados .= '<tr>
-                        <td>'.$reserva->id_reserva.'</td>
-                        <td class="text-center">'.$reserva->nome.'</td>
-                        <td class="text-center">'.$reserva->placa.'</td> 
-                        <td class="text-center">'.$status.'</td> 
-                        <td class="text-center">
 
-                            '.$botaoAluguel.'
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
-                        </td>
-                    </tr>';
+    if ($reserva->estado != 'cancelada') {
+        $resultados .= '<tr>
+            <td>'.$reserva->id_reserva.'</td>
+            <td class="text-center">'.$reserva->nome.'</td>
+            <td class="text-center">'.$reserva->placa.'</td>
+            <td class="text-center">'.$status.'</td>
+            <td class="text-center">'.$botaoAluguel.$botaoStatus.$botaoCancelar.'</td>
+        </tr>';
     }
 }
+
 $resultados = !empty($resultados) ? $resultados : '
                                                 <tr >
                                                 <td colspan="5" class="registros"><a>Sem registros</a></td>
                                                 </tr>
                                                 ';
 ?>
-
 
 <div class="d-flex flex-column flex-grow-1">
 <?=$mensagem?>
@@ -87,7 +99,7 @@ $resultados = !empty($resultados) ? $resultados : '
                 <th scope="col" class="text-center">Placa do Veículo</th>
                 <th scope="col" class="text-center">Status</th>
                 <th scope="col" class="text-center">Ações</th>
-                </thead>
+
             </thead>
 
             <tbody>

@@ -1,4 +1,6 @@
 <?php 
+include __DIR__.'/../includes/iniciaSessao.php';
+
 include __DIR__ . '/../includes/navbarAdmin.php';
 
 $id_carro = isset($_GET['id_carro']) ? (int) $_GET['id_carro'] : 0;

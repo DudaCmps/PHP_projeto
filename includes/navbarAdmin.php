@@ -1,4 +1,6 @@
 <?php 
+include __DIR__.'/../includes/verificaAdmin.php';
+
 $mensagem = '';
 define('BASE_URL', '/locaFast/');
 
@@ -240,6 +242,7 @@ body{
 
             <!-- Nome + Cargo -->
             <div class="d-flex flex-column justify-content-center text-start">
+
                 <span class="fw-semibold"><?=$_SESSION['nome']?></span>
                 <small class="text-muted">Admin</small>
             </div>
