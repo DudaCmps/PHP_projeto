@@ -13,10 +13,6 @@ $obUsuario = Usuario::getUsuario($id_user);
 
 $alugueisCliente = Aluguel::getAlugueis('id_user='.$id_user);
 
-if (empty($alugueisCliente)) {
-    $alugueisCliente->ativo_aluguel = 0;
-}
-
 
 if ($obUsuario instanceof Usuario) {
     if ($obUsuario->ativo_usuario == 0) {

@@ -9,14 +9,14 @@ include __DIR__ . '/../config.php';
 
 $obReserva = Reserva::getReservas('fk_cliente='.$_SESSION['id_user']);
 
-
+$resultados = '';
 foreach ($obReserva as $reserva) {
     
 
     // Pula reservas já com aluguel
     $obAluguel = Aluguel::getAlugueis('fk_reserva='.$reserva->id_reserva);
     if ($obAluguel != null) {
-        continue; // vai para a próxima iteração do foreach
+        continue; // pula o objeto
     }
 
     // redefine variáveis
@@ -29,7 +29,11 @@ foreach ($obReserva as $reserva) {
         case 'confirmada':
 
             $aluguelConfirmado = Aluguel::getAlugueis('id_user='.$_SESSION['id_user']);
-            $botaoAluguel = '<a href="../alugueis/formularioAluguel.php?id_reserva='.$reserva->id_reserva.'">
+
+            if ($aluguelConfirmado != null) {
+            $botaoStatus = '<span class="status status-warning">Você já possui um aluguel ativo.</span>';
+            }else {
+                $botaoAluguel = '<a href="../alugueis/formularioAluguel.php?id_reserva='.$reserva->id_reserva.'">
                 <button type="button" class="btn btn-sm me-1 btn-primary" title="Iniciar aluguel">
                     <i class="cil-calendar-check"></i>
                 </button>
@@ -39,6 +43,8 @@ foreach ($obReserva as $reserva) {
                     <i class="cil-trash"></i>
                 </button>
             </a>';
+            }
+            
             $status .= '<span class="status status-success">'.$reserva->estado.'</span>';
             break;
 
