@@ -2,6 +2,7 @@
 require __DIR__ . '/../vendor/autoload.php';
 session_start();
 use \App\Entity\Reserva;
+use \App\Entity\Aluguel;
 
 // Pega o id da reserva pela URL
 $id_reserva = $_GET['id_reserva'] ?? null;
@@ -20,8 +21,15 @@ $obReserva = Reserva::getReserva($id_reserva);
         }elseif($obReserva->estado == 'pendente'){
             //Se estiver ativada, desativa
             $obReserva->estado = 'cancelada';
-        }else{
-            header('Location: ../reservas/listagemReservas.php?status=error');
+        }elseif ($obReserva->estado == 'confirmada') {
+
+            $obAluguel = Aluguel::getAlugueis('fk_reserva='.$id_reserva);
+            if (empty($obAluguel)) {
+                $obReserva->estado = 'cancelada';
+            }else {
+                header('Location: ../reservas/listagemReservas.php?status=error');
+
+            }
         }
         $obReserva->atualizar();
 

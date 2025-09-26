@@ -79,7 +79,7 @@ class Reserva{
      * @param string
      * @return Reserva
      */
-    public static function getReservaRank($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getReservaRank($where = null, $and = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         
         $join = ' INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro ';
@@ -93,7 +93,7 @@ class Reserva{
         $limit = ' 1 ';
 
                    
-        return(new Database('reserva'))->select($where, $group, $order, $fields, $limit, $join)
+        return(new Database('reserva'))->select($where, $and , $group, $order, $fields, $limit, $join)
                                                 ->fetchObject(self::class);
                                                
     }
@@ -105,20 +105,21 @@ class Reserva{
      * @param string
      * @return array
      */
-    public static function getReservas($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getReservas($where = null,  $and = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
         $join = ' INNER JOIN usuarios c ON reserva.fk_cliente = c.id_user
                   INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
                 ';
         $fields = 'reserva.*,
                    c.*,
-                   v.*,
-                   reserva.estado';
+                   v.*
+                   ';
                    
-        return(new Database('reserva'))->select($where, $group, $order, $fields, $limit, $join)
+        return(new Database('reserva'))->select($where,$and, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }
+
 
     /**
      * Método para buscar a reserva pelo id
@@ -139,17 +140,16 @@ class Reserva{
      * @param string
      * @return array
      */
-    public static function getReservaUsuario($fk_cliente,$where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getReservaUsuario($fk_cliente,$where = null, $and = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
         
-        $join = ' INNER JOIN aluguel a ON reserva.id_reserva = a.fk_reserva
-                  INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
+        $join = ' INNER JOIN veiculos v ON reserva.fk_carro = v.id_carro
                   INNER JOIN modelos mo ON v.fk_modelo = mo.id_modelo
                   INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca
                 ';
-        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_cliente, reserva.estado AS status, a.*, v.*,ma.nome_marca AS nome_marca,
+        $fields = ' reserva.id_reserva, reserva.fk_carro, reserva.fk_cliente, reserva.estado AS status, v.*,ma.nome_marca AS nome_marca,
             mo.nome_modelos AS nome_modelo';
                    
-        return(new Database('reserva'))->select(' reserva.fk_cliente = '.$fk_cliente, $group, $order, $fields, $limit, $join)
+        return(new Database('reserva'))->select(' reserva.fk_cliente = '.$fk_cliente, $and, $group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

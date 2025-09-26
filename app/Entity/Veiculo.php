@@ -89,7 +89,8 @@ class Veiculo{
                                 'ano_fabricacao'=> $this->ano_fabricacao,
                                 'placa'=> $this->placa,
                                 'categoria'=> $this->categoria,
-                                'estado_carro'=> $this->estado_carro
+                                'estado_carro'=> $this->estado_carro,
+                                'ativo_carro' => $this->ativo_carro
                             ]);
         
     }
@@ -112,7 +113,7 @@ class Veiculo{
      * @param string
      * @return Reserva
      */
-    public static function getVeiculos($where = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getVeiculos($where = null, $and = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
        
         $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
         $fields = ' veiculos.id_carro,
@@ -120,24 +121,13 @@ class Veiculo{
                    veiculos.ano_fabricacao,
                    veiculos.placa,
                    veiculos.categoria,
-                   veiculos.estado_carro';
+                   veiculos.estado_carro,
+                   veiculos.ativo_carro';
                    
-        return(new Database('veiculos'))->select($where,$group, $order, $fields, $limit, $join)
+        return(new Database('veiculos'))->select($where, $and,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }
-
-    // /**
-    //  * Método para buscar o usuario pelo id
-    //  * @param integer
-    //  * @return Veiculo
-    //  */
-    // public static function getVeiculo($id_carro){
- 
-    //     return(new Database('veiculos'))->select('id_carro = '.$id_carro)
-    //                                            ->fetchObject(self::class);
-        
-    // }
 
     /**
      * Método para buscar o usuario pelo id
@@ -153,7 +143,7 @@ class Veiculo{
                     mo.nome_modelos AS nomeModelo,
                     ma.nome_marca AS nomeMarca';
 
-        return(new Database('veiculos'))->select('veiculos.id_carro = '.$id_carro, $group=null, $order=null, $fields, $limit = null, $join)
+        return(new Database('veiculos'))->select('veiculos.id_carro = '.$id_carro, $and = null, $group=null, $order=null, $fields, $limit = null, $join)
                                                ->fetchObject(self::class);
         
     }

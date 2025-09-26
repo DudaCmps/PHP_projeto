@@ -3,14 +3,18 @@ include __DIR__.'/../includes/iniciaSessao.php';
 
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
+use app\Entity\Reserva;
 
 $resultados = '';
 
 foreach ($reservas as $reserva) {
     $status = '';
-
+    $id =$reserva->id_reserva;
+    $reservasCarro = Reserva::getReservas('reserva.fk_carro ='.$reserva->fk_carro, 'reserva.estado= \'confirmada\'');
+    
     switch ($reserva->estado) {
         case 'confirmada':
+            
             $botaoInativar = '<a href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
                             <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
                                 <i class="fa-solid fa-ban"></i>
@@ -22,12 +26,24 @@ foreach ($reservas as $reserva) {
             break;
         
             case 'pendente':
-                $botaoInativar = '<a href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
+                if (empty($reservasCarro)) {
+
+                    $botaoInativar = '<a href="../reservas/inativarReserva.php?id_reserva='.$reserva->id_reserva.'">
                             <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Cancelar">
                                 <i class="fa-solid fa-ban"></i>
                             </button>
                     </a>';
-                $botaoAprovar = '<a href="aprovaReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
+                    $botaoAprovar = '<a href="aprovaReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button></a>';
+                }else{
+                    $botaoInativar = '
+                    <button type="button" class="btn btn-sm me-1 btn-warning disabled" data-coreui-toggle="tooltip" title="Cancelar">
+                        <i class="fa-solid fa-ban"></i>
+                    </button>';
+
+                    $botaoAprovar = '<button type="button" class="disabled btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Aprovar"><i class="cil-thumb-up"></i></button>';
+                }
+
+                
             $status .= '<span class="status status-warning">'.$reserva->estado.'</span>';
             break;
 
@@ -53,7 +69,7 @@ foreach ($reservas as $reserva) {
 
                         '.$botaoInativar.'
 
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
+                        <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirReserva.php?id_reserva='.$reserva->id_reserva.'"><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
 }

@@ -116,17 +116,18 @@ class Database {
      * @param string
      * @return PDOStatement
      */
-    public function select($where = null, $group = null, $order = null, $fields = null, $limit = null, $join = null){
+    public function select($where = null, $and = null, $group = null, $order = null, $fields = null, $limit = null, $join = null){
    
 
     $where = !empty($where) ? ' WHERE ' . $where : '';
+    $and = !empty($and) ? ' AND ' . $and : '';
     $fields = !empty($fields) ? ''. $fields : '*';
     $group = !empty($group) ? ' GROUP BY ' .$group : '';
     $order = !empty($order) ? ' ORDER BY ' .$order : '';
     $limit = !empty($limit) ? ' LIMIT ' .$limit : '';
     $join  = !empty($join)  ? ''.$join : '';
 
-    $query = 'SELECT '.$fields.' FROM '.$this->table.''.$join.$where.$group.$order.$limit;
+    $query = 'SELECT '.$fields.' FROM '.$this->table.''.$join.$where.$and.$group.$order.$limit;
 
     return $this->execute($query);
  

@@ -26,7 +26,7 @@ foreach ($veiculos as $carro) {
             break;
     }
 
-    if ($carro->estado_carro == 'disponivel') {
+    if (($carro->estado_carro == 'disponivel') && ($carro->ativo_carro == 1)) {
         $resultados .= '<tr>
         <td>'.$carro->id_carro.'</td>
         <td class="text-center">'.$carro->nome_modelos.'</td>

@@ -1,6 +1,5 @@
 <?php 
 include __DIR__.'/../includes/iniciaSessao.php';
-
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
@@ -21,7 +20,8 @@ foreach ($alugueis as $aluguel) {
                         <td class="text-center">R$'. number_format($aluguel->valor, 2, ",", ".").'</td> 
                         <td class="text-center">
                 
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirAluguel.php?id_aluguel='.$aluguel->id_aluguel.'" ><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirAluguel.php?id_aluguel='.$aluguel->id_aluguel.'">
+                            <button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
                         </td>
                     </tr>';
 }

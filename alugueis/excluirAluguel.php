@@ -1,5 +1,8 @@
 <?php
+
+session_start();
 require __DIR__ . '/../vendor/autoload.php';
+include __DIR__.'/../includes/verificaAdmin.php';
 
 use \App\Entity\Aluguel;
 use \App\Entity\Reserva;
@@ -31,7 +34,9 @@ $veiculo->atualizar();
 
 $obAluguel->excluir();
 
-header('location: ../index2.php?status=success');
+// Manda uma página para trás sem precisar de endereço fixo
+$voltar = $_SERVER['HTTP_REFERER'];
+header('Location: ' . $voltar);
 exit;
 
 

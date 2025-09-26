@@ -1,12 +1,51 @@
 <?php 
 include __DIR__.'/../includes/iniciaSessao.php';
-
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
 $resultados = '';
+
 foreach ($veiculos as $carro) {
 
+    if ($carro->ativo_carro == 1) {
+        $botaoAtivo = ' <a href="inativarVeiculo.php?id_carro='.$carro->id_carro.'">
+                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
+                                <i class="fa-solid fa-ban"></i>
+                            </button>
+                        </a>';
+
+        $botaoEditar =  ' <a href="formularioEditarVeiculo.php?id_carro='.$carro->id_carro.'">
+                                <button type="button" class="btn btn-sm btn-primary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar">
+                                    <i class="fa-regular fa-pen-to-square" style="color: black;"></i>
+                                </button>
+                          </a>';
+
+        $botaoManutencao =' <a href="../manutenções/formularioManutencao.php?id_carro='.$carro->id_carro.'">
+                                <button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção">
+                                    <i class="cil-settings" style="color: black;font-size:16px;"></i>
+                                </button>
+                            </a>';
+        
+        $ativo = '<span class="status status-success">Sim</span>';
+    }else {
+        $botaoAtivo = '<a href="inativarVeiculo.php?id_carro='.$carro->id_carro.'">
+                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
+                                <i class="cil-check-circle"></i>
+                            </button>
+                        </a>';
+
+                        $botaoEditar =  ' 
+                            <button type="button" class="btn btn-sm btn-primary me-1 disabled" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar">
+                                <i class="fa-regular fa-pen-to-square" style="color: black;"></i>
+                            </button>';
+
+                        $botaoManutencao ='
+                            <button type="button" class="btn btn-sm btn-secondary me-1 disabled" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção">
+                                <i class="cil-settings" style="color: black;font-size:16px;"></i>
+                            </button>';
+        
+        $ativo = '<span class="status status-warning">Não</span>';
+    }
 
     switch ($carro->estado_carro) {
         case 'alugado':
@@ -43,12 +82,12 @@ foreach ($veiculos as $carro) {
                         <td class="text-center">'.$carro->placa.'</td>
                         <td class="text-center">'.$categoria.'</td>
                         <td class="text-center">'.$status.'</td>
+                        <td class="text-center">'.$ativo.'</td>
                         <td class="text-center">
-                            <a href="formularioEditarVeiculo.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-primary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar"><i class="fa-regular fa-pen-to-square" style="color: black;"></i></button></a>
-
-                            <a href="../manutenções/formularioManutencao.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção"><i class="cil-settings" style="color: black;font-size:16px;"></i></button></a>
-
-                            <a href="inativarVeiculo.php?id_carro='.$carro->id_carro.'" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Inativar"><button type="button" class="btn btn-sm btn-warning"><i class="fa-solid fa-ban"></i></button></a>
+                            
+                            '.$botaoEditar.'
+                            '.$botaoManutencao.'
+                            '.$botaoAtivo.'
 
                             <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_carro='.$carro->id_carro.'" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><button type="button" class="btn btn-sm btn-danger"><i class="cil-trash"></i></button></a>
                         </td>
@@ -88,6 +127,7 @@ $resultados = !empty($resultados) ? $resultados : '
                 <th scope="col" class="text-center">Placa</th>
                 <th scope="col" class="text-center">Categoria</th>
                 <th scope="col" class="text-center">Status</th>
+                <th scope="col" class="text-center">Ativo</th>
                 <th scope="col" class="text-center">Ações</th>
                 </tr>
             </thead>

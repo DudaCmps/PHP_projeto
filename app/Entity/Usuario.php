@@ -115,7 +115,7 @@ class Usuario{
      * @param string
      * @return array
      */
-    public static function getUsuarios($where = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
+    public static function getUsuarios($where = null, $and = null,$group = null, $order = null, $limit = null, $fields = null, $join = null){
         
        
         $fields = 'usuarios.id_user,
@@ -127,7 +127,7 @@ class Usuario{
            usuarios.perfil';
 
                    
-        return(new Database('usuarios'))->select($where,$group, $order, $fields, $limit, $join)
+        return(new Database('usuarios'))->select($where, $and,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);
                                                
     }

@@ -153,7 +153,7 @@ body{
     <ul class="sidebar-nav">
 
       <li class="nav-item">
-          <a class="nav-link active" href="<?= BASE_URL ?>index2.php">
+          <a class="nav-link active" href="<?= BASE_URL ?>admin/index.php">
               <i class="cil-speedometer me-2"></i>Dashboard
           </a>
       </li>

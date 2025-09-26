@@ -31,7 +31,7 @@ foreach ($obReserva as $reserva) {
             $aluguelConfirmado = Aluguel::getAlugueis('id_user='.$_SESSION['id_user']);
 
             if ($aluguelConfirmado != null) {
-            $botaoStatus = '<span class="status status-warning">Você já possui um aluguel ativo.</span>';
+            $botaoStatus = '<span class="status status-warning">Finalize o aluguel ativo antes de iniciar outro.</span>';
             }else {
                 $botaoAluguel = '<a href="../alugueis/formularioAluguel.php?id_reserva='.$reserva->id_reserva.'">
                 <button type="button" class="btn btn-sm me-1 btn-primary" title="Iniciar aluguel">

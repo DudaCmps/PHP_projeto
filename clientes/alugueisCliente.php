@@ -22,10 +22,7 @@ foreach ($meusalugueis as $aluguel) {
                         <td class="text-center">'.$dataIni.'</td>
                         <td class="text-center">'.$dataFim.'</td> 
                         <td class="text-center">R$'. number_format($aluguel->valor, 2, ",", ".").'</td> 
-                        <td class="text-center">
-                
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirAluguel.php?id_aluguel='.$aluguel->id_aluguel.'" ><button type="button" class="btn btn-sm btn-danger" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><i class="cil-trash"></i></button></a>
-                        </td>
+                        
                     </tr>';
 }
 $resultados = !empty($resultados) ? $resultados : '
@@ -70,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <th scope="col" class="text-center">Data de inicio</th>
                 <th scope="col" class="text-center">Data de devolução</th>
                 <th scope="col" class="text-center">Valor</th>
-                <th scope="col" class="text-center">Ações</th>
                 </thead>
             </thead>
 
