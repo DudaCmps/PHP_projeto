@@ -15,14 +15,15 @@ foreach ($minhasReservas as $reserva) {
 
 //PROXIMA RESERVA
 
-$nextReserva = Reserva::getReservaUsuario($_SESSION['id_user'],null ,null,  null, 'reserva.id_reserva', 1);
-
+$reservaTemp = Reserva::getReservaUsuario($_SESSION['id_user'],null ,null,  null, 'reserva.id_reserva', 1);
+foreach ($reservaTemp as $reserva) {
+  $nextReserva = $reserva;
+}
 
 
 if (empty($nextReserva)) {
   $nextReserva = 'Nenhuma reserva proxima.';
 }
-
 
 //CARD VALOR GASTO
 $meusalugueis = Aluguel::getAlugueis('fk_cliente ='. $_SESSION['id_user']);
@@ -74,7 +75,7 @@ foreach ($meusalugueis as $aluguel) {
       <div class="col-12 col-sm-6 col-xl-4">
         <div class="card text-white bg-warning">
           <div class="card-body">
-            <div class="fs-2 fw-bold">Fiat Uno – 25/09/2025</div>
+            <div class="fs-2 fw-bold"><?=$nextReserva->nome_marca.' '.$nextReserva->nome_modelos?> – <?=$nextReserva->placa?></div>
             <div class="text-white-50">Próxima reserva</div>
             <div class="progress progress-white progress-thin my-2">
               <div class="progress-bar" role="progressbar" style="width: 70%"></div>

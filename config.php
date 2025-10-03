@@ -14,6 +14,3 @@ $veiculos = Veiculo::getVeiculos();
 $manutencoes = Manutencao::getManutencoes();
 $alugueis = Aluguel::getAlugueis();
 $reservas = Reserva::getReservas();
-
-
-

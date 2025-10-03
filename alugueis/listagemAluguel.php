@@ -33,15 +33,6 @@ $resultados = !empty($resultados) ? $resultados : '
 ?>
 
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (el) {
-        new coreui.Tooltip(el);
-    });
-});
-</script>
-
 <div class="d-flex flex-column flex-grow-1">
 <?=$mensagem?>
 <div class="m-4">
@@ -90,3 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <?php 
 include __DIR__.'/../includes/footer.php';
 ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
+    tooltipTriggerList.forEach(function (el) {
+        new coreui.Tooltip(el);
+    });
+});
+</script>
