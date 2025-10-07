@@ -49,9 +49,9 @@ date_default_timezone_set('America/Sao_Paulo');
 
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-body{
-    font-family: 'Nunito Sans', sans-serif;
-}
+    body{
+        font-family: 'Nunito Sans', sans-serif;
+    }
 
         .sidebar-header {
           padding: 9px 1rem; 
@@ -149,8 +149,6 @@ body{
 
     <!-- Nav -->
     <ul class="sidebar-nav">
-
-
 
       <li class="nav-item">
           <a class="nav-link active" href="<?= BASE_URL ?>clientes/index.php">

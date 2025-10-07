@@ -19,7 +19,7 @@ function loginUser(){
                 if (response.perfil == 'admin') {
                     window.location.href = '../admin/index.php';
                 }else{
-                    window.location.href = '../clientes/index.php';
+                    window.location.href = '../clientes/indexTemp.php';
                 }
             }else {
                 alert(response.message || 'Erro no login.');

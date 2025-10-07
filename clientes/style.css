@@ -1,0 +1,197 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+#header-alert {
+    background-color: #1E2329;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 27px;
+}
+
+#header-alert > a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+}
+
+.header-bar {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+    background-color: #2B323B;
+}
+
+#header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+}
+
+#header-logo > h1{
+    font-size: 30px;
+    margin-left: 20px;
+    color: white;
+}
+
+
+#login-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+#login-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    width: 100px;
+    height: 46px;
+    margin: 16px;
+    border-radius: 8px;
+    border: 1px solid rgb(255, 255, 255);    
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+#login-button:hover {
+    background-color: rgba(255, 255, 255, 0.808);
+}
+
+#login-button:hover svg path {
+    fill: black;
+    transition: fill 0.2s ease;
+}
+
+#login-button:hover #login-text {
+    color: black;
+    transition: color 0.2s ease;
+}
+
+.offcanvas-header{
+    background-color: #1E2329;
+}
+
+.offcanvas-body{
+    background-color: #2B323B;
+}
+
+.nav-item{
+   background-color:rgba(216, 112, 147, 0.37); 
+   border-radius:5px;
+   margin-bottom: 4px;
+   color: white;
+   height: 40px;
+}
+ 
+
+#wrapper-img-mega {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+#wrapper-img-mega .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('fundo.jpg');
+    background-size: cover;
+    filter: brightness(0.5);
+}
+
+#wrapper-img-mega h1 {
+    position: relative;
+    color: white;
+    font-size: 5em;
+    padding: 50px;
+    margin: 0px 100px;
+}
+
+.beneficios-lista {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 40px;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.beneficios-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.nossa-frota{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+#check-frota {
+    height: 168px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    line-height: 40px;
+    background-color: #1E2329;
+}
+
+#check-frota > h3 {
+    color: #FDCB5B;
+    font-size: 1.5em;
+}
+
+#check-frota > p {
+    font-weight: 18px;
+    font-weight: 300;
+    color: #e7e6e6;
+}
+
+#content-cars {
+    background-color: palegoldenrod;
+    height: 500px;
+}
+
+footer {
+    display: flex;
+    background-color: #1E2329;
+    width: 100%;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > div {
+    border-top: 1px solid #999999;
+    color: #999999;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+    height: 70px;
+    width: 90%;
+}
