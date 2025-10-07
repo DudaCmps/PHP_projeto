@@ -80,7 +80,7 @@ class Database {
         } catch (PDOException $e) {
             if ($e->errorInfo[1] == 1062) {
                 
-                header('location: index.php?status=MORTE');
+                header('location: index.php?status=');
                 exit;
             }else {
                 die('ERROR:'.$e->getMessage());

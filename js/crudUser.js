@@ -1,4 +1,7 @@
+//FUNÇÕES LOGIN E CADASTRO
+
 function loginUser(){
+
     var email = $("#email").val();
     var senha = $("#senha").val();
 
@@ -18,7 +21,6 @@ function loginUser(){
                 }else{
                     window.location.href = '../clientes/index.php';
                 }
-                
             }else {
                 alert(response.message || 'Erro no login.');
             }
@@ -27,8 +29,8 @@ function loginUser(){
 }
 
 function validateLogin(email, senha) {
-    let valid = true; // <--- alterado para let
-
+    let valid = true; 
+    
     if (email == "") {
         $("#emailError").html("Digite seu E-mail");
         valid = false;
@@ -46,7 +48,8 @@ function validateLogin(email, senha) {
     return valid;
 }
 
-function registerUser() {
+function registerUser(){
+
    var nome = $("#nome").val();
    var email = $("#email").val();
    var telefone = $("#telefone").val();
@@ -54,16 +57,32 @@ function registerUser() {
    var data_nasc = $("#data_nasc").val();
    var senha = $("#senha").val();
 
-   if (!validateRegister(email,senha)) {
+   if (!validateRegister(nome,email, telefone, data_nasc, cpf,  senha)) {
         return false;
     }
+
+    $.ajax({
+        method: "post",
+        url: "registerProcess.php",
+        data: {nome:nome, email:email, telefone:telefone,data_nasc:data_nasc , cpf:cpf, senha:senha},
+        dataType: "json",
+        success: function (response) {
+
+            if (response.status == 'success') {
+                window.location.href = '../auth/loginPage.php';
+                
+            }else {
+                alert(response.message || 'Erro no cadastro.');
+            }
+        },
+    });
 }
 
-function validateRegister(nome, email, telefone, cpf, data_nasc, senha) {
+function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
     let valid = true;
 
     if (nome == "") {
-        $("#nomeError").html("Digite seu Nome");
+        $("#nomeError").html("Digite seu nome");
         valid = false;
     } else {
         $("#nomeError").html("");
@@ -83,18 +102,18 @@ function validateRegister(nome, email, telefone, cpf, data_nasc, senha) {
         $("#telefoneError").html("");
     }
 
-    if (cpf == "") {
-        $("#cpfError").html("Digite seu CPF");
-        valid = false;
-    } else {
-        $("#cpfError").html("");
-    }
-
     if (data_nasc == "") {
         $("#data_nascError").html("Digite sua data de nascimento");
         valid = false;
     } else {
         $("#data_nascError").html("");
+    }
+
+    if (cpf == "") {
+        $("#cpfError").html("Digite seu CPF");
+        valid = false;
+    } else {
+        $("#cpfError").html("");
     }
 
     if (senha == "") {
@@ -106,3 +125,7 @@ function validateRegister(nome, email, telefone, cpf, data_nasc, senha) {
 
     return valid;
 }
+
+//-------------------------------------------------
+
+

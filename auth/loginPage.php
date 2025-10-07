@@ -38,6 +38,7 @@
                     <div class="col-6">
                       <input onclick="loginUser()" type="button" class="btn btn-primary px-4" value="Entrar">
                   </div>
+                  
 
                   </form>
                     <div class="col-6 text-end">

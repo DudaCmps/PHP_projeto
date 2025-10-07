@@ -2,17 +2,11 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Usuario;
-use \App\Entity\Endereco;
+
+header('Content-Type: application/json; charset=utf-8'); // define o tipo de retorno
 
 $obUsuario = new Usuario;
-$obEndereco = new Endereco;
-
-//Validanção do post basico
-if (!isset($_POST['nome'], $_POST['email'], $_POST['telefone'], $_POST['cpf'], $_POST['data_nasc'], $_POST['senha'], $_POST['perfil'])) {
-
-    header('location: ../includes/registerPage.php?status=error');
-    exit;
-}
+// $obEndereco = new Endereco;
 
 //Cadastra usuario idependente do tipo
 $obUsuario->nome = $_POST['nome'];
@@ -21,26 +15,41 @@ $obUsuario->telefone = $_POST['telefone'];
 $obUsuario->cpf = $_POST['cpf'];
 $obUsuario->data_nasc = $_POST['data_nasc'];
 $obUsuario->senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-$obUsuario->perfil = $_POST['perfil'];
+$obUsuario->perfil = 'cliente';
 
-$obUsuario->cadastrar();
 
-//Verifica se é cliente, caso seja preenche endereço 
-if ($_POST['perfil'] == 'cliente') {
+if (!$obUsuario->cadastrar()) {
 
-    $obEndereco->fk_cliente = $obUsuario->id_user;
-    $obEndereco->cidade = $_POST['cidade'];
-    $obEndereco->estado = $_POST['estado'];
-    $obEndereco->cep = $_POST['cep'];
-    $obEndereco->bairro = $_POST['bairro'];
-    $obEndereco->logradouro = $_POST['logradouro'];
-    $obEndereco->numero = $_POST['numero'];
-    $obEndereco->complemento = $_POST['complemento'];
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Não foi possível cadastrar.'
+    ]);
     
-    $obEndereco->cadastrar();
+
+}else{
+
+    echo json_encode([
+        'status' => 'success'
+    ]);
+    
+    exit;
 }
 
-header('location: ../index.php?status=success');
+
+
 exit;
 
+//Verifica se é cliente, caso seja preenche endereço 
+// if ($_POST['perfil'] == 'cliente') {
 
+//     $obEndereco->fk_cliente = $obUsuario->id_user;
+//     $obEndereco->cidade = $_POST['cidade'];
+//     $obEndereco->estado = $_POST['estado'];
+//     $obEndereco->cep = $_POST['cep'];
+//     $obEndereco->bairro = $_POST['bairro'];
+//     $obEndereco->logradouro = $_POST['logradouro'];
+//     $obEndereco->numero = $_POST['numero'];
+//     $obEndereco->complemento = $_POST['complemento'];
+    
+//     $obEndereco->cadastrar();
+// }
