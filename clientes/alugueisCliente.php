@@ -1,6 +1,7 @@
 <?php
 include __DIR__.'/../includes/iniciaSessao.php';
-include __DIR__.'/../includes/navbarCliente.php';
+include __DIR__.'/../public/header.php';
+
 use App\Entity\Aluguel;
 
 include __DIR__ . '/../config.php';
@@ -42,8 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<div class="d-flex justify-content-center fundo"  style="min-height: 723px;">
+<div style="width: 1300px;">
+
 <div class="d-flex flex-column flex-grow-1">
-<?=$mensagem?>
+
 <div class="m-4">
 <div class="row">
 <div class="col-12">
@@ -84,8 +88,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </div>
+</div>
+</div>
                 
 <!-- FECHAMENTO DA NAV -->
 <?php 
-include __DIR__.'/../includes/footer.php';
+include __DIR__.'/../public/footer.php';
 ?>

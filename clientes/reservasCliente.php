@@ -4,7 +4,7 @@ use App\Entity\Aluguel;
 
 include __DIR__.'/../includes/iniciaSessao.php';
 
-include __DIR__.'/../includes/navbarCliente.php';
+include __DIR__.'/../public/header.php';
 include __DIR__ . '/../config.php';
 
 $obReserva = Reserva::getReservas('fk_cliente='.$_SESSION['id_user']);
@@ -81,16 +81,19 @@ $resultados = !empty($resultados) ? $resultados : '
                                                 ';
 ?>
 
+
+
+<div class="d-flex justify-content-center fundo"  style="min-height: 723px;">
+<div style="width: 1300px;">
 <div class="d-flex flex-column flex-grow-1">
-<?=$mensagem?>
 <div class="m-4">
 <div class="row">
 <div class="col-12">
           
-            <div class="card">
-            <div class="card-header">
-            <strong>Reservas ativas</strong>
-            </div>
+<div class="card">
+<div class="card-header">
+<strong>Reservas ativas</strong>
+</div>
 
 <div class="card-body">
 <div class="example">
@@ -122,11 +125,12 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
 </div>
 </div>
-                
+</div>
+</div>       
 <!-- FECHAMENTO DA NAV -->
 <?php 
-include __DIR__.'/../includes/footer.php';
-?>
+include __DIR__.'/../public/footer.php';
+?>   
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

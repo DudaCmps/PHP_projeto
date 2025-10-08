@@ -39,7 +39,7 @@ foreach ($alugueis as $aluguel) {
 
 
 <div class="d-flex flex-column flex-grow-1">
-<?=$mensagem?>
+
 <div class="m-4">
 <div class="col-12">
           

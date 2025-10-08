@@ -1,16 +1,13 @@
 <?php 
 include __DIR__.'/../includes/iniciaSessao.php';
-
-
 include __DIR__ . '/../config.php';
 use \App\Entity\Usuario;
 
 // verificando o usuario
 if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin') {
   include __DIR__.'/../includes/navbarAdmin.php';
-} else {
-  include __DIR__.'/../includes/navbarCliente.php';
-}
+} 
+include __DIR__.'/../public/header.php';
 
 //consulta
 $obUsuario = Usuario::getUsuario($_SESSION['id_user']);
@@ -26,13 +23,35 @@ $estados = [
 ];
 ?>
 
+<div style="background-color: #2B323B; border-top:1px solid black;">
+      <ul class="d-flex flex-center list-unstyled justify-content-center m-0 ">
+        <li class="mx-5">
+          <a href="/pt-br/cliente/minhas-reservas" title="Minhas Reservas" class="d-flex btn btn-menu-header active-link  text-white">
+            <img src="//static.rentcars.com/imagens/icons/icon-my-bookings.svg" alt="Minhas Reservas" class="icon-menu-header pe-2" data-cmp-info="10">
+            <span class="font-weight-500 line-height-24 font-size-16"> Meu histórico </span>
+          </a>
+        </li>
+            
+              <li class="mx-5"><a href="/pt-br/minha-carteira" title="Meu Endereço" class="d-flex btn btn-menu-header  text-white"><img src="//static.rentcars.com/imagens/icons/icon-my-account-new.svg" alt="Minha carteira" class="icon-menu-header pe-2" data-cmp-info="10"> <span class="font-weight-500 line-height-24 font-size-16">
+              Meus Endereços</span></a></li>
+              <li class="mx-5"><a href="/pt-br/cliente/minha-conta" title="Minha Conta" class="d-flex btn btn-menu-header  text-white"><img src="//static.rentcars.com/imagens/icons/icon-my-account.svg" alt="Minha Conta" class="icon-menu-header pe-2" data-cmp-info="10"> <span class="font-weight-500 line-height-24 font-size-16">
+              Minha Conta</span></a></li>
+        </ul>
+</div>
+
+<div class="d-flex justify-content-center align-items-center fundo">
+<div style="width: 1300px;">
+
 <div class="d-flex flex-column flex-grow-1">
   <div class="m-4">
     <div class="row">
-      <div class="col-12">
+      <div class="col-12"  style="height: 611px;">
         
-        <div><h4>Editar meus dados</h4></div>  
-        <div class="card">
+        <div class="d-flex justify-content-between">
+          <h4>Minha conta</h4>
+          <button class="btn btn-sm btn-warning mb-2">editar dados</button>
+        </div>  
+        <div class="card h-75" style="background-color:  #2B323B;">
 
           <div class="card-body">
             
@@ -69,7 +88,8 @@ $estados = [
                 <label for="senha" class="input-group-text">Senha</label>
                 <input type="password" class="form-control" id="senha" name="senha" placeholder="********">
               </div>
-              <div class="form-text pb-3">Qualquer informação alterada deverá ser salva antes de sair da página.</div>
+              <div class="form-text pb-3 text-white">Qualquer informação alterada deverá ser salva antes de sair da página.</div>
+
               <button class="btn btn-outline-success" type="submit">Salvar</button>
             </form>
           </div>
@@ -79,8 +99,8 @@ $estados = [
     </div>
   </div>
 </div>
-
+</div></div>
 <!-- FECHAMENTO DA NAV -->
 <?php 
-include __DIR__.'/../includes/footer.php';
-?>
+include __DIR__.'/../public/footer.php';
+?>      

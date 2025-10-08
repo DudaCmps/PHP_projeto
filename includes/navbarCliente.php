@@ -1,29 +1,8 @@
 <?php 
 include __DIR__.'/../includes/verificaCliente.php';
 
-$mensagem = '';
-
 define('BASE_URL', '/locaFast/');
 
-if (isset($_GET['status'])) {
-  switch ($_GET['status']) {
-      case 'success':
-          $mensagem = '
-          <div class="alert alert-success alert-dismissible fade show m-4" role="alert">
-              ✅ Ação realizada com sucesso!
-              <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
-          </div>';
-          break;
-      
-      case 'error':
-          $mensagem = '
-          <div class="alert alert-danger alert-dismissible fade show m-4" role="alert">
-              ❌ Ação não realizada!
-              <button type="button" class="btn-close" data-coreui-dismiss="alert" aria-label="Close"></button>
-          </div>';
-          break;
-  }
-}
 date_default_timezone_set('America/Sao_Paulo');
 ?>
 
