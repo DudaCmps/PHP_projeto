@@ -128,4 +128,35 @@ function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
 
 //-------------------------------------------------
 
+//FUNÇÕES DE EDITAR UM USUARIO
 
+function updateUser() {
+
+    var id_user = $("#id_user").val();
+    var perfil = $("#perfil").val();
+    var nome = $("#nome").val();
+    var email = $("#email").val();
+    var telefone = $("#telefone").val();
+    var cpf = $("#cpf").val();
+    var data_nasc = $("#data_nasc").val();
+    var senha = $("#senha").val();
+ 
+
+    $.ajax({
+         method: "post",
+         url: "atualizarUser.php",
+         data: {id_user:id_user, perfil:perfil, nome:nome, email:email, telefone:telefone,data_nasc:data_nasc , cpf:cpf, senha:senha},
+         dataType: "json",
+         success: function (response) {
+
+            if (response.status == 'success') {
+                
+                alert(response.message || 'Sucesso ao cadastrar.')
+                 
+            }else {
+                 alert(response.message || 'Erro no cadastro.');
+            }
+         },
+     });
+
+}

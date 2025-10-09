@@ -12,6 +12,12 @@ include __DIR__.'/../public/header.php';
 //consulta
 $obUsuario = Usuario::getUsuario($_SESSION['id_user']);
 
+$formularioTipo = null;
+
+if (isset($_GET['sinal']) && $_GET['sinal'] == 'editar') {
+  $formularioTipo = $_GET['sinal'];
+}
+
 $estados = [
     'AC'=>'Acre','AL'=>'Alagoas','AP'=>'Amapá','AM'=>'Amazonas','BA'=>'Bahia',
     'CE'=>'Ceará','DF'=>'Distrito Federal','ES'=>'Espírito Santo','GO'=>'Goiás',
@@ -44,12 +50,16 @@ $estados = [
 
 <div class="d-flex flex-column flex-grow-1">
   <div class="m-4">
-    <div class="row">
-      <div class="col-12"  style="height: 611px;">
+
+  <?php if (!isset($formularioTipo)) { ?>
+
+    <!-- formulario fixo -->
+    <div class="row"  style="height: 636px;">
+      <div class="col-12"  style="height: 550px;">
         
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between" style="height: 35px;">
           <h4>Minha conta</h4>
-          <button class="btn btn-sm btn-warning mb-2">editar dados</button>
+          <a href="editarPerfil.php?id=<?=$_SESSION['id_user']?>&sinal=editar" class="btn btn-sm btn-warning mb-2">Editar dados</a>
         </div>  
         <div class="card h-75" style="background-color:  #2B323B;">
 
@@ -59,6 +69,61 @@ $estados = [
 
               <input type="hidden" name="id_user" value="<?=$obUsuario->id_user?>">
               <input type="hidden" name="perfil" value="<?=$obUsuario->perfil?>">
+
+              <div class="input-group mb-3">
+                <label for="nome" class="input-group-text">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required value="<?=$obUsuario->nome?>" disabled>
+              </div>
+
+              <div class="input-group mb-3">
+                <label for="email" class="input-group-text">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required value="<?=$obUsuario->email?>" disabled>
+              </div>
+
+              <div class="input-group mb-3">
+                <label for="telefone" class="input-group-text">Telefone</label>
+                <input type="text" class="form-control me-3" id="telefone" name="telefone"
+                value="<?=$obUsuario->telefone?>" required disabled>
+
+                <label for="cpf" class="input-group-text">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" value="<?=$obUsuario->cpf?>" required maxlength="14" disabled>
+              </div>
+
+              <div class="input-group mb-3">
+                <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
+                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required value="<?=$obUsuario->data_nasc?>" disabled>
+              </div>
+
+              <div class="input-group mb-3">
+                <label for="senha" class="input-group-text">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="********" disabled>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  <?php } elseif (isset($formularioTipo) && $formularioTipo == 'editar') { ?>
+
+    <!-- formulario de edição -->
+  <div class="row" style="height: 636px;">
+      <div class="col-12"  style="height: 550px;">
+        
+        <div class="d-flex justify-content-between" style="height: 35px;">
+          <h4>Minha conta</h4>
+          <!-- <a disable class="btn btn-sm btn-warning mb-2">TEMPORARIO</a> -->
+
+        </div>  
+        <div class="card h-75" style="background-color:  #2B323B;">
+
+          <div class="card-body">
+            
+            <form method="post">
+
+              <input type="hidden" name="id_user" id="id_user" value="<?=$obUsuario->id_user?>">
+              <input type="hidden" name="perfil" id="perfil" value="<?=$obUsuario->perfil?>">
 
               <div class="input-group mb-3">
                 <label for="nome" class="input-group-text">Nome</label>
@@ -90,16 +155,28 @@ $estados = [
               </div>
               <div class="form-text pb-3 text-white">Qualquer informação alterada deverá ser salva antes de sair da página.</div>
 
-              <button class="btn btn-outline-success" type="submit">Salvar</button>
+              <input onclick="updateUser()" type="button" class="btn btn-sm btn-outline-success me-1" value="Salvar">
+
+              <a href="editarPerfil.php" type="button" class="btn btn-sm btn-outline-danger">Cancelar</a>
+
             </form>
           </div>
 
         </div>
       </div>
     </div>
+
+    <?php } ?>
   </div>
 </div>
-</div></div>
+
+</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../js/crudUser.js"></script>
+
 <!-- FECHAMENTO DA NAV -->
 <?php 
 include __DIR__.'/../public/footer.php';

@@ -1,1 +1,0 @@
-{"nome":"c","email":"camposeduarda@gmail.com","telefone":"(11) 98765-4321","data_nasc":"2000-05-14","cpf":"444444444","senha":"123"}
