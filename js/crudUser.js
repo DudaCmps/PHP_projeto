@@ -140,7 +140,6 @@ function updateUser() {
     var cpf = $("#cpf").val();
     var data_nasc = $("#data_nasc").val();
     var senha = $("#senha").val();
- 
 
     $.ajax({
          method: "post",
@@ -152,7 +151,8 @@ function updateUser() {
             if (response.status == 'success') {
                 
                 alert(response.message || 'Sucesso ao cadastrar.')
-                 
+                window.location.href = '../aUser/editarPerfil.php';
+
             }else {
                  alert(response.message || 'Erro no cadastro.');
             }
