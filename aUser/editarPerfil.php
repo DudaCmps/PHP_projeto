@@ -52,7 +52,7 @@ $estados = [
   <div class="m-4">
 
   <?php if (!isset($formularioTipo)) { ?>
-
+    
     <!-- formulario fixo -->
     <div class="row"  style="height: 636px;">
       <div class="col-12"  style="height: 550px;">

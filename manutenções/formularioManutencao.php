@@ -26,16 +26,16 @@ $dataFormatada = $dataAtual->format('Y-m-d');
 
             <input type="hidden" name="id_carro" value="<?= $id_carro ?>">
 
-            <div class="mb-3">
-                <label class="form-label" for="exampleFormControlTextarea1">Descrição</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="descricao"></textarea>
-            </div>
+              <div class="mb-3">
+                  <label class="form-label" for="exampleFormControlTextarea1">Descrição</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="descricao"></textarea>
+              </div>
 
               
               <div class="input-group mb-3">
                 <label for="data_manutencao" class="input-group-text">Data da Manutenção</label>
                 <input type="date" class="form-control" id="data_manutencao" name="data_manutencao" 
-                 min="<?=$dataFormatada ?>" required>
+                  min="<?=$dataFormatada ?>" required>
               </div>
 
               

@@ -116,13 +116,8 @@ class Veiculo{
     public static function getVeiculos($where = null, $and = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
        
         $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
-        $fields = ' veiculos.id_carro,
-                   mo.nome_modelos,
-                   veiculos.ano_fabricacao,
-                   veiculos.placa,
-                   veiculos.categoria,
-                   veiculos.estado_carro,
-                   veiculos.ativo_carro';
+        $fields = ' veiculos.*,
+                   mo.nome_modelos';
                    
         return(new Database('veiculos'))->select($where, $and,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);

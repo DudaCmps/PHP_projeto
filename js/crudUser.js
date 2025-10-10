@@ -150,8 +150,7 @@ function updateUser() {
 
             if (response.status == 'success') {
                 
-                alert(response.message || 'Sucesso ao cadastrar.')
-                window.location.href = '../aUser/editarPerfil.php';
+                alert(response.message || 'Sucesso ao cadastrar.');
 
             }else {
                  alert(response.message || 'Erro no cadastro.');

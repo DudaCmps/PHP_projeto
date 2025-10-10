@@ -3,6 +3,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Veiculo;
 
+header('Content-Type: application/json; charset=utf-8'); // define o tipo de retorno
+
 $obCarro = new Veiculo;
 
 //VALIDANDO POST
@@ -13,8 +15,19 @@ if (isset($_POST['modelo'], $_POST['ano_fabricacao'], $_POST['placa'], $_POST['c
     $obCarro->placa = $_POST['placa'];
     $obCarro->categoria = $_POST['categoria'];
 
-    $obCarro->cadastrar();
+    $sucesso = $obCarro->cadastrar();
 
-    header('location: ../admin/index.php?status=success');
+    if (!$sucesso) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Não foi possível cadastrar.'
+        ]);
+    } else {
+        echo json_encode([
+            'status' => 'success'
+        ]);
+    }
     exit;
+
 }
+exit;

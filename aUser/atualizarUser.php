@@ -3,6 +3,8 @@ session_start();
 require __DIR__ . '/../vendor/autoload.php';
 use \App\Entity\Usuario;
 
+header('Content-Type: application/json; charset=utf-8'); // define o tipo de retorno
+
 //consulta
 $obUsuario = Usuario::getUsuario($_POST['id_user']);
 
@@ -57,3 +59,4 @@ echo json_encode([
     'status' => 'error',
     'message' => 'Erro ao atualizar.'
 ]);
+exit;

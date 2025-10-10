@@ -17,12 +17,12 @@ include __DIR__ . '/../config.php';
 
                     <div class="card-body">
 
-        <form method="post" action="cadastrarVeiculo.php">
+        <form method="post">
 
             <div class="mb-3">
                 <label for="modelo" class="form-label">Modelos</label>
-                <select name="modelo" class="form-select">
-                    
+
+                <select id="modelo" name="modelo" class="form-select">
                 <option value="" disabled selected>Selecione uma opção</option>
                     <option value="1">Corolla</option>
                     <option value="2">Yaris</option>
@@ -31,30 +31,36 @@ include __DIR__ . '/../config.php';
                     <option value="5">Fiesta</option>
                     <option value="6">Focus</option>
                 </select>
+                <div id="modeloError" class="text-danger small"></div>
             </div>
-    
 
-            <div class="input-group mb-3">
+            <div class="input-group">
 
                 <label for="placa" class="input-group-text" id="basic-addon1">Placa</label>
-                <input type="text"  name="placa" class="form-control me-3"style="border-radius: 0px 5px 5px 0px" maxlength="10">
+                <input type="text" id="placa" name="placa" class="form-control me-3"style="border-radius: 0px 5px 5px 0px" maxlength="10">
+                <!-- <div id="placaError" class="text-danger small"></div> -->
                 
                 <label for="ano_fabricacao"class="input-group-text" id="basic-addon1" style="border-radius: 5px 0px 0px 5px">Ano de Fabricação</label>
-                <input type="text" class="form-control" placeholder="YYYY" name="ano_fabricacao">
+                <input type="text" id="ano_fabricacao" class="form-control" placeholder="YYYY" name="ano_fabricacao">
+            </div>
+            <div class="d-flex mb-1">
+              <div id="placaError" class="text-danger small" style="margin-right: 572px;"></div>
+              <div id="anoError" class="text-danger small"></div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 mt-3">
                 <label for="categoria" class="form-label">Categoria</label>
-                <select name="categoria" class="form-select">
+                <select id="categoria" name="categoria" class="form-select">
                     <option value="" disabled selected>Selecione uma opção</option>
                     
                     <option value="luxo">Luxo</option>
                     <option value="economico" >Econômico</option>
                     <option value="suv">SUV</option>
                 </select>
+                <div id="categoriaError" class="text-danger small"></div>
             </div>
             
-            <button type="submit" class="btn btn-primary mb-3 mt-2">Enviar</button>
+            <input onclick="cadastrarVeiculo()" type="button" class="btn btn-primary mb-3 mt-2" value="Enviar">
 
         </form>
 </div>
@@ -63,6 +69,9 @@ include __DIR__ . '/../config.php';
 </div>
 </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="../js/crudVeiculo.js"></script>
 
 <!-- FECHAMENTO DA NAV -->
 <?php 
