@@ -42,21 +42,25 @@ if(isset($_POST['id_user'], $_POST['nome'], $_POST['email'], $_POST['telefone'],
     $obUsuario->data_nasc = $_POST['data_nasc'];
     $obUsuario->perfil = $_POST['perfil'];
     // Atualiza banco
-    $obUsuario->atualizar();
+    $sucesso = $obUsuario->atualizar();
 
-    // Atualiza sessão
-    $_SESSION['nome']     = $obUsuario->nome;
-    $_SESSION['email']    = $obUsuario->email;
+    if (!$sucesso) {
+        echo json_encode([
+            'status' => 'error',
+            'message' => 'Erro ao atualizar.'
+        ]);
+        exit;
+       
+    }else {
+        // Atualiza sessão
+        $_SESSION['nome']     = $obUsuario->nome;
+        $_SESSION['email']    = $obUsuario->email;
 
-    echo json_encode([
-        'status' => 'success',
-        'message' => 'Atualizado com sucesso.'
-    ]);
-    exit;
-} 
-
-echo json_encode([
-    'status' => 'error',
-    'message' => 'Erro ao atualizar.'
-]);
-exit;
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Atualizado com sucesso.'
+        ]);
+        exit;
+    }
+    
+}

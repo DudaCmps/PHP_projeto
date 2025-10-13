@@ -130,8 +130,32 @@ function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
 
 //FUNÇÕES DE EDITAR UM USUARIO
 
+// Função para alternar entre os formulários de visualização e edição
+function trocarFormulario(modo) {
+    if (modo === 'editar') {
+      $('#form-visualizar').hide();
+      $('#form-editar').show();
+    } else if (modo === 'visualizar') {
+      $('#form-editar').hide();
+      $('#form-visualizar').show();
+    }
+  }
+  
+// Evento par aos button
+$(document).ready(function () {
+$('#btnEditar').on('click', function () {
+    trocarFormulario('editar');
+});
+
+$('#btnCancelar').on('click', function () {
+    trocarFormulario('visualizar');
+});
+});
+  
+
 function updateUser() {
 
+    console.log("#nome");
     var id_user = $("#id_user").val();
     var perfil = $("#perfil").val();
     var nome = $("#nome").val();
@@ -152,6 +176,14 @@ function updateUser() {
                 
                 alert(response.message || 'Sucesso ao cadastrar.');
 
+                 // Atualiza os campos no formulário de visualização
+                $("#visualizar_nome").val(nome);
+                $("#visualizar_email").val(email);
+                $("#visualizar_telefone").val(telefone);
+                $("#visualizar_cpf").val(cpf);
+                $("#visualizar_data_nasc").val(data_nasc);
+                
+                trocarFormulario('visualizar');
             }else {
                  alert(response.message || 'Erro no cadastro.');
             }

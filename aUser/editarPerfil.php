@@ -12,12 +12,6 @@ include __DIR__.'/../public/header.php';
 //consulta
 $obUsuario = Usuario::getUsuario($_SESSION['id_user']);
 
-$formularioTipo = null;
-
-if (isset($_GET['sinal']) && $_GET['sinal'] == 'editar') {
-  $formularioTipo = $_GET['sinal'];
-}
-
 $estados = [
     'AC'=>'Acre','AL'=>'Alagoas','AP'=>'Amapá','AM'=>'Amazonas','BA'=>'Bahia',
     'CE'=>'Ceará','DF'=>'Distrito Federal','ES'=>'Espírito Santo','GO'=>'Goiás',
@@ -29,6 +23,7 @@ $estados = [
 ];
 ?>
 
+<!-- informações extra -->
 <div style="background-color: #2B323B; border-top:1px solid black;">
       <ul class="d-flex flex-center list-unstyled justify-content-center m-0 ">
         <li class="mx-5">
@@ -50,129 +45,122 @@ $estados = [
 
 <div class="d-flex flex-column flex-grow-1">
   <div class="m-4">
-
-  <?php if (!isset($formularioTipo)) { ?>
     
     <!-- formulario fixo -->
-    <div class="row"  style="height: 636px;">
+    <div class="row" id="form-visualizar" style="height: 636px;">
       <div class="col-12"  style="height: 550px;">
         
         <div class="d-flex justify-content-between" style="height: 35px;">
           <h4>Minha conta</h4>
-          <a href="editarPerfil.php?id=<?=$_SESSION['id_user']?>&sinal=editar" class="btn btn-sm btn-warning mb-2">Editar dados</a>
+          <button id="btnEditar" class="btn btn-sm btn-warning mb-2">Editar dados</button>
         </div>  
         <div class="card h-75" style="background-color:  #2B323B;">
 
           <div class="card-body">
-            
-            <form method="post" action="dadosCliente.php">
-
               <input type="hidden" name="id_user" value="<?=$obUsuario->id_user?>">
               <input type="hidden" name="perfil" value="<?=$obUsuario->perfil?>">
 
               <div class="input-group mb-3">
                 <label for="nome" class="input-group-text">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" required value="<?=$obUsuario->nome?>" disabled>
+                <input type="text" class="form-control" id="visualizar_nome" required value="<?=$obUsuario->nome?>" disabled>
               </div>
 
               <div class="input-group mb-3">
                 <label for="email" class="input-group-text">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required value="<?=$obUsuario->email?>" disabled>
+                <input type="email" class="form-control" id="visualizar_email" required value="<?=$obUsuario->email?>" disabled>
               </div>
 
               <div class="input-group mb-3">
                 <label for="telefone" class="input-group-text">Telefone</label>
-                <input type="text" class="form-control me-3" id="telefone" name="telefone"
-                value="<?=$obUsuario->telefone?>" required disabled>
+                <input type="text" class="form-control me-3" 
+                value="<?=$obUsuario->telefone?>" id="visualizar_telefone" required disabled>
 
                 <label for="cpf" class="input-group-text">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" value="<?=$obUsuario->cpf?>" required maxlength="14" disabled>
+                <input type="text" class="form-control" id="visualizar_cpf" value="<?=$obUsuario->cpf?>" required maxlength="14" disabled>
               </div>
 
               <div class="input-group mb-3">
                 <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required value="<?=$obUsuario->data_nasc?>" disabled>
+                <input type="date" class="form-control" id="visualizar_data_nasc" required value="<?=$obUsuario->data_nasc?>" disabled>
               </div>
 
               <div class="input-group mb-3">
                 <label for="senha" class="input-group-text">Senha</label>
-                <input type="password" class="form-control" id="senha" name="senha" placeholder="********" disabled>
+                <input type="password" class="form-control" placeholder="********" disabled>
               </div>
-            </form>
           </div>
 
         </div>
       </div>
     </div>
-
-  <?php } elseif (isset($formularioTipo) && $formularioTipo == 'editar') { ?>
 
     <!-- formulario de edição -->
-  <div class="row" style="height: 636px;">
-      <div class="col-12"  style="height: 550px;">
-        
-        <div class="d-flex justify-content-between" style="height: 35px;">
-          <h4>Minha conta</h4>
-          <!-- <a disable class="btn btn-sm btn-warning mb-2">TEMPORARIO</a> -->
+    <div class="row" id="form-editar" style="height: 636px; display: none;">
+        <div class="col-12"  style="height: 550px;">
+          
+          <div class="d-flex justify-content-between" style="height: 35px;">
+            <h4>Minha conta</h4>
+            <!-- <a disable class="btn btn-sm btn-warning mb-2">TEMPORARIO</a> -->
 
-        </div>  
-        <div class="card h-75" style="background-color:  #2B323B;">
+          </div>  
+          <div class="card h-75" style="background-color:  #2B323B;">
 
-          <div class="card-body">
-            
-            <form method="post">
+            <div class="card-body">
+              
+              <form method="post">
 
-              <input type="hidden" name="id_user" id="id_user" value="<?=$obUsuario->id_user?>">
-              <input type="hidden" name="perfil" id="perfil" value="<?=$obUsuario->perfil?>">
+                <input type="hidden" name="id_user" id="id_user" value="<?=$obUsuario->id_user?>">
+                <input type="hidden" name="perfil" id="perfil" value="<?=$obUsuario->perfil?>">
 
-              <div class="input-group mb-3">
-                <label for="nome" class="input-group-text">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" required value="<?=$obUsuario->nome?>">
-              </div>
+                <div class="input-group mb-3">
+                  <label for="nome" class="input-group-text">Nome</label>
+                  <input type="text" class="form-control" id="nome" name="nome" required value="<?=$obUsuario->nome?>">
+                </div>
 
-              <div class="input-group mb-3">
-                <label for="email" class="input-group-text">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required value="<?=$obUsuario->email?>">
-              </div>
+                <div class="input-group mb-3">
+                  <label for="email" class="input-group-text">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required value="<?=$obUsuario->email?>">
+                </div>
 
-              <div class="input-group mb-3">
-                <label for="telefone" class="input-group-text">Telefone</label>
-                <input type="text" class="form-control me-3" id="telefone" name="telefone"
-                value="<?=$obUsuario->telefone?>" required>
+                <div class="input-group mb-3">
+                  <label for="telefone" class="input-group-text">Telefone</label>
+                  <input type="text" class="form-control me-3" id="telefone" name="telefone"
+                  value="<?=$obUsuario->telefone?>" required>
 
-                <label for="cpf" class="input-group-text">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" value="<?=$obUsuario->cpf?>" required maxlength="14">
-              </div>
+                  <label for="cpf" class="input-group-text">CPF</label>
+                  <input type="text" class="form-control" id="cpf" name="cpf" value="<?=$obUsuario->cpf?>" required maxlength="14">
+                </div>
 
-              <div class="input-group mb-3">
-                <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nasc" name="data_nasc" required value="<?=$obUsuario->data_nasc?>">
-              </div>
+                <div class="input-group mb-3">
+                  <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
+                  <input type="date" class="form-control" id="data_nasc" name="data_nasc" required value="<?=$obUsuario->data_nasc?>">
+                </div>
 
-              <div class="input-group mb-3">
-                <label for="senha" class="input-group-text">Senha</label>
-                <input type="password" class="form-control" id="senha" name="senha" placeholder="********">
-              </div>
-              <div class="form-text pb-3 text-white">Qualquer informação alterada deverá ser salva antes de sair da página.</div>
+                <div class="input-group mb-3">
+                  <label for="senha" class="input-group-text">Senha</label>
+                  <input type="password" class="form-control" id="senha" name="senha" placeholder="********">
+                </div>
+                <div class="form-text pb-3 text-white">Qualquer informação alterada deverá ser salva antes de sair da página.</div>
 
-              <input onclick="updateUser()" type="button" class="btn btn-sm btn-outline-success me-1" value="Salvar">
+                <input onclick="updateUser()" type="button" class="btn btn-sm btn-outline-success me-1" value="Salvar">
 
-              <a href="editarPerfil.php" type="button" class="btn btn-sm btn-outline-danger">Cancelar</a>
+                <button id="btnCancelar" type="button" class="btn btn-sm btn-outline-danger">Cancelar</button>
 
-            </form>
+              </form>
+            </div>
+
           </div>
-
         </div>
       </div>
+
+
     </div>
 
-    <?php } ?>
   </div>
+
 </div>
 
 </div>
-</div>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../js/crudUser.js"></script>

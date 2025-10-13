@@ -16,10 +16,14 @@
     <style>
         .dropdown-item:hover {
         background-color: #2B323B;
+        
         }
 
         .fundo {
          background-color:rgba(43, 50, 59, 0.25);    
+        }
+        .dropdown-menu {
+         background-color:#1E2329;
         }
 
        
@@ -55,46 +59,54 @@
         <div  style="display: none;" id="conta-dropdown">
             <div class="d-flex dropdown">
                 <div class="d-flex justify-content-center align-items-center me-4 bg-secondary rounded-circle" style="width:42px; height:42px;" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="d-flex justify-content-center align-items-center rounded-circle text-black bg-warning avatar" style="width:32px; height:32px; font-weight:800;font-size:16px;"></div>
-                </div>
-            
+                    <div class="d-flex justify-content-center align-items-center rounded-circle text-black bg-warning avatar" style="width:32px; height:32px; font-weight:800;font-size:16px;">
+                    </div>
+                </div>  
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item text-white small" href="/locafast/aUser/editarPerfil.php">Minha Conta</a></li>
+                    <li><a class="dropdown-item text-white small" href="/locafast/clientes/reservasCliente.php">Reservas</a></li>
+                    <li><a class="dropdown-item text-white small" href="/locafast/clientes/alugueisCliente.php">Alugueis</a></li>
+                    <li><hr class="dropdown-divider bg-secondary"></li>
+                    <li><a class="dropdown-item text-white small" href="/locafast/auth/logout.php" class="dropdown-item">Sair</a></li>
+                </ul>
             </div>
         </div>
 
     </div>
 
-    <!-- Menu offcanvas -->
+    <!-- Menu de memes -->
     <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasExample" style="width: 280px;top: 102px !important;">
 
-    <div class="offcanvas-body">
+        <div class="offcanvas-body">
 
-    <ul class="nav flex-column">
-      <li class="nav-item">
-          <a class="nav-link text-white" href="#" style="font-size: 14px;">
-              Inicio
-          </a>
-      </li>
+        <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link text-white" href="#" style="font-size: 14px;">
+                Inicio
+            </a>
+        </li>
 
-      <li class="nav-item">
-          <a class="nav-link text-white" href="#" style="font-size: 14px;">
-             Carros
-          </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="#" style="font-size: 14px;">
+                Carros
+            </a>
+        </li>
 
-      <li class="nav-item">
-          <a class="nav-link text-white" href="#" style="font-size: 14px;">
-             Reservas
-          </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="#" style="font-size: 14px;">
+                Reservas
+            </a>
+        </li>
 
-      <li class="nav-item">
-          <a href="auth/logout.php" class="dropdown-item">Sair</a>
-      </li>
-      
-    </ul>
-  </div>
+        <li class="nav-item">
+            <a href="auth/logout.php" class="dropdown-item">Sair</a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+
+</div>
 </div>
 
-</div>
-</div>
-<script src="js/checkLogin.js"></script>
+
