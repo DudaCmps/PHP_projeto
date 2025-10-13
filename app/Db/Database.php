@@ -29,7 +29,7 @@ class Database {
      * Senha do usuário do banco de dados
      * @var string
      */
-    const PASS = '1234';
+    const PASS = '';
 
     /**
      * Nome da tabela atual em uso
