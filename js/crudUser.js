@@ -191,3 +191,21 @@ function updateUser() {
      });
 
 }
+
+
+//FUNÇÕES DE EDITAR UM USUARIO
+
+function showAdress(){  
+
+    var botao = document.getElementById('formularioEndereco');
+    var botaoAdress = document.getElementById('btnAdress');
+
+    if (botao.style.display === 'none') {
+        botao.style.display = 'block';
+        document.querySelector('#btnAdress').textContent = 'Não cadastrar endereço';
+    }else{
+        botao.style.display = 'none';
+        document.querySelector('#btnAdress').textContent = 'Adicionar endereço ao cliente';
+
+    }
+}
