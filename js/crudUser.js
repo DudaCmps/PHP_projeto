@@ -1,3 +1,11 @@
+$('input, select').on('input change', function () {
+    const id = $(this).attr('id');
+    const errorId = `#${id}-error`;
+    
+    $(this).removeClass('border-danger');
+    $(errorId).html('');
+});
+
 //FUNÇÕES LOGIN E CADASTRO
 
 function loginUser(){
@@ -48,79 +56,117 @@ function validateLogin(email, senha) {
     return valid;
 }
 
-function registerUser(){
+function registerUser() {
+    var nome = $("#nome").val();
+    var email = $("#email").val(); // Certifique-se de que exista no form
+    var telefone = $("#telefone").val();
+    var cpf = $("#cpf").val();
+    var data_nasc = $("#data_nasc").val();
+    var senha = $("#senha").val();
 
-   var nome = $("#nome").val();
-   var email = $("#email").val();
-   var telefone = $("#telefone").val();
-   var cpf = $("#cpf").val();
-   var data_nasc = $("#data_nasc").val();
-   var senha = $("#senha").val();
+    var endereco = document.getElementById('formularioEndereco');
 
-   if (!validateRegister(nome,email, telefone, data_nasc, cpf,  senha)) {
-        return false;
+    // Validação básica
+    if (!validateRegister(nome, email, telefone, data_nasc, cpf, senha)) return false;
+
+    var data = { nome, email, telefone, data_nasc, cpf, senha };
+
+    if (endereco.style.display !== 'none') {
+        var cep = $("#cep").val();
+        var cidade = $("#cidade").val();
+        var uf = $("#uf").val();
+        var numero = $("#numero").val();
+        var bairro = $("#bairro").val();
+        var logradouro = $("#logradouro").val();
+        var complemento = $("#complemento").val();
+
+        if (!validateAdress(cep, cidade, uf, numero, bairro, logradouro, complemento)) return false;
+
+        // Adiciona os dados do endereço ao objeto data
+        Object.assign(data, { cep, cidade, uf, numero, bairro, logradouro, complemento });
     }
 
     $.ajax({
-        method: "post",
-        url: "registerProcess.php",
-        data: {nome:nome, email:email, telefone:telefone,data_nasc:data_nasc , cpf:cpf, senha:senha},
+        method: "POST",
+        url: "../auth/registerProcess.php",
+        data: data,
         dataType: "json",
         success: function (response) {
-
-            if (response.status == 'success') {
-                window.location.href = '../auth/loginPage.php';
-                
-            }else {
+            if (response.status === 'success') {
+                alert(response.message || 'Cadastro realizado com sucesso!');
+                $('#clienteNovoModal').modal('hide');
+                $('#nome, #email, #telefone, #cpf, #data_nasc, #senha, #cep,#cidade,#uf,#numero,#bairro,#logradouro,#complemento').val('');
+            } else {
                 alert(response.message || 'Erro no cadastro.');
             }
         },
+        error: function () {
+            alert('Erro na comunicação com o servidor.');
+        }
     });
 }
 
 function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
     let valid = true;
 
-    if (nome == "") {
-        $("#nomeError").html("Digite seu nome");
+    // Nome
+    if (nome.trim() === "") {
+        $("#nome-error").html("Insira um nome válido");
+        $("#nome").addClass("border-danger");
         valid = false;
     } else {
-        $("#nomeError").html("");
+        $("#nome-error").html("");
+        $("#nome").removeClass("border-danger");
     }
 
+    //Email
     if (email == "") {
-        $("#emailError").html("Digite seu E-mail");
+        $("#email-error").html("Insira um email válido");
+        $("#email").addClass("border-danger");
         valid = false;
     } else {
-        $("#emailError").html("");
+        $("#email-error").html("");
+        $("#email").removeClass("border-danger");
     }
 
+    //Telefone
     if (telefone == "") {
-        $("#telefoneError").html("Digite seu telefone");
+        $("#telefone-error").html("Insira um telefone válido");
+        $("#telefone").addClass("border-danger");
         valid = false;
     } else {
-        $("#telefoneError").html("");
+        $("#telefone-error").html("");
+        $("#telefone").removeClass("border-danger");
     }
 
+    //Telefone
     if (data_nasc == "") {
-        $("#data_nascError").html("Digite sua data de nascimento");
+        $("#data_nasc-error").html("Digite sua data de nascimento");
+        $("#data_nasc").addClass("border-danger");
         valid = false;
     } else {
-        $("#data_nascError").html("");
+        $("#data_nasc-error").html("");
+        $("#data_nasc").removeClass("border-danger");
     }
 
+    //CPF
     if (cpf == "") {
-        $("#cpfError").html("Digite seu CPF");
+        $("#cpf-error").html("Digite seu CPF");
+        $("#cpf").addClass("border-danger");
         valid = false;
     } else {
-        $("#cpfError").html("");
+        $("#cpf-error").html("");
+        $("#cpf").removeClass("border-danger");
     }
 
+    //Senha
     if (senha == "") {
-        $("#senhaError").html("Digite sua senha");
+        $("#senha-error").html("Digite sua senha");
+        $("#senha").addClass("border-danger");
         valid = false;
     } else {
-        $("#senhaError").html("");
+        $("#senha-error").html("");
+        $("#senha").removeClass("border-danger");
     }
 
     return valid;
@@ -141,7 +187,7 @@ function trocarFormulario(modo) {
     }
   }
   
-// Evento par aos button
+// Evento para os button
 $(document).ready(function () {
 $('#btnEditar').on('click', function () {
     trocarFormulario('editar');
@@ -192,10 +238,9 @@ function updateUser() {
 
 }
 
+//FUNÇÕES DE ENDEREÇO
 
-//FUNÇÕES DE EDITAR UM USUARIO
-
-function showAdress(){  
+function showAdress(){
 
     var botao = document.getElementById('formularioEndereco');
     var botaoAdress = document.getElementById('btnAdress');
@@ -208,4 +253,81 @@ function showAdress(){
         document.querySelector('#btnAdress').textContent = 'Adicionar endereço ao cliente';
 
     }
+}
+
+function validateAdress(cep, cidade, uf, numero, bairro, logradouro, complemento) {
+    let valid = true;
+
+    // CEP
+    if (cep.trim() === "") {
+        $("#cep-error").html("Insira um CEP válido");
+        $("#cep").addClass("border-danger");
+        valid = false;
+    } else {
+        $("#cep-error").html("");
+        $("#cep").removeClass("border-danger");
+    }
+
+    // Cidade
+    if (cidade.trim() === "") {
+        $("#cidade-error").html("Insira um cidade válido");
+        $("#cidade").addClass("border-danger");
+        valid = false;
+    } else {
+        $("#cidade-error").html("");
+        $("#cidade").removeClass("border-danger");
+    }
+    
+    // UF
+    if (uf === null) {
+        $("#uf-error").html("Selecione uma opção");
+        $("#uf").addClass("border-danger");
+        valid = false;
+
+      } else {
+        $("#uf-error").html("");
+        $("#uf").removeClass("border-danger");
+      }
+
+    // Número
+    if (numero.trim() === "") {
+        $("#numero-error").html("Insira um número válido");
+        $("#numero").addClass("border-danger");
+        valid = false;
+      } else {
+        $("#numero-error").html("");
+        $("#numero").removeClass("border-danger");
+      }
+
+      // Bairro
+      if (bairro.trim() === "") {
+        $("#bairro-error").html("Insira um endereço válido");
+        $("#bairro").addClass("border-danger");
+        valid = false;
+      } else {
+        $("#bairro-error").html("");
+        $("#bairro").removeClass("border-danger");
+      }
+
+      // Logradouro
+      if (logradouro.trim() === "") {
+        $("#logradouro-error").html("Insira um endereço válido");
+        $("#logradouro").addClass("border-danger");
+        valid = false;
+      } else {
+        $("#logradouro-error").html("");
+        $("#logradouro").removeClass("border-danger");
+      }
+
+      // Complemento
+      if (complemento.trim() === "") {
+        $("#complemento-error").html("Insira um endereço válido");
+        $("#complemento").addClass("border-danger");
+        valid = false;
+      } else {
+        $("#complemento-error").html("");
+        $("#complemento").removeClass("border-danger");
+      }
+      
+    return valid;
 }

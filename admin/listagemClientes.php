@@ -86,7 +86,7 @@ $resultados = !empty($resultados) ? $resultados : '
 <!-- BOTAO ADICIONA CLIENTE -->
 <div class=" d-flex justify-content-end pe-3">
     <button data-bs-toggle="modal"
-    data-bs-target="#clienteNovoModal" class="btn btn-sm btn-outline-success">Adicionar novo cliente</button>
+    data-bs-target="#clienteNovoModal" class="btn btn-sm btn-outline-info">Adicionar novo cliente</button>
 </div>
 
 <!-- MODAL ADICIONAR NOVO CLIENTE -->
@@ -99,42 +99,61 @@ $resultados = !empty($resultados) ? $resultados : '
       </div>
       <div class="modal-body">
       <form method="post">
+
+        <div id="nome-error" class="text-danger mb-1 small"></div>
         <div class="input-group mb-3">
-        <label for="nome" class="input-group-text" id="basic-addon1">Nome</label>
-        <input type="text" class="form-control" id="nome" name="nome">
+            <label for="nome" class="input-group-text" id="basic-addon1">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do cliente">
         </div>
 
+        <div id="email-error" class="text-danger mb-1 small"></div>
         <div class="input-group mb-3">
-        <label for="telefone" class="input-group-text">Telefone</label>
-        <input type="text" class="form-control me-3" id="telefone" placeholder="(00) 00000-0000"
-            style="border-radius: 0px 5px 5px 0px" name="telefone" >
+                <label for="email" class="input-group-text">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="exemplo@gmail.com">
+              </div>
+        
+        <div class="d-flex mb-1 small">
+            <div id="telefone-error" class="text-danger" style="width: 53%;"></div>
+            <div id="cpf-error" class="text-danger" style="width: 47%;"></div>
+        </div>
+        <div class="input-group mb-3">
+            <div id="telefone-error" class="text-danger mb-1 small"></div>
+            <label for="telefone" class="input-group-text">Telefone</label>
+            <input type="text" class="form-control me-3" id="telefone" placeholder="(00) 00000-0000" style="border-radius: 0px 5px 5px 0px" name="telefone" >
 
-        <label for="cpf" class="input-group-text" style="border-radius: 5px 0px 0px 5px">CPF</label>
-        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
+            <label for="cpf" class="input-group-text" style="border-radius: 5px 0px 0px 5px">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
         </div>
 
+        <div id="data_nasc-error" class="text-danger mb-1 small"></div>
         <div class="input-group mb-3">
-        <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
-        <input type="date" class="form-control" id="data_nasc" name="data_nasc" max="2005" >
+            <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
+            <input type="date" class="form-control" id="data_nasc" name="data_nasc" max="2005" >
         </div>
 
-        <a onclick="showAdress()" id="btnAdress" class="btn btn-sm btn-primary small mb-2">Adicionar endereço ao cliente</a>
+        <a onclick="showAdress()" id="btnAdress" class="btn btn-sm btn-secondary small mb-2">Adicionar endereço ao cliente</a>
         
         <div id="formularioEndereco" style="display:none;">
-            <label class="form-label">Endereço</label>
+            <h4>Endereço</h4>
 
+            <div id="cep-error" class="text-danger mb-1 small"></div>
             <div class="input-group mb-3">
             <label for="cep" class="input-group-text">CEP</label>
             <input type="text" class="form-control" id="cep" name="cep" placeholder="00000-000" maxlength="8">
             </div>
 
+            <div class="d-flex mb-1 small">
+                <div id="cidade-error" class="text-danger" style="width: 30%;"></div>
+                <div id="uf-error" class="text-danger" style="width: 35%;"></div>
+                <div id="numero-error" class="text-danger" style="width: 30%;"></div>
+            </div>
             <div class="input-group mb-3">
             <label for="cidade" class="input-group-text">Cidade</label>
             <input type="text" class="form-control me-3" id="cidade" name="cidade" style="border-radius: 0px 5px 5px 0px">
 
-            <label for="estado" class="input-group-text" style="border-radius: 5px 0px 0px 5px; ">Estado</label>
-            <select class="form-select me-3" id="estado" name="estado" style="border-radius: 0px 5px 5px 0px">
-                <option value="">Selecione</option>
+            <label for="uf" class="input-group-text" style="border-radius: 5px 0px 0px 5px; ">Estado</label>
+            <select class="form-select me-3" id="uf" name="uf" style="border-radius: 0px 5px 5px 0px">
+            <option value="" hidden selected disabled>Selecione</option>
                 <?php
                 $estados = [
                     'AC'=>'Acre','AL'=>'Alagoas','AP'=>'Amapá','AM'=>'Amazonas','BA'=>'Bahia',
@@ -157,6 +176,10 @@ $resultados = !empty($resultados) ? $resultados : '
             <input type="text" class="form-control" id="numero" name="numero">
             </div>
 
+            <div class="d-flex mb-1 small">
+                <div id="bairro-error" class="text-danger" style="width: 49%;"></div>
+                <div id="logradouro-error" class="text-danger" style="width: 51%;"></div>
+            </div>
             <div class="input-group mb-3">
             <label for="bairro" class="input-group-text">Bairro</label>
             <input type="text" class="form-control me-3" id="bairro" name="bairro">
@@ -165,6 +188,7 @@ $resultados = !empty($resultados) ? $resultados : '
             <input type="text" class="form-control" id="logradouro" name="logradouro">
             </div>
 
+            <div id="complemento-error" class="text-danger mb-1 small"></div>
             <div class="input-group mb-3">
             <label for="complemento" class="input-group-text">Complemento</label>
             <input type="text" class="form-control" id="complemento" name="complemento">
@@ -175,7 +199,7 @@ $resultados = !empty($resultados) ? $resultados : '
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
-        <input onclick="editarVeiculo()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
+        <input onclick="registerUser()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
       </div>
     </div>
   </div>
@@ -220,12 +244,3 @@ $resultados = !empty($resultados) ? $resultados : '
 <?php 
 include __DIR__.'/../includes/footer.php';
 ?>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (el) {
-        new coreui.Tooltip(el);
-    });
-});
-</script>

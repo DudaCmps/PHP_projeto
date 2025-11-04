@@ -22,13 +22,13 @@
 
                 <form id="formRegister" method="POST">
 
-                <div id="nomeError" class="text-danger mb-1"></div>
+                <div id="nome-error" class="text-danger mb-1"></div>
                 <div class="input-group mb-3">
                 <label for="nome" class="input-group-text">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome"  required placeholder="Nome Completo">
                 </div>
 
-              <div id="emailError" class="text-danger mb-1"></div>
+              <div id="email-error" class="text-danger mb-1"></div>
               <div class="input-group mb-3">
                 <label for="email" class="input-group-text" id="basic-addon1">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required placeholder="exemplo@gmail.com">
@@ -36,8 +36,8 @@
 
               
               <div class="d-flex mb-1">
-              <div id="telefoneError" class="text-danger" style="margin-right: 270px;"></div>
-              <div id="cpfError" class="text-danger"></div>
+              <div id="telefone-error" class="text-danger" style="margin-right: 270px;"></div>
+              <div id="cpf-error" class="text-danger"></div>
               </div>
               <div class="input-group mb-3">
 
@@ -49,13 +49,13 @@
                 
               </div>
 
-              <div id="data_nascError" class="text-danger mb-1"></div>
+              <div id="data_nasc-error" class="text-danger mb-1"></div>
               <div class="input-group mb-3">
                 <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
                 <input type="date" class="form-control" id="data_nasc" name="data_nasc">
               </div>
 
-              <div id="senhaError" class="text-danger mb-1"></div>
+              <div id="senha-error" class="text-danger mb-1"></div>
               <div class="input-group mb-3">
                 <label for="senha" class="input-group-text" id="basic-addon1">Senha</label>
                 <input type="password" class="form-control" id="senha" name="senha" placeholder="********"  required>

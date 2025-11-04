@@ -52,17 +52,12 @@ function validateCadastro(modelo,placa, ano_fabricacao, categoria) {
 
     return valid;
 }
-
-//-------------------------------------------------
-
-//FUNÇÕES DE LISTAR VEICULO
-
 //-------------------------------------------------
 
 //FUNÇÕES DE EDITAR VEICULO
 
 function editarVeiculo() {
-
+console.log('morte');
     var id_carro = $("#id_carro").val();
     var modelo = $("#modelo").val();
     var placa = $("#placa").val();
