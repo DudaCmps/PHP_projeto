@@ -182,7 +182,7 @@ date_default_timezone_set('America/Sao_Paulo');
         <div class="dropdown">
             <button class="caixaUser d-flex align-items-center border-0 bg-transparent px-2 py-1"
                     type="button"
-                    data-bs-toggle="dropdown"
+                    data-coreui-toggle="dropdown"
                     aria-expanded="false">
             
             <!-- Avatar -->

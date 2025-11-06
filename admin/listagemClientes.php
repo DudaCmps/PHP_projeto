@@ -2,72 +2,6 @@
 include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
-
-$resultados = '';
-
-foreach ($usuarios as $usuario) {
-    
-    if ($usuario->ativo_usuario == 1) {
-        $botao = '<a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
-                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
-                                <i class="fa-solid fa-ban"></i>
-                            </button>
-                        </a>';
-        $ativo = '<span class="status status-success">Sim</span>';
-    }else {
-        $botao = '<a href="inativarUsuario.php?id_user='.$usuario->id_user.'">
-                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
-                                <i class="cil-check-circle"></i>
-                            </button>
-                        </a>';
-        
-        $ativo = '<span class="status status-warning">Não</span>';
-    }
-
-    if ($usuario->perfil == 'cliente') {
-        $resultados .= '
-            <tr>
-                <td>'.$usuario->id_user.'</td>
-                <td class="text-center">'.$usuario->nome.'</td>
-                <td class="text-center">'.$usuario->cpf.'</td>
-                <td class="text-center">'.date('d/m/Y', strtotime($usuario->data_nasc)).'</td>
-                <td class="text-center">'.$ativo.'</td>
-                <td class="text-center">'.$usuario->telefone.'</td> 
-                <td class="text-center">
-                    <a href="editarCliente.php?id_user='.$usuario->id_user.'">
-                        <button type="button" class="btn btn-sm me-1 btn-primary" data-coreui-toggle="tooltip" title="Editar">
-                            <i style="color:black;" class="fa-regular fa-pen-to-square"></i>
-                        </button>
-                    </a>
-
-                    <a href="../clientes/listagemHistorico.php?id_user='.$usuario->id_user.'">
-                        <button type="button" class="btn btn-sm btn-light me-1" data-coreui-toggle="tooltip" title="Histórico">
-                            <i style="color:black;" class="cil-description"></i>
-                        </button>
-                    </a>
-
-                    <a href="../endereços/listagemEnderecos.php?id_user='.$usuario->id_user.'">
-                        <button type="button" class="btn btn-sm btn-info me-1" data-coreui-toggle="tooltip" title="Endereços">
-                            <i style="color:black;" class="cil-house"></i>
-                        </button>
-                    </a>
-                    
-                    '.$botao.'
-
-                    <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirCliente.php?id_user='.$usuario->id_user.'">
-                        <button type="button" class="btn btn-sm me-1 btn-danger" data-coreui-toggle="tooltip" title="Excluir">
-                            <i class="cil-trash"></i>
-                        </button>
-                    </a>
-                </td>
-            </tr>';
-    }
-}                 
-
-$resultados = !empty($resultados) ? $resultados : '
-    <tr>
-        <td colspan="7" class="registros text-center">Sem registros</td>
-    </tr>';
 ?>
 
 <div class="d-flex flex-column flex-grow-1">
@@ -85,17 +19,17 @@ $resultados = !empty($resultados) ? $resultados : '
 
 <!-- BOTAO ADICIONA CLIENTE -->
 <div class=" d-flex justify-content-end pe-3">
-    <button data-bs-toggle="modal"
-    data-bs-target="#clienteNovoModal" class="btn btn-sm btn-outline-info">Adicionar novo cliente</button>
+    <button data-coreui-toggle="modal"
+    data-coreui-target="#clienteNovoModal" class="btn btn-sm btn-outline-info">Adicionar novo cliente</button>
 </div>
 
 <!-- MODAL ADICIONAR NOVO CLIENTE -->
-<div class="modal fade" id="clienteNovoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="clienteNovoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastrar novo cliente</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       <form method="post">
@@ -117,7 +51,6 @@ $resultados = !empty($resultados) ? $resultados : '
             <div id="cpf-error" class="text-danger" style="width: 47%;"></div>
         </div>
         <div class="input-group mb-3">
-            <div id="telefone-error" class="text-danger mb-1 small"></div>
             <label for="telefone" class="input-group-text">Telefone</label>
             <input type="text" class="form-control me-3" id="telefone" placeholder="(00) 00000-0000" style="border-radius: 0px 5px 5px 0px" name="telefone" >
 
@@ -128,7 +61,10 @@ $resultados = !empty($resultados) ? $resultados : '
         <div id="data_nasc-error" class="text-danger mb-1 small"></div>
         <div class="input-group mb-3">
             <label for="data_nasc" class="input-group-text">Data de Nascimento</label>
-            <input type="date" class="form-control" id="data_nasc" name="data_nasc" max="2005" >
+            <input type="date" class="form-control me-3" id="data_nasc"  style="border-radius: 0px 5px 5px 0px" name="data_nasc" max="2005">
+
+            <label for="senha" class="input-group-text" style="border-radius: 5px 0px 0px 5px">Senha</label>
+            <input type="text" class="form-control" id="senha" name="senha" placeholder="*******">
         </div>
 
         <a onclick="showAdress()" id="btnAdress" class="btn btn-sm btn-secondary small mb-2">Adicionar endereço ao cliente</a>
@@ -198,13 +134,64 @@ $resultados = !empty($resultados) ? $resultados : '
         </form>
     </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
         <input onclick="registerUser()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
       </div>
     </div>
   </div>
 </div>
 <!--FIM MODAL ADICIONAR NOVO CLIENTE -->
+
+<!-- MODAL MOSTRAR ENDEREÇO -->
+<div class="modal fade" id="clienteEndereco" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Endereços cadastrados</h1>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+      </div>
+    <div class="modal-body">
+        <div id="conteudoEndereco">
+
+        </div>
+    </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODAL MOSTRAR ENDEREÇO -->
+
+<!-- MODAL MOSTRAR HISTORICO -->
+<div class="modal fade" id="clienteHistorico" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Histórico completo</h1>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+      </div>
+    <div class="modal-body">
+        <div id="conteudoHistorico"></div>
+    </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODAL MOSTRAR HISTORICO -->
+
+<!-- MODAL EDITAR CLIENTE -->
+<div class="modal fade" id="clienteEditar" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar</h1>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+      </div>
+    <div class="modal-body">
+        <div id="conteudoEditar"></div>
+    </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODAL EDITAR CLIENTE -->
+
 <div class="example">
 <div class="tab-content rounded-bottom">
 <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
@@ -223,8 +210,12 @@ $resultados = !empty($resultados) ? $resultados : '
         </tr>
     </thead>
 
-    <tbody>
+    <!-- <tbody>
         <?=$resultados?>
+    </tbody> -->
+
+    <tbody id="listaClientes">
+        <tr><td colspan="7" class="text-center">Carregando...</td></tr>
     </tbody>
 
     </table>

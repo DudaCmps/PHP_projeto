@@ -3,9 +3,13 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use \App\Entity\Usuario;
 
+header('Content-Type: application/json');
+
 if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
 
-    header('location: listagemClientes.php?status=error');
+    echo json_encode([
+        'status' => 'error'
+    ]);
     exit;
 }
 
@@ -15,13 +19,19 @@ $obUsuario = Usuario::getUsuario($_GET['id_user']);
 //Valida
 if (!$obUsuario instanceof Usuario) {
 
-    header('location: listagemClientes.php?status=error');
+    echo json_encode([
+        'status' => 'error'
+    ]);
     exit;
 }
 
-$obUsuario->excluir();
+if ($obUsuario->excluir()) {
+    echo json_encode([
+        'status' => 'success'
+    ]);
+    exit;
+}
 
-header('location: listagemClientes.php?status=success');
 exit;
 
 

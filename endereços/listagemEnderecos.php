@@ -7,14 +7,9 @@ use \App\Entity\Endereco;
 
 // verificando o usuario
 if (isset($_SESSION['perfil']) && $_SESSION['perfil'] === 'admin') {
-    include __DIR__.'/../includes/navbarAdmin.php';
-    
     //consulta
     $client = Usuario::getUsuario($_GET['id_user']);
-
 } else {
-    include __DIR__.'/../includes/navbarCliente.php';
-
     //consulta
     $client = Usuario::getUsuario($_SESSION['id_user']);
 }
@@ -101,17 +96,3 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
 </div>
 </div>
-
-<!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (el) {
-        new coreui.Tooltip(el);
-    });
-});
-</script>

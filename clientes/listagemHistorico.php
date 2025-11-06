@@ -1,15 +1,12 @@
 <?php 
 include __DIR__.'/../includes/iniciaSessao.php';
-
-include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
-
 if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
-
     header('location: ../index2.php?status=error');
     exit;
 }
+
 use \App\Entity\Usuario;
 use \App\Entity\Reserva;
 
@@ -26,7 +23,8 @@ $obHistorico = Reserva::getReservaUsuario($_GET['id_user']);
 
 $resultados = '';
 foreach ($obHistorico as $historico) {
-
+    
+echo '<script>alert("'.$historico->valor.'");</script>';
     $resultados .= '<tr>
                         <td>'.$historico->id_reserva.'</td>
                         <td class="text-center">'.date('d/m/Y', strtotime($historico->data_inicio)).' - '.date('d/m/Y', strtotime($historico->data_final)).'</td>
@@ -42,15 +40,6 @@ $resultados = !empty($resultados) ? $resultados : '
                                                 </tr>
                                                 ';
 ?>
- 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-coreui-toggle="tooltip"]'));
-    tooltipTriggerList.forEach(function (el) {
-        new coreui.Tooltip(el);
-    });
-});
-</script>
 
 <div class="d-flex flex-column flex-grow-1">
 
@@ -94,8 +83,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </div>
 </div>
-
-<!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>

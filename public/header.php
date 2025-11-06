@@ -44,7 +44,7 @@
 
         <div id="header-logo">
       
-            <h1 data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">LocaFast</h1>
+            <h1 data-coreui-toggle="offcanvas" data-coreui-target="#offcanvasExample">LocaFast</h1>
         </div>
         
         <button onclick="window.location.href='./auth/loginPage.php'" id="login-button"  style="display: none;">
@@ -58,7 +58,7 @@
 
         <div  style="display: none;" id="conta-dropdown">
             <div class="d-flex dropdown">
-                <div class="d-flex justify-content-center align-items-center me-4 bg-secondary rounded-circle" style="width:42px; height:42px;" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="d-flex justify-content-center align-items-center me-4 bg-secondary rounded-circle" style="width:42px; height:42px;" data-coreui-toggle="dropdown" aria-expanded="false">
                     <div class="d-flex justify-content-center align-items-center rounded-circle text-black bg-warning avatar" style="width:32px; height:32px; font-weight:800;font-size:16px;">
                     </div>
                 </div>  
@@ -75,7 +75,7 @@
     </div>
 
     <!-- Menu de memes -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" data-bs-backdrop="false" id="offcanvasExample" style="width: 280px;top: 102px !important;">
+    <div class="offcanvas offcanvas-start" tabindex="-1" data-coreui-backdrop="false" id="offcanvasExample" style="width: 280px;top: 102px !important;">
 
         <div class="offcanvas-body">
 

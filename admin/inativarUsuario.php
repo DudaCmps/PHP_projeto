@@ -1,12 +1,12 @@
 <?php 
 require __DIR__ . '/../vendor/autoload.php';
 include __DIR__.'/../includes/iniciaSessao.php';
-include __DIR__.'/../includes/verificaAdmin.php';
 include __DIR__.'/../config.php';
 use \App\Entity\Usuario;
 use \App\Entity\Aluguel;
 
-// Pega o id do usuário pela URL
+header('Content-Type: application/json');
+    
 $id_user = $_GET['id_user'] ?? null;
 
 $obUsuario = Usuario::getUsuario($id_user);
@@ -23,7 +23,17 @@ if ($obUsuario instanceof Usuario) {
         //Se estiver ativado, desativa
         $obUsuario->ativo_usuario = 0;
     }
-    $obUsuario->atualizar();
+    
+    if ($obUsuario->atualizar()) {
+        echo json_encode([
+            'status' => 'success'
+        ]);
+        exit;
+    }
 }
 
-header('Location: listagemClientes.php');
+echo json_encode([
+    'status' => 'error'
+]);
+exit;
+

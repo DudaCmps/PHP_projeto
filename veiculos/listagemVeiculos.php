@@ -18,8 +18,8 @@ foreach ($veiculos as $carro) {
                         <button
                             type="button"
                             class="btn btn-sm btn-primary me-1"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editarModal"
+                            data-coreui-toggle="modal"
+                            data-coreui-target="#editarModal"
                             data-id="'.$carro->id_carro.'"
                             data-modelo="'.$carro->fk_modelo.'"
                             data-placa="'.$carro->placa.'"
@@ -33,8 +33,8 @@ foreach ($veiculos as $carro) {
                     
 
         $botaoManutencao ='
-                            <button type="button" class="btn btn-sm btn-secondary me-1" data-bs-toggle="modal"
-                            data-bs-target="#manutencaoModal" title="Manutenção">
+                            <button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="modal"
+                            data-coreui-target="#manutencaoModal" title="Manutenção">
                                 <i class="cil-settings" style="color: black;font-size:16px;"></i>
                             </button>
                         ';
@@ -115,12 +115,12 @@ $resultados = !empty($resultados) ? $resultados : '
 ?>
 
 <!-- MODAL EDIÇÃO -->
-<div class="modal fade" id="editarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="editarModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Edição de veículo</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="post">
@@ -159,7 +159,7 @@ $resultados = !empty($resultados) ? $resultados : '
         </form>
     </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
         <input onclick="editarVeiculo()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
       </div>
     </div>
@@ -168,12 +168,12 @@ $resultados = !empty($resultados) ? $resultados : '
 <!--FIM MODAL EDIÇÃO -->
 
 <!-- MODAL MANUTENÇÃO -->
-<div class="modal fade" id="manutencaoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="manutencaoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Manutenção</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="post">
@@ -192,7 +192,7 @@ $resultados = !empty($resultados) ? $resultados : '
         </form>
     </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
         <input onclick="manutencaoVeiculo()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
       </div>
     </div>

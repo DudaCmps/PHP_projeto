@@ -6,6 +6,77 @@ $('input, select').on('input change', function () {
     $(errorId).html('');
 });
 
+$(document).ready(function() {
+carregarClientes();
+});
+
+//FUNÇÃO PARA LISTAR OS CLIENTES/RECARREGAR TABELA
+
+function carregarClientes() {
+    $.ajax({
+      url: '../admin/listagemClientesAjax.php',
+      type: 'GET',
+      dataType: 'json',
+      success: function(usuarios) {
+        let html = '';
+  
+        if (usuarios.length === 0) {
+          html = '<tr><td colspan="7" class="text-center">Sem registros</td></tr>';
+        } else {
+          usuarios.forEach(usuario => {
+            if (usuario.perfil === 'cliente') {
+              const ativo = usuario.ativo == 1 
+                ? '<span class="status status-success">Sim</span>'
+                : '<span class="status status-warning">Não</span>';
+  
+              const botaoAtivo = usuario.ativo == 1
+                ? `<button onclick="inativarAtivarCliente(${usuario.id_user})" type="button" class="btn btn-sm me-1 btn-warning" title="Inativar">
+                        <i class="fa-solid fa-ban"></i>
+                      </button>`
+                : `<button onclick="inativarAtivarCliente(${usuario.id_user})" type="button" class="btn btn-sm me-1 btn-success" title="Ativar">
+                        <i class="cil-check-circle"></i>
+                      </button>`;
+  
+              html += `
+                <tr>
+                  <td>${usuario.id_user}</td>
+                  <td class="text-center">${usuario.nome}</td>
+                  <td class="text-center">${usuario.cpf}</td>
+                  <td class="text-center">${usuario.data_nasc}</td>
+                  <td class="text-center">${ativo}</td>
+                  <td class="text-center">${usuario.telefone}</td>
+                  <td class="text-center">
+                      <button onclick="editaCliente(${usuario.id_user})" type="button" class="btn btn-sm me-1 btn-primary" title="Editar">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                      </button>
+  
+                    <button onclick="buscaHistorico(${usuario.id_user})" type="button" class="btn btn-sm btn-light me-1" title="Histórico">
+                      <i class="cil-description"></i>
+                    </button>
+  
+                    <button onclick="buscaEndereco(${usuario.id_user})" type="button" class="btn btn-sm btn-info me-1" title="Endereços">
+                      <i class="cil-house"></i>
+                    </button>
+  
+                    ${botaoAtivo}
+  
+                    <button onclick="deleteUser(${usuario.id_user})" type="button" class="btn btn-sm me-1 btn-danger" title="Excluir">
+                        <i class="cil-trash"></i>
+                    </button>
+                  </td>
+                </tr>`;
+            }
+          });
+        }
+  
+        $('#listaClientes').html(html);
+      },
+      error: function() {
+        $('#listaClientes').html('<tr><td colspan="7" class="text-center text-danger">Erro ao carregar clientes.</td></tr>');
+      }
+    });
+}
+  
 //FUNÇÕES LOGIN E CADASTRO
 
 function loginUser(){
@@ -96,6 +167,7 @@ function registerUser() {
                 alert(response.message || 'Cadastro realizado com sucesso!');
                 $('#clienteNovoModal').modal('hide');
                 $('#nome, #email, #telefone, #cpf, #data_nasc, #senha, #cep,#cidade,#uf,#numero,#bairro,#logradouro,#complemento').val('');
+                carregarClientes();
             } else {
                 alert(response.message || 'Erro no cadastro.');
             }
@@ -172,8 +244,6 @@ function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
     return valid;
 }
 
-//-------------------------------------------------
-
 //FUNÇÕES DE EDITAR UM USUARIO
 
 // Função para alternar entre os formulários de visualização e edição
@@ -185,7 +255,7 @@ function trocarFormulario(modo) {
       $('#form-editar').hide();
       $('#form-visualizar').show();
     }
-  }
+}
   
 // Evento para os button
 $(document).ready(function () {
@@ -197,11 +267,8 @@ $('#btnCancelar').on('click', function () {
     trocarFormulario('visualizar');
 });
 });
-  
 
 function updateUser() {
-
-    console.log("#nome");
     var id_user = $("#id_user").val();
     var perfil = $("#perfil").val();
     var nome = $("#nome").val();
@@ -211,23 +278,37 @@ function updateUser() {
     var data_nasc = $("#data_nasc").val();
     var senha = $("#senha").val();
 
+// const modal = $('#clienteEditar'); // seu modal
+// var id_user = modal.find("#id_user").val();
+// var perfil = modal.find("#perfil").val();
+// var nome = modal.find("#nome").val();
+// var email = modal.find("#email").val();
+// var telefone = modal.find("#telefone").val();
+// var cpf = modal.find("#cpf").val();
+// var data_nasc = modal.find("#data_nasc").val();
+// var senha = modal.find("#senha").val();
+
+    console.log({id_user, perfil, nome, email, telefone, cpf, data_nasc, senha});
+
     $.ajax({
          method: "post",
-         url: "atualizarUser.php",
+         url: "/locaFast/aUser/atualizarUser.php",
          data: {id_user:id_user, perfil:perfil, nome:nome, email:email, telefone:telefone,data_nasc:data_nasc , cpf:cpf, senha:senha},
          dataType: "json",
          success: function (response) {
 
             if (response.status == 'success') {
                 
-                alert(response.message || 'Sucesso ao cadastrar.');
+                alert(response.message || 'Sucesso ao atualizar.');
 
-                 // Atualiza os campos no formulário de visualização
                 $("#visualizar_nome").val(nome);
                 $("#visualizar_email").val(email);
                 $("#visualizar_telefone").val(telefone);
                 $("#visualizar_cpf").val(cpf);
                 $("#visualizar_data_nasc").val(data_nasc);
+
+                // Fecha modal se existir
+                if (modal.length) modal.modal('hide');
                 
                 trocarFormulario('visualizar');
             }else {
@@ -238,8 +319,133 @@ function updateUser() {
 
 }
 
-//FUNÇÕES DE ENDEREÇO
+//FUNÇÃO INATIVAR
+function inativarAtivarCliente (idUser) {
+    $.ajax({
+        method: "GET",
+        url: "../admin/inativarUsuario.php",
+        data: { id_user: idUser },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === 'success') {
+                carregarClientes();
+            } else {
+                alert(response.message || 'Erro.');
+            }
+        },
+        error: function () {
+            alert('SOCORRO');
+        }
+    });
+}
 
+//FUNÇÃO DELETAR
+function deleteUser (idUser) {
+  
+  if (confirm("Você deseja continuar?")) {
+    $.ajax({
+      method: "GET",
+        url: "../admin/excluirCliente.php",
+        data: { id_user: idUser },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === 'success') {
+                alert('Usuário deletado.');
+                carregarClientes();
+            } else {
+                alert(response.message || 'Erro.');
+            }
+        },
+        error: function () {
+            alert('BLEH');
+        }
+    });
+  }
+
+}
+
+//FUNÇÃO EDITAR CLIENTE
+function editaCliente(idUser){
+  const modal = new coreui.Modal($('#clienteEditar'));
+  const conteudo = $('#conteudoEditar');
+
+  modal.show();
+
+  $.ajax({
+    url: '../admin/editarCliente.php',
+    type: 'GET',
+    data: { id_user: idUser },
+    success: function(response) {
+      conteudo.html(response);
+    },
+    error: function() {
+      conteudo.html('<p>Erro ao carregar ficha.</p>');
+    }
+  });
+}
+
+function atualizarCliente() {
+
+const modal = $('#clienteEditar'); // seu modal
+var id_user = modal.find("#id_user").val();
+var perfil = modal.find("#perfil").val();
+var nome = modal.find("#nome").val();
+var email = modal.find("#email").val();
+var telefone = modal.find("#telefone").val();
+var cpf = modal.find("#cpf").val();
+var data_nasc = modal.find("#data_nasc").val();
+var senha = modal.find("#senha").val();
+
+  console.log({id_user, perfil, nome, email, telefone, cpf, data_nasc, senha});
+
+  $.ajax({
+       method: "post",
+       url: "/locaFast/aUser/atualizarUser.php",
+       data: {id_user:id_user, perfil:perfil, nome:nome, email:email, telefone:telefone,data_nasc:data_nasc , cpf:cpf, senha:senha},
+       dataType: "json",
+       success: function (response) {
+
+          if (response.status == 'success') {
+              
+              alert(response.message || 'Sucesso ao atualizar.');
+
+              $("#visualizar_nome").val(nome);
+              $("#visualizar_email").val(email);
+              $("#visualizar_telefone").val(telefone);
+              $("#visualizar_cpf").val(cpf);
+              $("#visualizar_data_nasc").val(data_nasc);
+
+              // modal.modal('hide');
+    
+          }else {
+               alert(response.message || 'Erro no cadastro.');
+          }
+       },
+   });
+
+}
+
+//FUNÇÕES PARA BUSCAR HISTORICO
+function buscaHistorico (idUser) {
+    const modal = new coreui.Modal($('#clienteHistorico'));
+    const conteudo = $('#conteudoHistorico');
+
+    modal.show();
+
+    $.ajax({
+        url: '../clientes/listagemHistorico.php',
+        type: 'GET',
+        data: { id_user: idUser },
+        success: function(response) {
+          conteudo.html(response);
+        },
+        error: function() {
+          conteudo.html('<p>Erro ao carregar histórico.</p>');
+        }
+    });
+}
+
+//FUNÇÕES DE ENDEREÇO
 function showAdress(){
 
     var botao = document.getElementById('formularioEndereco');
@@ -330,4 +536,23 @@ function validateAdress(cep, cidade, uf, numero, bairro, logradouro, complemento
       }
       
     return valid;
+}
+
+function buscaEndereco (idUser) {
+    const modal = new coreui.Modal($('#clienteEndereco'));
+    const conteudo = $('#conteudoEndereco');
+
+    modal.show();
+
+    $.ajax({
+        url: '../endereços/listagemEnderecos.php',
+        type: 'GET',
+        data: { id_user: idUser },
+        success: function(response) {
+          conteudo.html(response);
+        },
+        error: function() {
+          conteudo.html('<p>Erro ao carregar histórico.</p>');
+        }
+    });
 }

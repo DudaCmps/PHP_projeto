@@ -18,6 +18,8 @@ date_default_timezone_set('America/Sao_Paulo');
     <link href="https://cdn.jsdelivr.net/npm/@coreui/icons/css/all.min.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.4.1/dist/js/coreui.bundle.min.js"></script>
+
     
     <!-- link para tabelas -->
     <link href="https://cdn.jsdelivr.net/npm/material-dashboard@1.0.0/dist/css/material-dashboard.css" rel="stylesheet">
@@ -213,7 +215,7 @@ body{
         <div class="dropdown">
             <button class="caixaUser d-flex align-items-center border-0 bg-transparent px-2 py-1"
                     type="button"
-                    data-bs-toggle="dropdown"
+                    data-coreui-toggle="dropdown"
                     aria-expanded="false">
             
             <!-- Avatar -->
