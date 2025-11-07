@@ -31,9 +31,9 @@ date_default_timezone_set('America/Sao_Paulo');
 
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
-body{
-    font-family: 'Nunito Sans', sans-serif;
-}
+    body{
+        font-family: 'Nunito Sans', sans-serif;
+    }
 
         .sidebar-header {
           padding: 9px 1rem; 
@@ -125,6 +125,7 @@ body{
 
 
 </head>
+
 <body>
 
 <div class="sidebar sidebar-fixed border-end" id="sidebar">
@@ -142,12 +143,6 @@ body{
       </li>
 
       <li class="nav-title">Users</li>
-
-      <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>admin/formularioClientes.php">
-              <i class="cil-user-plus fs-5 me-2"></i> Cadastrar usuário
-          </a>
-      </li>
 
       <li class="nav-item">
           <a class="nav-link" href="<?= BASE_URL ?>admin/listagemClientes.php">

@@ -114,58 +114,22 @@ $resultados = !empty($resultados) ? $resultados : '
                                                 ';
 ?>
 
-<!-- MODAL EDIÇÃO -->
-<div class="modal fade" id="editarModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- MODAL EDITAR VEICULO -->
+<div class="modal fade" id="veiculoEditar" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edição de veículo</h1>
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar</h1>
         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form method="post">
-            <input type="hidden" name="id_carro" id="id_carro" value="">
-
-            <div class="mb-3">
-                <label for="modelo" class="form-label">Modelos</label>
-                <select name="modelo" id="modelo" class="form-select">
-                <option disabled selected>Selecione uma opção</option>
-                <option value="1">Corolla</option>
-                <option value="2">Yaris</option>
-                <option value="3">Civic</option>
-                <option value="4">Fit</option>
-                <option value="5">Fiesta</option>
-                <option value="6">Focus</option>
-                </select>
-            </div>
-
-            <div class="input-group mb-3">
-                <label for="placa" class="input-group-text" id="basic-addon1">Placa</label>
-                <input type="text" name="placa" id="placa" class="form-control me-3" maxlength="10" value="">
-
-                <label for="ano" class="input-group-text" id="basic-addon1">Ano de Fabricação</label>
-                <input type="text" name="ano_fabricacao" id="ano" class="form-control" placeholder="YYYY" value="">
-            </div>
-
-            <div class="mb-3">
-                <label for="categoria" class="form-label">Categoria</label>
-                <select name="categoria" id="categoria" class="form-select">
-                <option value="" disabled selected>Selecione uma opção</option>
-                <option value="luxo">Luxo</option>
-                <option value="economico">Econômico</option>
-                <option value="suv">SUV</option>
-                </select>
-            </div>
-        </form>
+    <div class="modal-body">
+        <div id="conteudoEditarVeiculo"></div>
     </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
-        <input onclick="editarVeiculo()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
-      </div>
     </div>
   </div>
 </div>
-<!--FIM MODAL EDIÇÃO -->
+<!--FIM MODAL EDITAR VEICULO -->
+
 
 <!-- MODAL MANUTENÇÃO -->
 <div class="modal fade" id="manutencaoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
