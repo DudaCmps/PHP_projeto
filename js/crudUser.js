@@ -539,20 +539,121 @@ function validateAdress(cep, cidade, uf, numero, bairro, logradouro, complemento
 }
 
 function buscaEndereco (idUser) {
-    const modal = new coreui.Modal($('#clienteEndereco'));
-    const conteudo = $('#conteudoEndereco');
 
+  // Se o modal já existir, pega ele; se não, cria
+  let modal = coreui.Modal.getInstance(document.getElementById('clienteEndereco'));
+  if (!modal) {
+    modal = new coreui.Modal($('#clienteEndereco')[0]);
+  }
+
+  const conteudo = $('#conteudoEndereco');
+  const conteudoEditar = $('#conteudoEditarEndereco');
+  let titulo = $('#titulo-endereco');
+
+  conteudoEditar.hide();
+  conteudo.show();
+
+  // Só mostra o modal se ainda não estiver aberto
+  if (!$('#clienteEndereco').hasClass('show')) {
     modal.show();
-
+  }
+    
     $.ajax({
-        url: '../endereços/listagemEnderecos.php',
+        url: '../enderecos/listagemEnderecos.php',
         type: 'GET',
         data: { id_user: idUser },
         success: function(response) {
           conteudo.html(response);
+          titulo.html('Endereços cadastrados');
         },
         error: function() {
           conteudo.html('<p>Erro ao carregar histórico.</p>');
         }
     });
+}
+
+function buscaEditarEndereco(idEndereco) {
+  const conteudo = $('#conteudoEditarEndereco');
+  const conteudoEndereco = $('#conteudoEndereco');
+  let titulo = $('#titulo-endereco');
+  conteudoEndereco.hide();
+
+  $.ajax({
+      url: '../enderecos/formularioEndereco.php',
+      type: 'GET',
+      data: { id_endereco: idEndereco },
+      success: function(response) {
+      conteudo.show();
+      conteudo.html(response);
+      titulo.html('Editar');
+
+      },
+      error: function() {
+        conteudo.html('<p>Erro ao carregar endereço.</p>');
+      }
+  });
+}
+
+function atualizarEndereco(idEndereco) {
+
+  const modal = $('#clienteEndereco'); // seu modal
+  var id_endereco = idEndereco;
+  var cep = modal.find("#cep").val();
+  var cidade = modal.find("#cidade").val();
+  var estado = modal.find("#estado").val();
+  var numero = modal.find("#numero").val();
+  var bairro = modal.find("#bairro").val();
+  var logradouro = modal.find("#logradouro").val();
+  var complemento = modal.find("#complemento").val();
+  
+    $.ajax({
+         method: "post",
+         url: "/locaFast/enderecos/editarEndereco.php",
+         data: {id_endereco:id_endereco, cep:cep, cidade:cidade,estado:estado, numero:numero, bairro:bairro , logradouro:logradouro, complemento:complemento},
+         dataType: "json",
+         success: function (response) {
+  
+            if (response.status == 'success') {
+                
+                alert(response.message || 'Sucesso ao atualizar.');
+  
+                $("#cep").val(cep);
+                $("#cidade").val(cidade);
+                $("#estado").val(estado);
+                $("#numero").val(numero);
+                $("#bairro").val(bairro);
+                $("#logradouro").val(logradouro);
+                $("#complemento").val(complemento);
+      
+            }else {
+                 alert(response.message || 'Erro ao atualizar.');
+            }
+         },
+     });
+  
+}
+
+  //FUNÇÃO DELETAR
+function deleteUser (idUser) {
+  
+  if (confirm("Você deseja continuar?")) {
+    $.ajax({
+      method: "GET",
+        url: "../admin/excluirCliente.php",
+        data: { id_user: idUser },
+        dataType: "json",
+        success: function (response) {
+            if (response.status === 'success') {
+                alert('Usuário deletado.');
+                carregarClientes();
+            } else {
+                alert(response.message || 'Erro.');
+            }
+        },
+        error: function () {
+            alert('BLEH');
+        }
+    });
+  }
+
 }

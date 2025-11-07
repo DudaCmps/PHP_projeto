@@ -2,11 +2,15 @@
 require __DIR__ . '/../vendor/autoload.php';
 use App\Entity\Endereco;
 
+header('Content-Type: application/json');
+
 $id_endereco = $_POST['id_endereco'];
 
 if (!isset($id_endereco) || !is_numeric($id_endereco)) {
-    header('location: listagemEnderecos.php?status=error');
-    exit;
+    echo json_encode([
+        'status' => 'error'
+    ]);
+    exit;;
 }
 
 // Consulta
@@ -14,7 +18,9 @@ $obEndereco = Endereco::getEndereco($id_endereco);
 
 // Valida
 if (!$obEndereco instanceof Endereco) {
-    header('location: listagemEnderecos.php?status=error');
+    echo json_encode([
+        'status' => 'error'
+    ]);
     exit;
 }
 
@@ -29,9 +35,15 @@ if (isset($_POST['cidade'], $_POST['estado'], $_POST['cep'], $_POST['bairro'], $
     $obEndereco->numero      = $_POST['numero'];
     $obEndereco->complemento = $_POST['complemento'];
 
-    $obEndereco->atualizar();
-
-    // Redireciona para a lista de endereços do usuario
-    header('location: listagemEnderecos.php?id_user=' . $obEndereco->fk_cliente . '&status=success');
-    exit;
+    if ($obEndereco->atualizar()) {
+        echo json_encode([
+            'status' => 'success'
+        ]);
+        exit;
+    }
 }
+
+echo json_encode([
+    'status' => 'error'
+]);
+exit;

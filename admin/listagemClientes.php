@@ -2,6 +2,8 @@
 include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
+
+
 ?>
 
 <div class="d-flex flex-column flex-grow-1">
@@ -147,11 +149,14 @@ include __DIR__ . '/../config.php';
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Endereços cadastrados</h1>
+        <h1 class="modal-title fs-5" id="titulo-endereco"></h1>
         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
     <div class="modal-body">
         <div id="conteudoEndereco">
+
+        </div>
+        <div id="conteudoEditarEndereco">
 
         </div>
     </div>
