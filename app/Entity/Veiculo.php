@@ -61,7 +61,7 @@ class Veiculo{
      */
     public $nome_modelos;
 
-/**
+    /**
      * Método de cadastro de um veiculo no banco
      * @return boolean
      */
@@ -115,9 +115,11 @@ class Veiculo{
      */
     public static function getVeiculos($where = null, $and = null, $group = null, $order = null, $limit = null, $fields = null, $join = null){
        
-        $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo';
+        $join = ' INNER JOIN modelos mo ON veiculos.fk_modelo = mo.id_modelo
+                INNER JOIN marcas ma ON mo.fk_marca = ma.id_marca';
         $fields = ' veiculos.*,
-                   mo.nome_modelos';
+                   mo.*,
+                   ma.nome_marca AS nomeMarca';
                    
         return(new Database('veiculos'))->select($where, $and,$group, $order, $fields, $limit, $join)
                                                ->fetchAll(PDO::FETCH_CLASS,self::class);

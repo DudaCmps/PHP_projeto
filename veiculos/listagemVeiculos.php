@@ -1,121 +1,73 @@
 <?php 
 include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__.'/../includes/navbarAdmin.php';
-include __DIR__ . '/../config.php';
-
-$resultados = '';
-
-foreach ($veiculos as $carro) {
-
-    if ($carro->ativo_carro == 1) {
-        $botaoAtivo = ' <a href="inativarVeiculo.php?id_carro='.$carro->id_carro.'">
-                            <button type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
-                                <i class="fa-solid fa-ban"></i>
-                            </button>
-                        </a>';
-
-                        $botaoEditar =  '
-                        <button
-                            type="button"
-                            class="btn btn-sm btn-primary me-1"
-                            data-coreui-toggle="modal"
-                            data-coreui-target="#editarModal"
-                            data-id="'.$carro->id_carro.'"
-                            data-modelo="'.$carro->fk_modelo.'"
-                            data-placa="'.$carro->placa.'"
-                            data-ano="'.$carro->ano_fabricacao.'"
-                            data-categoria="'.$carro->categoria.'"
-                            title="Editar"
-                        >
-                            <i class="fa-regular fa-pen-to-square" style="color: black;"></i>
-                        </button>
-                    ';
-                    
-
-        $botaoManutencao ='
-                            <button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="modal"
-                            data-coreui-target="#manutencaoModal" title="Manutenção">
-                                <i class="cil-settings" style="color: black;font-size:16px;"></i>
-                            </button>
-                        ';
-        
-        $ativo = '<span class="status status-success">Sim</span>';
-    }else {
-        $botaoAtivo = '<a href="inativarVeiculo.php?id_carro='.$carro->id_carro.'">
-                            <button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
-                                <i class="cil-check-circle"></i>
-                            </button>
-                        </a>';
-
-                        $botaoEditar =  ' 
-                            <button type="button" class="btn btn-sm btn-primary me-1 disabled" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Editar">
-                                <i class="fa-regular fa-pen-to-square" style="color: black;"></i>
-                            </button>';
-
-                        $botaoManutencao ='
-                            <button type="button" class="btn btn-sm btn-secondary me-1 disabled" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção">
-                                <i class="cil-settings" style="color: black;font-size:16px;"></i>
-                            </button>';
-        
-        $ativo = '<span class="status status-warning">Não</span>';
-    }
-
-    switch ($carro->estado_carro) {
-        case 'alugado':
-            $status = '<span class="status status-info">Alugado</span>';
-            break;
-
-        case 'manutencao':
-            $status = '<span class="status status-warning">Manutenção</span>';
-            break;
-        
-        default:
-        $status = '<span class="status status-success">Disponível</span>';
-            break;
-    }
-
-    switch ($carro->categoria) {
-        case 'luxo':
-            $categoria = 'Luxo';
-            break;
-
-        case 'economico':
-            $categoria = 'Econômico';
-            break;
-        
-        case 'suv':
-        $categoria = 'SUV';
-            break;
-    }
-
-    $resultados .= '<tr>
-                        <td>'.$carro->id_carro.'</td>
-                        <td class="text-center">'.$carro->nome_modelos.'</td>
-                        <td class="text-center">'.$carro->ano_fabricacao.'</td> 
-                        <td class="text-center">'.$carro->placa.'</td>
-                        <td class="text-center">'.$categoria.'</td>
-                        <td class="text-center">'.$status.'</td>
-                        <td class="text-center">'.$ativo.'</td>
-                        <td class="text-center">
-                            
-                            '.$botaoEditar.'
-                            '.$botaoManutencao.'
-                            '.$botaoAtivo.'
-
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirVeiculo.php?id_carro='.$carro->id_carro.'" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Excluir"><button type="button" class="btn btn-sm btn-danger"><i class="cil-trash"></i></button></a>
-                        </td>
-                    </tr>';
-                    
-}
-$resultados = !empty($resultados) ? $resultados : '
-                                                <tr >
-                                                <td colspan="7" class="registros"><a>Sem registros</a></td>
-                                                </tr>
-                                                ';
+include __DIR__ . '/../config.php';    
 ?>
 
+<!-- MODAL ADICIONAR NOVO VEÍCULO -->
+<div class="modal fade" id="carroNovoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cadastrar novo veículo</h1>
+        <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <form method="post">
+
+            <div class="mb-3">
+                <label for="modelo" class="form-label">Modelos</label>
+
+                <select id="modelo" name="modelo" class="form-select">
+                <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="1">Corolla</option>
+                    <option value="2">Yaris</option>
+                    <option value="3">Civic</option>
+                    <option value="4">Fit</option>
+                    <option value="5">Fiesta</option>
+                    <option value="6">Focus</option>
+                </select>
+                <div id="modeloError" class="text-danger small"></div>
+            </div>
+
+            <div class="input-group">
+
+                <label for="placa" class="input-group-text" id="basic-addon1">Placa</label>
+                <input type="text" id="placa" name="placa" class="form-control me-3"style="border-radius: 0px 5px 5px 0px" maxlength="10">
+                
+                <label for="ano_fabricacao"class="input-group-text" id="basic-addon1" style="border-radius: 5px 0px 0px 5px">Ano de Fabricação</label>
+                <input type="text" id="ano_fabricacao" class="form-control" placeholder="YYYY" name="ano_fabricacao">
+            </div>
+            <div class="d-flex mb-1">
+            <div id="placaError" class="text-danger small" style="margin-right: 172px;"></div>
+            <div id="anoError" class="text-danger small"></div>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select id="categoria" name="categoria" class="form-select">
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    
+                    <option value="luxo">Luxo</option>
+                    <option value="economico" >Econômico</option>
+                    <option value="suv">SUV</option>
+                </select>
+                <div id="categoriaError" class="text-danger small"></div>
+            </div>
+
+            </form>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
+        <input onclick="cadastrarVeiculo()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODAL ADICIONAR NOVO CLIENTE -->
+
 <!-- MODAL EDITAR VEICULO -->
-<div class="modal fade" id="veiculoEditar" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="carroEditar" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,16 +75,17 @@ $resultados = !empty($resultados) ? $resultados : '
         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
     <div class="modal-body">
-        <div id="conteudoEditarVeiculo"></div>
+        <div id="conteudoEditarVeiculo">
+            
+        </div>
     </div>
     </div>
   </div>
 </div>
 <!--FIM MODAL EDITAR VEICULO -->
 
-
 <!-- MODAL MANUTENÇÃO -->
-<div class="modal fade" id="manutencaoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="manutencaoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,7 +114,7 @@ $resultados = !empty($resultados) ? $resultados : '
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <!--FIM MODAL MANUTENÇÃO -->
 
 <div class="d-flex flex-column flex-grow-1">
@@ -176,6 +129,13 @@ $resultados = !empty($resultados) ? $resultados : '
             </div>
 
 <div class="card-body">
+
+<!-- BOTAO ADICIONA VEICULO -->
+<div class=" d-flex justify-content-end pe-3">
+    <button data-coreui-toggle="modal"
+    data-coreui-target="#carroNovoModal" class="btn btn-sm btn-outline-info">Adicionar novo veículo</button>
+</div>
+    
 <div class="example">
 <div class="tab-content rounded-bottom">
 <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-1000">
@@ -185,7 +145,7 @@ $resultados = !empty($resultados) ? $resultados : '
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col" class="text-center">Modelo</th>
+                <th scope="col" class="text-center">Modelo / Marca</th>
                 <th scope="col" class="text-center">Ano</th>
                 <th scope="col" class="text-center">Placa</th>
                 <th scope="col" class="text-center">Categoria</th>
@@ -195,8 +155,8 @@ $resultados = !empty($resultados) ? $resultados : '
                 </tr>
             </thead>
 
-            <tbody>
-                <?=$resultados?>
+            <tbody id="listaCarros">
+                <tr><td colspan="7" class="text-center">Carregando...</td></tr>
             </tbody>
 
             </table>
@@ -216,24 +176,5 @@ $resultados = !empty($resultados) ? $resultados : '
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="../js/crudVeiculo.js"></script>
 
-<script>
-  var editarModal = document.getElementById('editarModal');
-editarModal.addEventListener('show.bs.modal', function (event) {
-  var button = event.relatedTarget;
-
-  var id = button.getAttribute('data-id');
-  var modelo = button.getAttribute('data-modelo');
-  var placa = button.getAttribute('data-placa');
-  var ano = button.getAttribute('data-ano');
-  var categoria = button.getAttribute('data-categoria');
-
-  document.getElementById('id_carro').value = id;
-  document.getElementById('modelo').value = modelo;
-  document.getElementById('placa').value = placa;
-  document.getElementById('ano').value = ano;
-  document.getElementById('categoria').value = categoria;
-});
-
-</script>
 </body>
 </html>

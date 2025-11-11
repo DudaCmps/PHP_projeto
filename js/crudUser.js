@@ -137,7 +137,6 @@ function registerUser() {
 
     var endereco = document.getElementById('formularioEndereco');
 
-    // Validação básica
     if (!validateRegister(nome, email, telefone, data_nasc, cpf, senha)) return false;
 
     var data = { nome, email, telefone, data_nasc, cpf, senha };
@@ -278,16 +277,6 @@ function updateUser() {
     var data_nasc = $("#data_nasc").val();
     var senha = $("#senha").val();
 
-// const modal = $('#clienteEditar'); // seu modal
-// var id_user = modal.find("#id_user").val();
-// var perfil = modal.find("#perfil").val();
-// var nome = modal.find("#nome").val();
-// var email = modal.find("#email").val();
-// var telefone = modal.find("#telefone").val();
-// var cpf = modal.find("#cpf").val();
-// var data_nasc = modal.find("#data_nasc").val();
-// var senha = modal.find("#senha").val();
-
     console.log({id_user, perfil, nome, email, telefone, cpf, data_nasc, senha});
 
     $.ajax({
@@ -386,7 +375,7 @@ function editaCliente(idUser){
 
 function atualizarCliente() {
 
-const modal = $('#clienteEditar'); // seu modal
+const modal = $('#clienteEditar');
 var id_user = modal.find("#id_user").val();
 var perfil = modal.find("#perfil").val();
 var nome = modal.find("#nome").val();
@@ -395,8 +384,6 @@ var telefone = modal.find("#telefone").val();
 var cpf = modal.find("#cpf").val();
 var data_nasc = modal.find("#data_nasc").val();
 var senha = modal.find("#senha").val();
-
-  console.log({id_user, perfil, nome, email, telefone, cpf, data_nasc, senha});
 
   $.ajax({
        method: "post",
@@ -418,7 +405,7 @@ var senha = modal.find("#senha").val();
               // modal.modal('hide');
     
           }else {
-               alert(response.message || 'Erro no cadastro.');
+               alert(response.message || 'Erro ao atualizar.');
           }
        },
    });
@@ -633,7 +620,7 @@ function atualizarEndereco(idEndereco) {
   
 }
 
-  //FUNÇÃO DELETAR
+//FUNÇÃO DELETAR
 function deleteUser (idUser) {
   
   if (confirm("Você deseja continuar?")) {

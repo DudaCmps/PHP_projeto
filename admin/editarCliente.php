@@ -2,15 +2,11 @@
 include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__ . '/../config.php';
 
-if (!isset($_GET['id_user']) or !is_numeric($_GET['id_user'])) {
-    header('location: ../index2.php?status=error');
-    exit;
-}
-
 use \App\Entity\Usuario;
 
 //consulta
 $cliente = Usuario::getUsuario($_GET['id_user']);
+
 
 $estados = [
     'AC'=>'Acre','AL'=>'Alagoas','AP'=>'Amapá','AM'=>'Amazonas','BA'=>'Bahia',

@@ -1,7 +1,6 @@
 <?php
 include __DIR__ . '/../config.php';
 
-
 $data= [];
 
 foreach ($usuarios as $usuario) {

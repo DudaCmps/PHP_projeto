@@ -215,10 +215,6 @@ include __DIR__ . '/../config.php';
         </tr>
     </thead>
 
-    <!-- <tbody>
-        <?=$resultados?>
-    </tbody> -->
-
     <tbody id="listaClientes">
         <tr><td colspan="7" class="text-center">Carregando...</td></tr>
     </tbody>
