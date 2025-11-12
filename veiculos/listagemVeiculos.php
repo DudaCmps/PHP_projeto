@@ -85,7 +85,7 @@ include __DIR__ . '/../config.php';
 <!--FIM MODAL EDITAR VEICULO -->
 
 <!-- MODAL MANUTENÇÃO -->
-<!-- <div class="modal fade" id="manutencaoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="manutencaoModal" data-coreui-backdrop="static" data-coreui-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -93,28 +93,17 @@ include __DIR__ . '/../config.php';
         <button type="button" class="btn-close" data-coreui-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post">
-            <input type="hidden" name="id_carro" value="<?= $id_carro ?>">
+        <div id="conteudoManutencaoVeiculo">
 
-            <div class="mb-3">
-                <label class="form-label" for="exampleFormControlTextarea1">Descrição</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="descricao"></textarea>
-            </div>
-
-            <div class="input-group mb-3">
-                <label for="data_manutencao" class="input-group-text">Data da Manutenção</label>
-                <input type="date" class="form-control" id="data_manutencao" name="data_manutencao" 
-                min="<?=$dataFormatada ?>" required>
-            </div>
-        </form>
-    </div>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
-        <input onclick="manutencaoVeiculo()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
+        <input onclick="manutencaoVeiculo()" type="button" class="btn btn-sm btn-outline-primary" value="Salvar">
       </div>
     </div>
   </div>
-</div> -->
+</div>
 <!--FIM MODAL MANUTENÇÃO -->
 
 <div class="d-flex flex-column flex-grow-1">

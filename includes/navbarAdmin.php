@@ -168,7 +168,7 @@ date_default_timezone_set('America/Sao_Paulo');
       </li>
 
       <li class="nav-item">
-          <a class="nav-link" href="<?= BASE_URL ?>manutenções/listagemManutencao.php">
+          <a class="nav-link" href="<?= BASE_URL ?>manutencoes/listagemManutencao.php">
             <i class="cil-settings me-2"></i> Manutenção
           </a>
       </li>

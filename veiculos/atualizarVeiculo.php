@@ -31,7 +31,7 @@ if (!$obCarro instanceof Veiculo) {
 
 if (!isset($_POST['modelo']) || !is_numeric($_POST['modelo'])) {
     echo json_encode([
-        'status' => false,
+        'status' => 'error',
         'message' => 'Modelo inválido.'
     ]);
     exit;

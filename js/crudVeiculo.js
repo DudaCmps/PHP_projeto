@@ -48,15 +48,12 @@ function carregarVeiculos() {
               </button>`;
 
               const botaoManutencao = carro.ativo == 1
-              ? `<button type="button" class="btn btn-sm btn-secondary me-1" data-coreui-toggle="modal"
-                            data-coreui-target="#manutencaoModal" title="Manutenção">
+              ? `<button onclick="manutencaoVeiculo(${carro.id_carro})" type="button" class="btn btn-sm btn-secondary me-1" title="Manutenção">
                                 <i class="cil-settings" style="color: black;font-size:16px;"></i>
-                            </button>`
-              : `<button type="button" class="btn btn-sm btn-secondary me-1 disabled" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Manutenção">
-                                <i class="cil-settings" style="color: black;font-size:16px;"></i>
-                            </button>`;
-              
-
+                  </button>`
+              : `<button type="button" class="btn btn-sm btn-secondary me-1 disabled" title="Manutenção">
+                      <i class="cil-settings" style="color: black;font-size:16px;"></i>
+                  </button>`;
         
               html += `
                 <tr>
@@ -193,13 +190,13 @@ function atualizarVeiculo() {
       dataType: "json",
       success: function (response) {
         console.log(response.debug);
-        alert(response.message || 'XERECA');
+        alert(response.message || 'ALO');
 
         // Atualiza os campos no formulário/modal
-        $("#modelo").val(modelo);
-        $("#placa").val(placa);
-        $("#ano_fabricacao").val(ano_fabricacao);
-        $("#categoria").val(categoria);
+        modal.find("#modelo").val(modelo);
+        modal.find("#placa").val(placa);
+        modal.find("#ano_fabricacao").val(ano_fabricacao);
+        modal.find("#categoria").val(categoria);
 
         // Recarrega a listagem de veículos
         carregarVeiculos();
@@ -209,4 +206,83 @@ function atualizarVeiculo() {
         alert(response.message || 'FODASE');
       }
     });
+}
+
+//FUNÇÕES MANUTENÇÃO DE VEÍCULO
+
+function manutencaoVeiculo (idCarro) {
+
+  const modalManutencao = new coreui.Modal($('#manutencaoModal'));
+  const conteudoManutencao = $('#conteudoManutencaoVeiculo');
+
+  modalManutencao.show();
+
+  $.ajax({
+    url: "../manutencoes/formularioManutencao.php",
+    type: "get",
+    data: {id_carro: idCarro},
+    success: function (response){
+      conteudoManutencao.html(response);
+    },
+    error: function () {
+      conteudoManutencao.html("<p>Erro ao carregar formulário</p>");
+    }
+  });
+}
+
+function agendaManutencao () {
+  const modalManutencao = new coreui.Modal($('#manutencaoModal'));
+
+  var id_carro = $("#id_carro").val();
+  var descricao = $("#descricao").val();
+  var data_manutencao = $("#data_manutencao").val();
+
+  if (!validateManutencao(descricao, data_manutencao)) {
+      return false;
+  }
+
+  $.ajax({
+    method: "POST",
+    url: "/locafast/manutencoes/processaManutencao.php",
+    data: {
+      id_carro: id_carro,
+      descricao: descricao,
+      data_manutencao: data_manutencao
+    },
+    dataType: "json",
+    success: function (response) {
+      console.log(response.debug);
+      alert(response.message || 'ALO');
+
+      // Atualiza os campos no formulário/modal
+      modalManutencao.find("#descricao").val(descricao);
+      modalManutencao.find("#id_carro").val(id_carro);
+      modalManutencao.find("#data_manutencao").val(data_manutencao);
+
+      // Recarrega a listagem de veículos
+      carregarVeiculos();
+      
+    },
+    error: function (response) {
+      alert(response.message || 'FODASE');
+    }
+  });
+
+}
+
+function validateManutencao(descricao, data_manutencao) {
+    
+  let valid = true;
+
+  if(descricao == null){
+      $("#descricaoError").html("Informe uma descrição breve");
+      valid = false;
+  }
+
+  if (data_manutencao == "") {
+      $("#data_manutencaoError").html("Informe a data corretamente");
+      valid = false;
+  }
+
+  return valid;
 }
