@@ -1,4 +1,4 @@
-console.log('PORRA');
+
 document.addEventListener('DOMContentLoaded', () => {
     fetch('/locafast/auth/checkLogin.php')
         .then(response => response.json())

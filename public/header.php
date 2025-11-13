@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LocaFast</title>
+    <link href="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.4.1/dist/css/coreui.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/locafast/public/custom/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
 
@@ -12,6 +14,7 @@
 
     <!-- link boostrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 
     <style>
         .dropdown-item:hover {
@@ -26,14 +29,40 @@
          background-color:#1E2329;
         }
 
+        .status{
+        --cui-badge-padding-x: 0.65em;
+        --cui-badge-padding-y: 0.35em;
+        --cui-badge-font-size: 0.85em;
+        --cui-badge-font-weight: 700;
+        --cui-badge-color: #fff;
+        --cui-badge-border-radius: var(--cui-border-radius);
+        display: inline-block;
+        padding: var(--cui-badge-padding-y) var(--cui-badge-padding-x);
+        font-size: var(--cui-badge-font-size);
+        font-weight: var(--cui-badge-font-weight);
+        line-height: 1;
+        color: var(--cui-badge-color);
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: var(--cui-badge-border-radius, 0);
+        }
+
+        .status-success { background-color: #198754; } /* verde */
+.status-warning { background-color: #ffc107; } /* amarelo */
+.status-info    { background-color: #0dcaf0; } /* azul */
+
+
        
     </style>
 
 </head>
 <body>
     
-    <!-- Bootstrap JS Bundle (com Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-VeFyAyzbfuFzD0OfIj4MDGmKrZixL+bWZjqbD9++ZoTVv7XZy4EkcF7aD1ZPP5qj" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coreui/icons@latest/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@coreui/coreui@5.0.0/dist/js/coreui.bundle.min.js"></script>
+
 
     <div id="header-alert">
         <a href="#">Viaje para os EUA e Europa com ótimas OFERTAS em nossa frota Premium! - Reserve agora</a>
@@ -71,10 +100,9 @@
                 </ul>
             </div>
         </div>
-
     </div>
 
-    <!-- Menu de memes -->
+    <!-- Menu de memes
     <div class="offcanvas offcanvas-start" tabindex="-1" data-coreui-backdrop="false" id="offcanvasExample" style="width: 280px;top: 102px !important;">
 
         <div class="offcanvas-body">
@@ -104,7 +132,7 @@
         
         </ul>
         </div>
-    </div>
+    </div> -->
 
 </div>
 </div>

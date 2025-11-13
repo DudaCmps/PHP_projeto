@@ -28,5 +28,4 @@ if ($obUsuario && $obUsuario->ativo_usuario == 1 && password_verify($_POST['senh
         'message' => 'Usuário ou senha inválidos.'
     ]);
 }
-
 exit;

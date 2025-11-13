@@ -14,7 +14,7 @@ function carregarVeiculos() {
           html = '<tr><td colspan="7" class="text-center">Sem registros</td></tr>';
         } else {
           veiculos.forEach(carro => {
-              
+
               const ativoCarro = carro.ativo == 1
                 ? '<span class="status status-success">Sim</span>'
                 : '<span class="status status-warning">Não</span>';
@@ -25,17 +25,17 @@ function carregarVeiculos() {
                 ? 'Econômico'
                 : 'SUV';
 
-              const statusCarro = carro.estado_carro == 'alugado'
-              ? 'Alugado'
-              : carro.categoria == 'manutencao'
-                ? 'Manutenção'
-                : 'Disponível';
+                const statusCarro = carro.status == 'alugado'
+                ? 'Alugado'
+                : carro.status == 'manutencao'
+                  ? 'Manutenção'
+                  : 'Disponível';
   
               const botaoAtivo = carro.ativo == 1
-                ? `<button  onclick="inativarAtivarCliente(${carro.id_user})"  type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
+                ? `<button onclick="inativarAtivarCarro(${carro.id_carro})"  type="button" class="btn btn-sm me-1 btn-warning" data-coreui-toggle="tooltip" title="Inativar">
                         <i class="fa-solid fa-ban"></i>
                   </button>`
-                : `<button type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
+                : `<button onclick="inativarAtivarCarro(${carro.id_carro})" type="button" class="btn btn-sm me-1 btn-success" data-coreui-toggle="tooltip" title="Ativar">
                         <i class="cil-check-circle"></i>
                     </button>`;
               
@@ -68,7 +68,7 @@ function carregarVeiculos() {
                     ${botaoEditar}
                     ${botaoManutencao}
                     ${botaoAtivo}
-                    <button onclick="deleteUser(${carro.id_carro})" type="button" class="btn btn-sm me-1 btn-danger" title="Excluir">
+                    <button onclick="deleteVeiculo(${carro.id_carro})" type="button" class="btn btn-sm me-1 btn-danger" title="Excluir">
                         <i class="cil-trash"></i>
                     </button>
                   </td>
@@ -208,6 +208,53 @@ function atualizarVeiculo() {
     });
 }
 
+// FUNCÕES DE INATIVAR/ATIVAR VEICULO
+function inativarAtivarCarro (idCarro) {
+
+    $.ajax({
+      method: "GET",
+      url: "../veiculos/inativarVeiculo.php",
+      data: { id_carro: idCarro },
+      dataType: "json",
+      success: function (response) {
+          if (response.status === 'success') {
+              carregarVeiculos();
+          } else {
+              alert(response.message || 'Erro.');
+          }
+      },
+      error: function () {
+          alert('SOCORRO');
+      }
+    });
+}
+
+// FUNÇÃO DE EXCLUIR
+function deleteVeiculo(idCarro) {
+  
+  if(confirm("Tem certeza que deseja excluir?")){
+
+    $.ajax({
+      method: "GET",
+      url: "../veiculos/excluirVeiculo.php",
+      data: {id_carro:idCarro},
+      dataType: "json",
+      success: function (response) {
+        if (response.status === 'success') {
+          carregarVeiculos();
+        } else {
+          alert(response.message || 'Erro.');
+        }
+      },
+      error: function () {
+        alert('ERRO');
+      }
+    
+    });
+  }
+  
+}
+
 //FUNÇÕES MANUTENÇÃO DE VEÍCULO
 
 function manutencaoVeiculo (idCarro) {
@@ -231,8 +278,8 @@ function manutencaoVeiculo (idCarro) {
 }
 
 function agendaManutencao () {
-  const modalManutencao = new coreui.Modal($('#manutencaoModal'));
 
+  const modalManutencao = $('#manutencaoModal');
   var id_carro = $("#id_carro").val();
   var descricao = $("#descricao").val();
   var data_manutencao = $("#data_manutencao").val();
@@ -285,4 +332,30 @@ function validateManutencao(descricao, data_manutencao) {
   }
 
   return valid;
+}
+
+// FUNÇÃO DE EXCLUIR
+function deleteManutencao(idCarro) {
+  
+  if(confirm("Tem certeza que deseja excluir?")){
+
+    $.ajax({
+      method: "GET",
+      url: "../manutencoes/excluirManutencao.php",
+      data: {id_carro:idCarro},
+      dataType: "json",
+      success: function (response) {
+        if (response.status === 'success') {
+          carregarVeiculos();
+        } else {
+          alert(response.message || 'Erro.');
+        }
+      },
+      error: function () {
+        alert('ERRO');
+      }
+    
+    });
+  }
+  
 }

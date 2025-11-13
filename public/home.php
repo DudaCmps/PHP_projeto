@@ -19,6 +19,6 @@
             <p>As melhores condições para você reservar e aproveitar</p>
         </div>
         <div id="content-cars">
-            
+            <button class="btn btn-warning"><a href="catalogo.php">Confira outros modelos!</a></button>
         </div>
     </section>

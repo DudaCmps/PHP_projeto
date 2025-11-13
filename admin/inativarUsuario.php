@@ -1,13 +1,15 @@
 <?php 
 require __DIR__ . '/../vendor/autoload.php';
 include __DIR__.'/../includes/iniciaSessao.php';
+include __DIR__.'/../includes/verificaAdmin.php';
 include __DIR__.'/../config.php';
+
 use \App\Entity\Usuario;
 use \App\Entity\Aluguel;
 
 header('Content-Type: application/json');
     
-$id_user = $_GET['id_user'] ?? null;
+$id_user = $_GET['id_user'];
 
 $obUsuario = Usuario::getUsuario($id_user);
 

@@ -99,7 +99,7 @@ include __DIR__ . '/../config.php';
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
-        <input onclick="manutencaoVeiculo()" type="button" class="btn btn-sm btn-outline-primary" value="Salvar">
+        <input onclick="agendaManutencao()" type="button" class="btn btn-sm btn-outline-primary" value="Salvar">
       </div>
     </div>
   </div>

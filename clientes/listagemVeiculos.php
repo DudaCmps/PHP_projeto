@@ -1,53 +1,5 @@
 <?php 
-include __DIR__.'/../includes/iniciaSessao.php';
-include __DIR__.'/../includes/navbarCliente.php';
 include __DIR__ . '/../config.php';
-
-$resultados = '';
-foreach ($veiculos as $carro) {
-
-    switch ($carro->estado_carro) {
-        default:
-        $status = '<span class="status status-success">Disponível</span>';
-            break;
-    }
-
-    switch ($carro->categoria) {
-        case 'luxo':
-            $categoria = 'Luxo';
-            break;
-
-        case 'economico':
-            $categoria = 'Econômico';
-            break;
-        
-        case 'suv':
-        $categoria = 'SUV';
-            break;
-    }
-
-    if (($carro->estado_carro == 'disponivel') && ($carro->ativo_carro == 1)) {
-        $resultados .= '<tr>
-        <td>'.$carro->id_carro.'</td>
-        <td class="text-center">'.$carro->nome_modelos.'</td>
-        <td class="text-center">'.$carro->ano_fabricacao.'</td> 
-        <td class="text-center">'.$carro->placa.'</td>
-        <td class="text-center">'.$categoria.'</td>
-        <td class="text-center">'.$status.'</td>
-        <td class="text-center">
-            <a href="../reservas/criaReserva.php?id_carro='.$carro->id_carro.'"><button type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Reservar">Reservar</button></a>
-        </td>
-        </tr>';
-    
-    }
-
-    
-}
-$resultados = !empty($resultados) ? $resultados : '
-                                                <tr >
-                                                <td colspan="7" class="registros"><a>Sem veículos disponiveis.</a></td>
-                                                </tr>
-                                                ';
 ?>
 
 <div class="d-flex flex-column flex-grow-1">
@@ -75,13 +27,12 @@ $resultados = !empty($resultados) ? $resultados : '
                 <th scope="col" class="text-center">Ano</th>
                 <th scope="col" class="text-center">Placa</th>
                 <th scope="col" class="text-center">Categoria</th>
-                <th scope="col" class="text-center">Status</th>
                 <th scope="col" class="text-center">Ações</th>
                 </tr>
             </thead>
 
-            <tbody>
-                <?=$resultados?>
+            <tbody id="listaVeiculosClientes">
+                
             </tbody>
 
             </table>
@@ -95,7 +46,5 @@ $resultados = !empty($resultados) ? $resultados : '
 </div>
 </div>
 
-<!-- FECHAMENTO DA NAV -->
-</div>
-</body>
-</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/crudUser.js"></script>

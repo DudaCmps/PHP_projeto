@@ -6,8 +6,15 @@ $('input, select').on('input change', function () {
     $(errorId).html('');
 });
 
+const divClientes = document.getElementById("#listaClientes");
+
 $(document).ready(function() {
-carregarClientes();
+  if (divClientes) {
+    carregarClientes();
+  } else {
+      carregarVeiculos();
+  }
+
 });
 
 //FUNÇÃO PARA LISTAR OS CLIENTES/RECARREGAR TABELA
@@ -244,8 +251,6 @@ function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
 }
 
 //FUNÇÕES DE EDITAR UM USUARIO
-
-// Função para alternar entre os formulários de visualização e edição
 function trocarFormulario(modo) {
     if (modo === 'editar') {
       $('#form-visualizar').hide();
@@ -255,8 +260,7 @@ function trocarFormulario(modo) {
       $('#form-visualizar').show();
     }
 }
-  
-// Evento para os button
+
 $(document).ready(function () {
 $('#btnEditar').on('click', function () {
     trocarFormulario('editar');
@@ -352,7 +356,6 @@ function deleteUser (idUser) {
   }
 
 }
-
 //FUNÇÃO EDITAR CLIENTE
 function editaCliente(idUser){
   const modal = new coreui.Modal($('#clienteEditar'));
@@ -620,27 +623,72 @@ function atualizarEndereco(idEndereco) {
   
 }
 
-//FUNÇÃO DELETAR
-function deleteUser (idUser) {
-  
-  if (confirm("Você deseja continuar?")) {
-    $.ajax({
-      method: "GET",
-        url: "../admin/excluirCliente.php",
-        data: { id_user: idUser },
-        dataType: "json",
-        success: function (response) {
-            if (response.status === 'success') {
-                alert('Usuário deletado.');
-                carregarClientes();
-            } else {
-                alert(response.message || 'Erro.');
-            }
-        },
-        error: function () {
-            alert('BLEH');
-        }
-    });
-  }
+//FUNÇOES PARA RESERVAS
 
+function carregarVeiculos() {
+
+  $.ajax({
+    url: 'admin/listagemVeiculosAjax.php',
+    type: 'GET',
+    dataType: 'json',
+    success: function(veiculos) {
+      let html = '';
+
+      if (veiculos.length === 0) {
+        html = '<tr><td colspan="7" class="text-center">Sem registros</td></tr>';
+      } else {
+        veiculos.forEach(carro => {
+
+            const categoria = carro.categoria == 'luxo'
+            ? 'Luxo'
+            : carro.categoria == 'economico'
+              ? 'Econômico'
+              : 'SUV';
+      
+            if (carro.status === 'manutencao' || carro.status === 'alugado') {
+              return;
+            }
+
+            html += `
+              <tr>
+                <td>${carro.id_carro}</td>
+                <td class="text-center">${carro.nome_modelos}  ${carro.nomeMarca}</td>
+                <td class="text-center">${carro.ano_fabricacao}</td>
+                <td class="text-center">${carro.placa}</td>
+                <td class="text-center">${categoria}</td>
+                <td class="text-center">
+                  
+                  <button onclick="criaReserva(${carro.id_carro})" type="button" class="btn btn-sm btn-success me-1" data-coreui-toggle="tooltip" data-coreui-placement="top" title="Reservar">Reservar</button>
+                </td>
+              </tr>`;
+        });
+      }
+
+      $('#listaVeiculosClientes').html(html);
+    },
+    error: function() {
+      $('#listaVeiculosClientes').html('<tr><td colspan="7" class="text-center text-danger">Erro ao carregar veículos. Tente novamente!</td></tr>');
+    }
+  });
+}
+
+function criaReserva(idCarro) {
+
+  $.ajax({
+    method: 'get',
+    url:'reservas/criaReserva.php',
+    data: {id_carro:idCarro},
+    dataType: 'json',
+    success: function (response) {
+      if (response.status == 'success') {
+        alert('Sua solicitação foi enviada. Aguarde a confirmação!')
+        carregarVeiculos();
+      }else {
+        alert(response.message || 'erro.');
+      }
+    },
+    error: function(){
+      alert('Erro na conexão com o servidor.')
+    }
+  });
 }

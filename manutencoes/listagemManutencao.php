@@ -14,7 +14,7 @@ foreach ($manutencoes as $manutencao) {
                         <td class="text-center">'.$manutencao->placa.'</td>
                         <td class="text-center">
                             
-                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirManutencao.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-danger">Excluir</button></a>
+                            <a onclick="return confirm(\'Tem certeza que deseja deletar?\');" href="excluirManutencao.php?id_manutencao='.$manutencao->id_manutencao.'"><button type="button" class="btn btn-sm btn-info">Finalizar</button></a>
                         </td>
                     </tr>';
                     

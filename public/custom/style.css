@@ -175,8 +175,15 @@
 #content-cars {
     background-color: palegoldenrod;
     height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 10px;
 }
-
+#content-cars button a {
+    text-decoration: none;
+    color: black;
+}
 footer {
     display: flex;
     background-color: #1E2329;

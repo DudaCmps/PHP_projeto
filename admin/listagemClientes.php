@@ -3,7 +3,6 @@ include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__.'/../includes/navbarAdmin.php';
 include __DIR__ . '/../config.php';
 
-
 ?>
 
 <div class="d-flex flex-column flex-grow-1">

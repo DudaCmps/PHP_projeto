@@ -1,16 +1,18 @@
 <?php 
 require __DIR__ . '/../vendor/autoload.php';
-session_start();
+include __DIR__.'/../includes/iniciaSessao.php';
 include __DIR__.'/../includes/verificaAdmin.php';
+include __DIR__.'/../config.php';
 
 use \App\Entity\Veiculo;
 
-// Pega o id da reserva pela URL
-$id_carro = $_GET['id_carro'] ?? null;
+header('Content-Type: application/json');
+
+$id_carro = $_GET['id_carro'];
 
 $obCarro = Veiculo::getVeiculo($id_carro);
 
-//Valida o objeto reserva
+
  if ($obCarro instanceof Veiculo) {
 
     if ($obCarro->ativo_carro == 0) {
@@ -20,25 +22,18 @@ $obCarro = Veiculo::getVeiculo($id_carro);
     }elseif($obCarro->ativo_carro == 1){
         //Se estiver ativada, desativa
         $obCarro->ativo_carro = 0;
-    }else{
-        // Manda uma página para trás sem precisar de endereço fixo
-        $voltar = $_SERVER['HTTP_REFERER'];
-        header('Location: ' . $voltar.'?status=error');
+    }
+
+    if ($obCarro->atualizar()) {
+        echo json_encode([
+            'status' => 'success'
+        ]);
         exit;
     }
-    
-    $obCarro->atualizar();
 
-        // Manda uma página para trás sem precisar de endereço fixo
-        $voltar = $_SERVER['HTTP_REFERER'];
-        header('Location: ' . $voltar.'?status=success');
-        exit;
 }
 
-// Manda uma página para trás sem precisar de endereço fixo
-$voltar = $_SERVER['HTTP_REFERER'];
-header('Location: ' . $voltar.'?status=error');
+echo json_encode([
+    'status' => 'error'
+]);
 exit;
-
-
-
