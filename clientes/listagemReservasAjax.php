@@ -27,7 +27,7 @@ foreach ($obReserva as $reserva) {
         'nome' => $reserva->nome,
         'placa' => $reserva->placa,
         'status' => $reserva->estado,
-        'aluguelConfirmado' => $aluguelConfirmado // true ou false
+        'aluguelConfirmado' => $aluguelConfirmado
     ];
 }
 

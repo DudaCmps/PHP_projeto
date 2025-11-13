@@ -30,7 +30,7 @@ function carregarReservasCliente(){
                 switch (reserva.status){
                     case 'confirmada':
                         // exemplo: se tiver aluguel confirmado
-                        if (aluguelConfirmado === true) {
+                        if (reserva.aluguelConfirmado === true) {
                             botaoStatus = '<span class="status status-warning">Finalize o aluguel ativo antes de iniciar outro.</span>';
                         } else {
                             botaoAluguel = `<button type="button" class="btn btn-sm me-1 btn-primary" title="Iniciar aluguel"><i class="cil-calendar-check"></i></button>`;
