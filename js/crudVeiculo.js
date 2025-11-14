@@ -1,5 +1,9 @@
 $(document).ready(function() {
-  carregarVeiculos();
+  
+  const divCarro = document.getElementById("listaCarros");
+  if (divCarro) {
+    carregarVeiculos();
+  }
 });
 
 function carregarVeiculos() {

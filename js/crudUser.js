@@ -6,19 +6,23 @@ $('input, select').on('input change', function () {
     $(errorId).html('');
 });
 
-const divClientes = document.getElementById("#listaClientes");
+
 
 $(document).ready(function() {
+
+  const divClientes = document.getElementById("listaClientes");
+
   if (divClientes) {
     carregarClientes();
-  } else {
-      carregarVeiculos();
+  } 
+  const divCarro = document.getElementById("listaCarros");
+  if (divCarro) {
+    carregarVeiculos();
   }
 
 });
 
 //FUNÇÃO PARA LISTAR OS CLIENTES/RECARREGAR TABELA
-
 function carregarClientes() {
     $.ajax({
       url: '../admin/listagemClientesAjax.php',
@@ -164,8 +168,8 @@ function registerUser() {
     }
 
     $.ajax({
-        method: "POST",
-        url: "../auth/registerProcess.php",
+        method: "GET",
+        url: "registerProcess.php",
         data: data,
         dataType: "json",
         success: function (response) {
@@ -182,6 +186,56 @@ function registerUser() {
             alert('Erro na comunicação com o servidor.');
         }
     });
+}
+
+function registerCliente() {
+  var nome = $("#nome").val();
+  var email = $("#email").val(); // Certifique-se de que exista no form
+  var telefone = $("#telefone").val();
+  var cpf = $("#cpf").val();
+  var data_nasc = $("#data_nasc").val();
+  var senha = $("#senha").val();
+
+  var endereco = document.getElementById('formularioEndereco');
+
+  if (!validateRegister(nome, email, telefone, data_nasc, cpf, senha)) return false;
+
+  var data = { nome, email, telefone, data_nasc, cpf, senha };
+
+  if (endereco.style.display !== 'none') {
+      var cep = $("#cep").val();
+      var cidade = $("#cidade").val();
+      var uf = $("#uf").val();
+      var numero = $("#numero").val();
+      var bairro = $("#bairro").val();
+      var logradouro = $("#logradouro").val();
+      var complemento = $("#complemento").val();
+
+      if (!validateAdress(cep, cidade, uf, numero, bairro, logradouro, complemento)) return false;
+
+      // Adiciona os dados do endereço ao objeto data
+      Object.assign(data, { cep, cidade, uf, numero, bairro, logradouro, complemento });
+  }
+
+  $.ajax({
+      method: "POST",
+      url: "../auth/registerProcess.php",
+      data: data,
+      dataType: "json",
+      success: function (response) {
+          if (response.status === 'success') {
+              alert(response.message || 'Cadastro realizado com sucesso!');
+              $('#clienteNovoModal').modal('hide');
+              $('#nome, #email, #telefone, #cpf, #data_nasc, #senha, #cep,#cidade,#uf,#numero,#bairro,#logradouro,#complemento').val('');
+              carregarClientes();
+          } else {
+              alert(response.message || 'Erro no cadastro.');
+          }
+      },
+      error: function () {
+          alert('Erro na comunicação com o servidor.');
+      }
+  });
 }
 
 function validateRegister(nome,email, telefone, data_nasc, cpf, senha) {
@@ -692,3 +746,5 @@ function criaReserva(idCarro) {
     }
   });
 }
+
+function aprovarReserva(idReserva) {}

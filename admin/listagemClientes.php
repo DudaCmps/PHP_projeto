@@ -136,7 +136,7 @@ include __DIR__ . '/../config.php';
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-sm btn-outline-danger" data-coreui-dismiss="modal">Cancelar</button>
-        <input onclick="registerUser()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
+        <input onclick="registerCliente()" type="button" class="btn btn-sm btn-outline-success" value="Salvar">
       </div>
     </div>
   </div>
